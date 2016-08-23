@@ -27,6 +27,8 @@ var AppContainer = React.createClass({
             })
           }
         </div>
+
+        {this.props.children}
       </div>
     )
   }

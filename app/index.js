@@ -1,7 +1,8 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
-var AppContainer = require("./containers/AppContainer");
+var routes = require("./config/routes");
+
 
 ReactDOM.render(
-  <AppContainer />, document.getElementById("app")
+  routes, document.getElementById("app")
 );
