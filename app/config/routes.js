@@ -9,9 +9,8 @@ var RootFolderContainer = require("../containers/RootFolderContainer");
 
 var routes = (
   <Router history={ hashHistory }>
-    <Route path="/" component={AppContainer}>
-      <Route path="/partitions/:id" component={RootFolderContainer}/>
-    </Route>
+    <Route path="/" component={AppContainer}/>
+    <Route path="/partitions/:id" component={RootFolderContainer}/>
   </Router>
 );
 
