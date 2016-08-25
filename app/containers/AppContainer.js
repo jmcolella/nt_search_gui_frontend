@@ -2,6 +2,8 @@ var React = require('react');
 var PartitionContainer = require('../containers/PartitionContainer');
 var RootFolderContainer = require('../containers/RootFolderContainer');
 var GoBackButton = require('../components/GoBackButton');
+var AddButton = require('../components/AddButton');
+var DocumentListContainer = require('../containers/DocumentListContainer')
 
 var AppContainer = React.createClass({
   getInitialState: function() {
@@ -9,7 +11,10 @@ var AppContainer = React.createClass({
       partitions: [],
       folders: [],
       documents: [],
-      pathList: []
+      pathList: [],
+      addButton: false,
+      documentToAdd: {},
+      addDocumentList: []
     }
   },
   componentWillMount: function() {
@@ -42,6 +47,19 @@ var AppContainer = React.createClass({
       })
     }.bind(this));
   },
+  handleShowAddButton: function( data ) {
+    this.setState({
+      addButton: true,
+      documentToAdd: data
+    })
+  },
+  handleUpdateDocumentList: function( data ) {
+    this.state.addDocumentList.push( data )
+    this.setState({
+      addDocumentList: this.state.addDocumentList,
+      addButton: false
+    })
+  },
   handleGoBack: function() {
     $.ajax({
       url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
@@ -52,7 +70,8 @@ var AppContainer = React.createClass({
         partitions: response.partitions || [],
         folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
-        pathList: this.state.pathList.slice(0, this.state.pathList.length - 1)
+        pathList: this.state.pathList.slice(0, this.state.pathList.length - 1),
+        addButton: false
       })
     }.bind(this));
   },
@@ -62,12 +81,24 @@ var AppContainer = React.createClass({
         <PartitionContainer
             partitions={ this.state.partitions }
             onUpdateRender={ this.handleUpdateRender } />
-    } else if ( this.state.folders.length > 0 ){
+    } else if ( this.state.folders.length > 0 ) {
       var rootFolderContainer =
         <RootFolderContainer
             folders={ this.state.folders }
             documents={ this.state.documents }
-            onUpdateRender={ this.handleUpdateRender } />
+            onUpdateRender={ this.handleUpdateRender }
+            onShowAddButton={ this.handleShowAddButton } />
+    }
+    if ( this.state.addButton ) {
+      var addButton =
+        <AddButton
+            onUpdateDocumentList={ this.handleUpdateDocumentList }
+            documentToAdd={ this.state.documentToAdd } />
+    }
+    if ( this.state.addDocumentList.length > 0 ) {
+      var documentListContainer =
+        <DocumentListContainer
+            documentList={ this.state.addDocumentList } />
     }
     if ( this.state.pathList.length > 1 ) {
       var goBackButton =
@@ -76,13 +107,23 @@ var AppContainer = React.createClass({
     }
     return (
       <div className="container text-center">
-        <div className="row">
-          { partitionContainer }
-        </div>
+
+        { partitionContainer }
 
         <div className="row">
-          { rootFolderContainer }
+          <div className="col-lg-4">
+            { rootFolderContainer }
+          </div>
+
+          <div className="col-lg-4">
+            { addButton }
+          </div>
+
+          <div className="col-lg-4">
+            { documentListContainer }
+          </div>
         </div>
+
 
         <div className="row">
           { goBackButton }
