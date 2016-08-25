@@ -22,7 +22,7 @@ var AppContainer = React.createClass({
       url: "http://localhost:3000/partitions",
       type: "GET"
     }).done( function( response ) {
-      this.state.pathList.push("/partitions");
+      this.state.pathList.push( "/partitions" );
 
       this.setState({
         partitions: response.partitions,
@@ -55,6 +55,7 @@ var AppContainer = React.createClass({
   },
   handleUpdateDocumentList: function( data ) {
     this.state.addDocumentList.push( data )
+
     this.setState({
       addButton: false,
       documentToAdd: {},
