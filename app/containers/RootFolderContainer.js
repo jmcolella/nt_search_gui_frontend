@@ -5,7 +5,6 @@ var Document = require('../components/Document');
 
 var RootFolderContainer = React.createClass({
   render: function() {
-
     return (
       <div className="container text-center">
         <div className="row">
@@ -28,7 +27,6 @@ var RootFolderContainer = React.createClass({
             }.bind(this))
           }
         </div>
-
       </div>
     )
   }

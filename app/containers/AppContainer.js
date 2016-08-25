@@ -28,7 +28,6 @@ var AppContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateRender: function( path ) {
-    debugger;
     $.ajax({
       url: "http://localhost:3000" + path,
       type: "GET",
@@ -48,14 +47,10 @@ var AppContainer = React.createClass({
       url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
       type: "GET"
     }).done( function( response ) {
-      if ( response.folders ) {
-        var updatedFolders = response.folders
-      } else {
-        var updatedFolders = response.sub_folders
-      }
 
       this.setState({
-        folders: updatedFolders,
+        partitions: response.partitions || [],
+        folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList.slice(0, this.state.pathList.length - 1)
       })
