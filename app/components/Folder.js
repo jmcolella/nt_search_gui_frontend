@@ -4,7 +4,7 @@ var React = require('react');
 function Folder ( props ) {
   return (
     <div className="col-lg-12">
-      <h3>{ props.data.name }</h3>
+      <h3><a onClick={props.onUpdateRender}>{ props.data.name }</a></h3>
     </div>
   )
 };

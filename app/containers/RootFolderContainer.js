@@ -20,6 +20,9 @@ var RootFolderContainer = React.createClass({
       })
     }.bind(this));
   },
+  handleUpdateRender: function() {
+    debugger;
+  },
   render: function() {
     return (
       <div className="container text-center">
@@ -28,8 +31,9 @@ var RootFolderContainer = React.createClass({
             this.state.folders.map( function( folder ) {
               return <Folder
                         key={folder.id}
-                        data={folder} />
-            })
+                        data={folder}
+                        onUpdateRender={this.handleUpdateRender} />
+            }.bind(this))
           }
         </div>
       </div>
