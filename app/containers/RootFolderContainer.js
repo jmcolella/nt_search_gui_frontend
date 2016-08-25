@@ -1,13 +1,17 @@
 var React = require('react');
 var Folder = require('../components/Folder');
 var Document = require('../components/Document');
+var Header = require('../components/Header');
 
 
 var RootFolderContainer = React.createClass({
   render: function() {
     return (
-      <div className="container text-center">
-        <div className="row">
+      <div>
+        <Header
+          title={ "Directory" } />
+
+        <div>
           {
             this.props.folders.map( function( folder ) {
               return <Folder
@@ -18,12 +22,13 @@ var RootFolderContainer = React.createClass({
           }
         </div>
 
-        <div className="row">
+        <div>
           {
             this.props.documents.map( function( doc ) {
               return <Document
                         key={doc.id}
-                        data={doc} />
+                        data={doc}
+                        onShowAddButton={this.props.onShowAddButton} />
             }.bind(this))
           }
         </div>
