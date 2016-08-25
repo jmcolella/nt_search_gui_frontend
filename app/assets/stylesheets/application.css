@@ -1,3 +1,11 @@
 .pointer:hover {
   cursor: pointer;
 };
+
+.clicked {
+  color: red;
+}
+
+#clicked {
+  color: red;
+}
