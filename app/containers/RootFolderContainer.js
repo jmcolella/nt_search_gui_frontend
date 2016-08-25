@@ -28,7 +28,9 @@ var RootFolderContainer = React.createClass({
               return <Document
                         key={doc.id}
                         data={doc}
-                        onShowAddButton={this.props.onShowAddButton} />
+                        onShowAddButton={this.props.onShowAddButton}
+                        documentToAdd={ this.props.documentToAdd }
+                        documentList={ this.props.documentList } />
             }.bind(this))
           }
         </div>

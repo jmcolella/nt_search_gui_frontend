@@ -56,8 +56,9 @@ var AppContainer = React.createClass({
   handleUpdateDocumentList: function( data ) {
     this.state.addDocumentList.push( data )
     this.setState({
-      addDocumentList: this.state.addDocumentList,
-      addButton: false
+      addButton: false,
+      documentToAdd: {},
+      addDocumentList: this.state.addDocumentList
     })
   },
   handleGoBack: function() {
@@ -87,7 +88,9 @@ var AppContainer = React.createClass({
             folders={ this.state.folders }
             documents={ this.state.documents }
             onUpdateRender={ this.handleUpdateRender }
-            onShowAddButton={ this.handleShowAddButton } />
+            onShowAddButton={ this.handleShowAddButton }
+            documentToAdd={ this.state.documentToAdd }
+            documentList={ this.state.addDocumentList } />
     }
     if ( this.state.addButton ) {
       var addButton =
