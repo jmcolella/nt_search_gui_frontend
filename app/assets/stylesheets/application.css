@@ -1,11 +1,8 @@
 .pointer:hover {
   cursor: pointer;
-};
+}
 
-.clicked {
+.clicked-document {
   color: red;
 }
 
-#clicked {
-  color: red;
-}

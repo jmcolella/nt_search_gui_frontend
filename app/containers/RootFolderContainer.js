@@ -22,15 +22,15 @@ var RootFolderContainer = React.createClass({
           }
         </div>
 
-        <div>
+        <div className="list-of-documents">
           {
             this.props.documents.map( function( doc ) {
               return <Document
-                        key={doc.id}
-                        data={doc}
-                        onShowAddButton={this.props.onShowAddButton}
-                        documentToAdd={ this.props.documentToAdd }
-                        documentList={ this.props.documentList } />
+                    key={doc.id}
+                    data={doc}
+                    onShowAddButton={this.props.onShowAddButton}
+                    documentToAdd={ this.props.documentToAdd }
+                    clickedDocuments={ this.props.clickedDocuments } />
             }.bind(this))
           }
         </div>
