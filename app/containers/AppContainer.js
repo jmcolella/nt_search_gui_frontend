@@ -14,7 +14,8 @@ var AppContainer = React.createClass({
       pathList: [],
       addButton: false,
       documentToAdd: {},
-      addDocumentList: []
+      addDocumentList: [],
+      clickedDocuments: []
     }
   },
   componentWillMount: function() {
@@ -55,11 +56,13 @@ var AppContainer = React.createClass({
   },
   handleUpdateDocumentList: function( data ) {
     this.state.addDocumentList.push( data )
+    this.state.clickedDocuments.push( data.name )
 
     this.setState({
       addButton: false,
       documentToAdd: {},
-      addDocumentList: this.state.addDocumentList
+      addDocumentList: this.state.addDocumentList,
+      clickedDocuments: this.state.clickedDocuments
     })
   },
   handleGoBack: function() {
@@ -91,7 +94,7 @@ var AppContainer = React.createClass({
             onUpdateRender={ this.handleUpdateRender }
             onShowAddButton={ this.handleShowAddButton }
             documentToAdd={ this.state.documentToAdd }
-            documentList={ this.state.addDocumentList } />
+            clickedDocuments={ this.state.clickedDocuments } />
     }
     if ( this.state.addButton ) {
       var addButton =

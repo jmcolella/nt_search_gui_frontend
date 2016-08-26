@@ -1,13 +1,12 @@
 var React = require('react');
 
 function Document ( props ) {
-  debugger;
-  if ( props.documentList.includes( props.data ) || props.documentToAdd && props.documentToAdd.id === props.data.id ) {
+ if( props.clickedDocuments.includes( props.data.name ) || props.documentToAdd && props.documentToAdd.id === props.data.id ) {
     var render =
-      <h4 id="clicked">{ props.data.name }</h4>
+      <h4 id={ "document-" + props.data.id } className="clicked-document">{ props.data.name }</h4>
   } else {
     var render =
-      <h4 className="pointer" onClick={ function() { props.onShowAddButton( props.data ) } }>{ props.data.name }</h4>
+      <h4 id={ "document-" + props.data.id } className="pointer" onClick={ function() { props.onShowAddButton( props.data ) } }>{ props.data.name }</h4>
   }
   return (
     <div>
