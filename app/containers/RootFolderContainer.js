@@ -17,7 +17,9 @@ var RootFolderContainer = React.createClass({
       addButton: false,
       documentToAdd: {},
       addDocumentList: [],
-      clickedDocuments: []
+      clickedDocuments: [],
+      submit: false,
+      cancelPath: ""
     }
   },
   componentWillMount: function() {
@@ -78,12 +80,16 @@ var RootFolderContainer = React.createClass({
         folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList.slice(0, this.state.pathList.length - 1),
-        addButton: false
+        addButton: false,
+        submit: false
       })
     }.bind(this));
   },
-  componentWillUnMount: function() {
+  handleSubmitDocumentList: function() {
     debugger;
+    this.setState({
+      submit: true
+    })
   },
   render: function() {
     if ( this.state.addButton ) {
@@ -97,8 +103,17 @@ var RootFolderContainer = React.createClass({
         <GoBackButton
             onGoBack={ this.handleGoBack } />
     }
-    return (
-      <div className="container">
+    if ( this.state.submit === true ) {
+      var rootRender =
+        <div className="row">
+          <div className="col-lg-12">
+            <DocumentListContainer
+                  documentList={ this.state.addDocumentList }
+                  submit={ this.state.submit } />
+          </div>
+        </div>
+    } else {
+      var rootRender =
         <div className="row">
           <div className="col-lg-4">
             <DirectoryContainer
@@ -115,9 +130,16 @@ var RootFolderContainer = React.createClass({
 
           <div className="col-lg-4">
             <DocumentListContainer
-                documentList={ this.state.addDocumentList } />
+                documentList={ this.state.addDocumentList }
+                onSubmitDocumentList={ this.handleSubmitDocumentList }
+                submit={ this.state.submit } />
           </div>
         </div>
+    }
+    return (
+      <div className="container">
+
+          { rootRender }
 
         <div className="row">
           { goBackButton }
