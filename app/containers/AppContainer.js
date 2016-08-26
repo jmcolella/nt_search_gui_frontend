@@ -4,7 +4,7 @@ var AppContainer = React.createClass({
   render: function() {
     return (
       <div className="container text-center">
-        <h1>Hello</h1>
+        <h1>NT Search GUI</h1>
         {this.props.children}
       </div>
     )
