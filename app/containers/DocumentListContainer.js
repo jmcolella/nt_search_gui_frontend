@@ -5,7 +5,7 @@ var Header = require('../components/Header');
 var DocumentListContainer = React.createClass({
   render: function () {
     return (
-      <div>
+      <div className="document-list">
         <Header
           title={ "Added Documents" } />
         {
