@@ -2,7 +2,7 @@ var React = require('react');
 
 function GoBackButton ( props ) {
   return (
-    <button className="btn btn-default" onClick={ props.onGoBack } >back</button>
+    <button className="remove-button" onClick={ props.onGoBack } ><i className="fa fa-arrow-left fa-2x" aria-hidden="true"></i></button>
   )
 };
 
