@@ -3,8 +3,10 @@ var React = require('react');
 var AppContainer = React.createClass({
   render: function() {
     return (
-      <div className="container">
-        <h1>NT Search GUI</h1>
+      <div className="container-fluid">
+        <div className="row text-center">
+          <h1>NT Search GUI</h1>
+        </div>
         {this.props.children}
       </div>
     )
