@@ -6,3 +6,17 @@
   color: red;
 }
 
+.remove-button {
+  background-color: transparent;
+  border: none;
+  color: orange;
+}
+
+.remove-button:focus {
+  outline: 0;
+}
+
+.form-center {
+  text-align: center !important;
+}
+

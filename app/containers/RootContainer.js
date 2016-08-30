@@ -1,12 +1,12 @@
 var React = require('react');
 var DirectoryContainer = require('../containers/DirectoryContainer');
-var DocumentsToAddListContainer = require('../containers/DocumentsToAddListContainer');
-var DocumentsAddedListContainer = require('../containers/DocumentsAddedListContainer');
+var DocumentsToSubmitListContainer = require('../containers/DocumentsToSubmitListContainer');
+var DocumentsSubmittedListContainer = require('../containers/DocumentsSubmittedListContainer');
 var GoBackButton = require('../components/GoBackButton');
 var AddButton = require('../components/AddButton');
 
 
-var RootFolderContainer = React.createClass({
+var RootContainer = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
   },
@@ -70,6 +70,15 @@ var RootFolderContainer = React.createClass({
       clickedDocuments: this.state.clickedDocuments
     })
   },
+  handleRemoveDocument: function( data ) {
+    this.state.addDocumentList = this.state.addDocumentList.filter( function(doc) { return doc.name != data.name });
+    this.state.clickedDocuments = this.state.clickedDocuments.filter(function(doc){return doc != data.name});
+
+    this.setState({
+      clickedDocuments: this.state.clickedDocuments,
+      addDocumentList: this.state.addDocumentList
+    })
+  },
   handleGoBack: function() {
     $.ajax({
       url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
@@ -123,7 +132,7 @@ var RootFolderContainer = React.createClass({
       var rootRender =
         <div className="row">
           <div className="col-lg-12">
-            <DocumentsAddedListContainer
+            <DocumentsSubmittedListContainer
                   documentList={ this.state.addDocumentList }
                   submit={ this.state.submit }
                   onCancelDocumentList={ this.handleCancelDocumentList } />
@@ -146,10 +155,11 @@ var RootFolderContainer = React.createClass({
           </div>
 
           <div className="col-lg-4">
-            <DocumentsToAddListContainer
+            <DocumentsToSubmitListContainer
                 documentList={ this.state.addDocumentList }
                 onSubmitDocumentList={ this.handleSubmitDocumentList }
-                submit={ this.state.submit } />
+                submit={ this.state.submit }
+                onRemoveDocument={ this.handleRemoveDocument } />
           </div>
         </div>
     }
@@ -165,4 +175,4 @@ var RootFolderContainer = React.createClass({
   }
 });
 
-module.exports = RootFolderContainer;
+module.exports = RootContainer;

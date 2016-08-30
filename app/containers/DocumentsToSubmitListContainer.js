@@ -1,9 +1,9 @@
 var React = require('react');
-var DocumentAdded = require('../components/DocumentAdded');
+var DocumentToSubmit = require('../components/DocumentToSubmit');
 var Header = require('../components/Header');
 var SubmitDocumentListButton = require('../components/SubmitDocumentListButton');
 
-var DocumentsToAddListContainer = React.createClass({
+var DocumentsToSubmitListContainer = React.createClass({
   render: function () {
     if ( this.props.documentList.length > 0 && this.props.submit === false ) {
       var submitDocumentListButton =
@@ -13,13 +13,15 @@ var DocumentsToAddListContainer = React.createClass({
     return (
       <div className="document-list">
         <Header
-          title={ "Added Documents" } />
+          title={ "Documents to Submit" } />
         {
           this.props.documentList.map( function( doc ) {
-            return <DocumentAdded
+            return <DocumentToSubmit
                       key={ doc.id }
-                      data={ doc } />
-          })
+                      data={ doc }
+                      onRemoveDocument={ this.props.onRemoveDocument }
+                      submit={ this.props.submit } />
+          }.bind(this))
         }
 
         { submitDocumentListButton }
@@ -28,4 +30,4 @@ var DocumentsToAddListContainer = React.createClass({
   }
 });
 
-module.exports = DocumentsToAddListContainer;
+module.exports = DocumentsToSubmitListContainer;
