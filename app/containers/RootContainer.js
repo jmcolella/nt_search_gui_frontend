@@ -4,7 +4,6 @@ var findDOMNode = ReactDOM.findDOMNode;
 var DirectoryContainer = require('../containers/DirectoryContainer');
 var DocumentsToSubmitListContainer = require('../containers/DocumentsToSubmitListContainer');
 var DocumentsSubmittedListContainer = require('../containers/DocumentsSubmittedListContainer');
-var GoBackButton = require('../components/GoBackButton');
 var AddButton = require('../components/AddButton');
 
 
@@ -77,6 +76,12 @@ var RootContainer = React.createClass({
       documentToAdd: data
     })
   },
+  handleCancelAddDocument: function() {
+    this.setState({
+      addButton: false,
+      documentToAdd: {}
+    })
+  },
   handleUpdateDocumentList: function( data ) {
     this.state.addDocumentList.push( data )
     this.state.clickedDocuments.push( data.name )
@@ -119,17 +124,6 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   render: function() {
-    if ( this.state.addButton) {
-      var addButton =
-        <AddButton
-            onUpdateDocumentList={ this.handleUpdateDocumentList }
-            documentToAdd={ this.state.documentToAdd } />
-    }
-    if ( this.state.pathList.length > 1 && this.state.cancelPath.length === 0 ) {
-      var goBackButton =
-        <GoBackButton
-            onGoBack={ this.handleGoBack } />
-    }
     if ( this.state.submit === true ) {
       var rootRender =
         <div className="row text-center">
@@ -148,12 +142,20 @@ var RootContainer = React.createClass({
                 folders={ this.state.folders }
                 documents={ this.state.documents }
                 onUpdateRender={ this.handleUpdateRender }
+                pathList={ this.state.pathList }
+                onGoBack={ this.handleGoBack }
                 onShowAddButton={ this.handleShowAddButton }
-                clickedDocuments={ this.state.clickedDocuments } />
+                documentToAdd={ this.state.documentToAdd }
+                clickedDocuments={ this.state.clickedDocuments }
+                cancelPath={ this.state.cancelPath } />
           </div>
 
           <div className="col-lg-4">
-            { addButton }
+            <AddButton
+              addButton={ this.state.addButton }
+              onUpdateDocumentList={ this.handleUpdateDocumentList }
+              onCancelAddDocument={ this.handleCancelAddDocument }
+              documentToAdd={ this.state.documentToAdd } />
           </div>
 
           <div className="col-lg-4">
@@ -166,10 +168,7 @@ var RootContainer = React.createClass({
         </div>
     }
     return (
-      <div className="container">
-        <div className="row">
-          { goBackButton }
-        </div>
+      <div id="root-container" className="container-fluid">
 
         { rootRender }
 

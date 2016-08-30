@@ -20,17 +20,15 @@ var PartitionContainer = React.createClass({
   },
   render: function () {
     return (
-      <div className="container">
-        <div className="row">
-          {
-            this.state.partitions.map( function( partition ) {
-              return <Partition
-                        key={ partition.id }
-                        data={ partition } />
-            }.bind(this))
-          }
-        </div>
-      </div>
+      <div className="row text-center">
+        {
+          this.state.partitions.map( function( partition ) {
+            return <Partition
+                      key={ partition.id }
+                      data={ partition } />
+          }.bind(this))
+        }
+     </div>
     )
   }
 });
