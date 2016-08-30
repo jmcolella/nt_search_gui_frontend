@@ -132,7 +132,7 @@ var RootContainer = React.createClass({
     }
     if ( this.state.submit === true ) {
       var rootRender =
-        <div className="row">
+        <div className="row text-center">
           <div className="col-lg-12">
             <DocumentsSubmittedListContainer
                   documentList={ this.state.addDocumentList }
@@ -142,7 +142,7 @@ var RootContainer = React.createClass({
         </div>
     } else {
       var rootRender =
-        <div className="row">
+        <div className="row text-center">
           <div className="col-lg-4">
             <DirectoryContainer
                 folders={ this.state.folders }
@@ -167,11 +167,12 @@ var RootContainer = React.createClass({
     }
     return (
       <div className="container">
-        { rootRender }
-
         <div className="row">
           { goBackButton }
         </div>
+
+        { rootRender }
+
       </div>
     )
   }
