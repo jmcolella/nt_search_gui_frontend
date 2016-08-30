@@ -17,7 +17,7 @@ var DocumentsToSubmitListContainer = React.createClass({
             title={ "Documents to Submit" } />
         </div>
 
-        <div className="panel-body">
+        <div className="panel-body submit-document-list">
           {
             this.props.documentList.map( function( doc ) {
               return <DocumentToSubmit
