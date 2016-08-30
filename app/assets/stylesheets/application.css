@@ -1,18 +1,16 @@
+/* App wide styling */
+
+.font {
+  font-family: 'Droid Sans', sans-serif;
+}
+
 .pointer:hover {
   cursor: pointer;
 }
 
-.clicked-document {
-  color: red;
-}
-
-.form-center {
-  text-align: center !important;
-}
-
-.interval-input {
-  width: 50%;
-  margin: 0 auto;
+.panel-default > .panel-heading {
+  background-image: linear-gradient(to bottom,#175373 0,#175373 100%) !important;
+  color: white !important;
 }
 
 /* Root styling */
@@ -27,10 +25,45 @@
   height: 50vh;
 }
 
+.folder-document-icon-name {
+  display: inline-block;
+}
+
+.folder-link {
+  color: #175373 !important;
+}
+
+.folder-icon {
+  margin-right: 10px;
+  color: #175373;
+}
+
+.individual-document-container {
+  color: #5688A2;
+}
+
+.document-icon {
+  margin-right: 10px;
+  color: #5688A2;
+}
+
+.clicked-document {
+  color: #777;
+}
+
+.hidden {
+  display: none !important;
+}
+
 /* Documents to Submit styling */
 
 .document-list {
   height: 50vh;
+  color: #777;
+}
+
+.submit-document-list {
+  margin-top: 3vh;
 }
 
 /* Button styling */
@@ -39,12 +72,41 @@
   height: 3vh;
 }
 
+.back-button {
+  background-color: transparent;
+  border: none;
+  color: #777;
+}
+
+.back-button:focus {
+  outline: 0;
+}
+
+.add-button {
+  margin-top: 15em;
+}
+
+.cancel-add-button {
+  margin-top: 2em;
+}
+
 .remove-button {
   background-color: transparent;
   border: none;
-  color: orange;
+  color: #b92c28;
 }
 
 .remove-button:focus {
   outline: 0;
+}
+
+/* Form styling */
+
+.form-center {
+  text-align: center !important;
+}
+
+.interval-input {
+  width: 50%;
+  margin: 0 auto;
 }
