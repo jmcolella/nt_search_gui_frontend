@@ -1,6 +1,7 @@
 var React = require('react');
 var DirectoryContainer = require('../containers/DirectoryContainer');
-var DocumentListContainer = require('../containers/DocumentListContainer');
+var DocumentsToAddListContainer = require('../containers/DocumentsToAddListContainer');
+var DocumentsAddedListContainer = require('../containers/DocumentsAddedListContainer');
 var GoBackButton = require('../components/GoBackButton');
 var AddButton = require('../components/AddButton');
 
@@ -86,19 +87,34 @@ var RootFolderContainer = React.createClass({
     }.bind(this));
   },
   handleSubmitDocumentList: function() {
-    debugger;
     this.setState({
-      submit: true
+      submit: true,
+      cancelPath: this.state.pathList[this.state.pathList.length - 1]
     })
   },
+  handleCancelDocumentList: function() {
+    $.ajax({
+      url: "http://localhost:3000" + this.state.cancelPath,
+      type: "GET"
+    }).done( function( response ) {
+        this.setState({
+          partitions: response.partitions || [],
+          folders: response.sub_folders || response.folders || [],
+          documents: response.documents || [],
+          addButton: false,
+          cancelPath: "",
+          submit: false
+        })
+    }.bind(this));
+  },
   render: function() {
-    if ( this.state.addButton ) {
+    if ( this.state.addButton) {
       var addButton =
         <AddButton
             onUpdateDocumentList={ this.handleUpdateDocumentList }
             documentToAdd={ this.state.documentToAdd } />
     }
-    if ( this.state.pathList.length > 1 ) {
+    if ( this.state.pathList.length > 1 && this.state.cancelPath.length === 0 ) {
       var goBackButton =
         <GoBackButton
             onGoBack={ this.handleGoBack } />
@@ -107,9 +123,10 @@ var RootFolderContainer = React.createClass({
       var rootRender =
         <div className="row">
           <div className="col-lg-12">
-            <DocumentListContainer
+            <DocumentsAddedListContainer
                   documentList={ this.state.addDocumentList }
-                  submit={ this.state.submit } />
+                  submit={ this.state.submit }
+                  onCancelDocumentList={ this.handleCancelDocumentList } />
           </div>
         </div>
     } else {
@@ -129,7 +146,7 @@ var RootFolderContainer = React.createClass({
           </div>
 
           <div className="col-lg-4">
-            <DocumentListContainer
+            <DocumentsToAddListContainer
                 documentList={ this.state.addDocumentList }
                 onSubmitDocumentList={ this.handleSubmitDocumentList }
                 submit={ this.state.submit } />
@@ -138,8 +155,7 @@ var RootFolderContainer = React.createClass({
     }
     return (
       <div className="container">
-
-          { rootRender }
+        { rootRender }
 
         <div className="row">
           { goBackButton }
