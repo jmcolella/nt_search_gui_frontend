@@ -6,16 +6,6 @@
   color: red;
 }
 
-.remove-button {
-  background-color: transparent;
-  border: none;
-  color: orange;
-}
-
-.remove-button:focus {
-  outline: 0;
-}
-
 .form-center {
   text-align: center !important;
 }
@@ -25,3 +15,36 @@
   margin: 0 auto;
 }
 
+/* Root styling */
+
+#root-container {
+  margin-top: 5vh;
+}
+
+/* Directory List styling */
+
+.directory-list {
+  height: 50vh;
+}
+
+/* Documents to Submit styling */
+
+.document-list {
+  height: 50vh;
+}
+
+/* Button styling */
+
+#back-button-container {
+  height: 3vh;
+}
+
+.remove-button {
+  background-color: transparent;
+  border: none;
+  color: orange;
+}
+
+.remove-button:focus {
+  outline: 0;
+}
