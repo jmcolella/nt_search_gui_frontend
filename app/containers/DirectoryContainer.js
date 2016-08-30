@@ -5,6 +5,12 @@ var Header = require('../components/Header');
 var GoBackButton = require('../components/GoBackButton');
 
 var DirectoryContainer = React.createClass({
+  handleMouseOver: function(e) {
+    $(e.target).closest("div").find("i").removeClass("hidden");
+  },
+  handleMouseDepart: function(e) {
+    $(e.target).closest("div").find("i").addClass("hidden");
+  },
   render: function() {
     if ( this.props.pathList.length > 1 && this.props.cancelPath.length === 0 ) {
         var goBackButton =
@@ -30,7 +36,9 @@ var DirectoryContainer = React.createClass({
                 return <Folder
                           key={folder.id}
                           data={folder}
-                          onUpdateRender={this.props.onUpdateRender} />
+                          onUpdateRender={this.props.onUpdateRender}
+                          onMouseOver={ this.handleMouseOver }
+                          onMouseDepart={ this.handleMouseDepart } />
               }.bind(this))
             }
           </div>
@@ -43,7 +51,9 @@ var DirectoryContainer = React.createClass({
                       data={doc}
                       onShowAddButton={this.props.onShowAddButton}
                       documentToAdd={ this.props.documentToAdd }
-                      clickedDocuments={ this.props.clickedDocuments } />
+                      clickedDocuments={ this.props.clickedDocuments }
+                      onMouseOver={ this.handleMouseOver }
+                      onMouseDepart={ this.handleMouseDepart } />
               }.bind(this))
             }
           </div>

@@ -76,6 +76,12 @@ var RootContainer = React.createClass({
       documentToAdd: data
     })
   },
+  handleCancelAddDocument: function() {
+    this.setState({
+      addButton: false,
+      documentToAdd: {}
+    })
+  },
   handleUpdateDocumentList: function( data ) {
     this.state.addDocumentList.push( data )
     this.state.clickedDocuments.push( data.name )
@@ -118,12 +124,6 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   render: function() {
-    if ( this.state.addButton) {
-      var addButton =
-        <AddButton
-            onUpdateDocumentList={ this.handleUpdateDocumentList }
-            documentToAdd={ this.state.documentToAdd } />
-    }
     if ( this.state.submit === true ) {
       var rootRender =
         <div className="row text-center">
@@ -145,12 +145,17 @@ var RootContainer = React.createClass({
                 pathList={ this.state.pathList }
                 onGoBack={ this.handleGoBack }
                 onShowAddButton={ this.handleShowAddButton }
+                documentToAdd={ this.state.documentToAdd }
                 clickedDocuments={ this.state.clickedDocuments }
                 cancelPath={ this.state.cancelPath } />
           </div>
 
           <div className="col-lg-4">
-            { addButton }
+            <AddButton
+              addButton={ this.state.addButton }
+              onUpdateDocumentList={ this.handleUpdateDocumentList }
+              onCancelAddDocument={ this.handleCancelAddDocument }
+              documentToAdd={ this.state.documentToAdd } />
           </div>
 
           <div className="col-lg-4">
