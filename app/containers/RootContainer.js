@@ -1,4 +1,6 @@
 var React = require('react');
+var ReactDOM = require("react-dom");
+var findDOMNode = ReactDOM.findDOMNode;
 var DirectoryContainer = require('../containers/DirectoryContainer');
 var DocumentsToSubmitListContainer = require('../containers/DocumentsToSubmitListContainer');
 var DocumentsSubmittedListContainer = require('../containers/DocumentsSubmittedListContainer');
@@ -53,6 +55,22 @@ var RootContainer = React.createClass({
       })
     }.bind(this));
   },
+  handleGoBack: function() {
+    $.ajax({
+      url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
+      type: "GET"
+    }).done( function( response ) {
+
+      this.setState({
+        partitions: response.partitions || [],
+        folders: response.sub_folders || response.folders || [],
+        documents: response.documents || [],
+        pathList: this.state.pathList.slice(0, this.state.pathList.length - 1),
+        addButton: false,
+        submit: false
+      })
+    }.bind(this));
+  },
   handleShowAddButton: function( data ) {
     this.setState({
       addButton: true,
@@ -78,22 +96,6 @@ var RootContainer = React.createClass({
       clickedDocuments: this.state.clickedDocuments,
       addDocumentList: this.state.addDocumentList
     })
-  },
-  handleGoBack: function() {
-    $.ajax({
-      url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
-      type: "GET"
-    }).done( function( response ) {
-
-      this.setState({
-        partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
-        documents: response.documents || [],
-        pathList: this.state.pathList.slice(0, this.state.pathList.length - 1),
-        addButton: false,
-        submit: false
-      })
-    }.bind(this));
   },
   handleSubmitDocumentList: function() {
     this.setState({
@@ -130,7 +132,7 @@ var RootContainer = React.createClass({
     }
     if ( this.state.submit === true ) {
       var rootRender =
-        <div className="row">
+        <div className="row text-center">
           <div className="col-lg-12">
             <DocumentsSubmittedListContainer
                   documentList={ this.state.addDocumentList }
@@ -140,7 +142,7 @@ var RootContainer = React.createClass({
         </div>
     } else {
       var rootRender =
-        <div className="row">
+        <div className="row text-center">
           <div className="col-lg-4">
             <DirectoryContainer
                 folders={ this.state.folders }
@@ -165,11 +167,12 @@ var RootContainer = React.createClass({
     }
     return (
       <div className="container">
-        { rootRender }
-
         <div className="row">
           { goBackButton }
         </div>
+
+        { rootRender }
+
       </div>
     )
   }
