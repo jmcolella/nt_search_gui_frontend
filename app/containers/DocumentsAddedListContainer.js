@@ -1,13 +1,14 @@
 var React = require('react');
-var DocumentAdded = require('../components/DocumentAdded');
 var Header = require('../components/Header');
+var DocumentAdded = require('../components/DocumentAdded');
+var CancelButton = require('../components/CancelButton');
 
-var DocumentListContainer = React.createClass({
+var DocumentsAddedListContainer = React.createClass({
   render: function () {
     return (
       <div className="document-list">
         <Header
-          title={ "Added Documents" } />
+          title={ "Documents to submit" } />
         {
           this.props.documentList.map( function( doc ) {
             return <DocumentAdded
@@ -15,9 +16,13 @@ var DocumentListContainer = React.createClass({
                       data={ doc } />
           })
         }
+
+        <CancelButton
+            onCancelDocumentList={ this.props.onCancelDocumentList } />
+
       </div>
     )
   }
 });
 
-module.exports = DocumentListContainer;
+module.exports = DocumentsAddedListContainer;

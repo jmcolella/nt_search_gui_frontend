@@ -1,6 +1,7 @@
 var React = require('react');
 var DirectoryContainer = require('../containers/DirectoryContainer');
-var DocumentListContainer = require('../containers/DocumentListContainer');
+var DocumentsToAddListContainer = require('../containers/DocumentsToAddListContainer');
+var DocumentsAddedListContainer = require('../containers/DocumentsAddedListContainer');
 var GoBackButton = require('../components/GoBackButton');
 var AddButton = require('../components/AddButton');
 
@@ -17,7 +18,9 @@ var RootFolderContainer = React.createClass({
       addButton: false,
       documentToAdd: {},
       addDocumentList: [],
-      clickedDocuments: []
+      clickedDocuments: [],
+      submit: false,
+      cancelPath: ""
     }
   },
   componentWillMount: function() {
@@ -78,27 +81,56 @@ var RootFolderContainer = React.createClass({
         folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList.slice(0, this.state.pathList.length - 1),
-        addButton: false
+        addButton: false,
+        submit: false
       })
     }.bind(this));
   },
-  componentWillUnMount: function() {
-    debugger;
+  handleSubmitDocumentList: function() {
+    this.setState({
+      submit: true,
+      cancelPath: this.state.pathList[this.state.pathList.length - 1]
+    })
+  },
+  handleCancelDocumentList: function() {
+    $.ajax({
+      url: "http://localhost:3000" + this.state.cancelPath,
+      type: "GET"
+    }).done( function( response ) {
+        this.setState({
+          partitions: response.partitions || [],
+          folders: response.sub_folders || response.folders || [],
+          documents: response.documents || [],
+          addButton: false,
+          cancelPath: "",
+          submit: false
+        })
+    }.bind(this));
   },
   render: function() {
-    if ( this.state.addButton ) {
+    if ( this.state.addButton) {
       var addButton =
         <AddButton
             onUpdateDocumentList={ this.handleUpdateDocumentList }
             documentToAdd={ this.state.documentToAdd } />
     }
-    if ( this.state.pathList.length > 1 ) {
+    if ( this.state.pathList.length > 1 && this.state.cancelPath.length === 0 ) {
       var goBackButton =
         <GoBackButton
             onGoBack={ this.handleGoBack } />
     }
-    return (
-      <div className="container">
+    if ( this.state.submit === true ) {
+      var rootRender =
+        <div className="row">
+          <div className="col-lg-12">
+            <DocumentsAddedListContainer
+                  documentList={ this.state.addDocumentList }
+                  submit={ this.state.submit }
+                  onCancelDocumentList={ this.handleCancelDocumentList } />
+          </div>
+        </div>
+    } else {
+      var rootRender =
         <div className="row">
           <div className="col-lg-4">
             <DirectoryContainer
@@ -114,10 +146,16 @@ var RootFolderContainer = React.createClass({
           </div>
 
           <div className="col-lg-4">
-            <DocumentListContainer
-                documentList={ this.state.addDocumentList } />
+            <DocumentsToAddListContainer
+                documentList={ this.state.addDocumentList }
+                onSubmitDocumentList={ this.handleSubmitDocumentList }
+                submit={ this.state.submit } />
           </div>
         </div>
+    }
+    return (
+      <div className="container">
+        { rootRender }
 
         <div className="row">
           { goBackButton }
