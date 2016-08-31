@@ -2,7 +2,7 @@ var React = require('react');
 
 function CancelButton ( props ) {
   return (
-    <button className="btn btn-default" onClick={ props.onCancelDocumentList }>cancel</button>
+    <button className="btn btn-danger" onClick={ props.onCancelDocumentList }>cancel</button>
   )
 };
 

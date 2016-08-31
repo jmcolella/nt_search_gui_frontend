@@ -130,14 +130,14 @@ var RootContainer = React.createClass({
       url: "http://localhost:3000" + this.state.cancelPath,
       type: "GET"
     }).done( function( response ) {
-        this.setState({
-          partitions: response.partitions || [],
-          folders: response.sub_folders || response.folders || [],
-          documents: response.documents || [],
-          addButton: false,
-          cancelPath: "",
-          submit: false
-        })
+      this.setState({
+        partitions: response.partitions || [],
+        folders: response.sub_folders || response.folders || [],
+        documents: response.documents || [],
+        addButton: false,
+        cancelPath: "",
+        submit: false
+      });
     }.bind(this));
   },
   render: function() {
@@ -146,16 +146,16 @@ var RootContainer = React.createClass({
         <div className="row text-center">
           <div className="col-lg-12">
             <DocumentsSubmittedListContainer
-                  partition={ this.state.partition }
-                  documentList={ this.state.clickedDocumentObjects }
-                  submit={ this.state.submit }
-                  onCancelDocumentList={ this.handleCancelDocumentList } />
+                partition={ this.state.partition }
+                documentList={ this.state.clickedDocumentObjects }
+                submit={ this.state.submit }
+                onCancelDocumentList={ this.handleCancelDocumentList } />
           </div>
         </div>
     } else {
       var rootRender =
         <div className="row text-center">
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-md-4 col-sm-4">
             <DirectoryContainer
                 folders={ this.state.folders }
                 documents={ this.state.documents }
@@ -168,15 +168,15 @@ var RootContainer = React.createClass({
                 cancelPath={ this.state.cancelPath } />
           </div>
 
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-md-4 col-sm-4">
             <AddButton
-              addButton={ this.state.addButton }
-              onUpdateDocumentList={ this.handleUpdateDocumentList }
-              onCancelAddDocument={ this.handleCancelAddDocument }
-              documentToAdd={ this.state.documentToAdd } />
+                addButton={ this.state.addButton }
+                onUpdateDocumentList={ this.handleUpdateDocumentList }
+                onCancelAddDocument={ this.handleCancelAddDocument }
+                documentToAdd={ this.state.documentToAdd } />
           </div>
 
-          <div className="col-lg-4">
+          <div className="col-lg-4 col-md-4 col-sm-4">
             <DocumentsToSubmitListContainer
                 documentList={ this.state.clickedDocumentObjects }
                 onSubmitDocumentList={ this.handleSubmitDocumentList }

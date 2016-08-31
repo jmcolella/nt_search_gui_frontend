@@ -6,8 +6,9 @@ var Partition = React.createClass({
   render: function() {
     var partition = this.props.data;
     return (
-      <div className="col-lg-6 col-md-6 col-sm-12">
-        <h1><Link to={ "/partitions/" + partition.id }>{ partition.name }</Link></h1>
+      <div className="col-lg-12 individual-partition-container">
+        <i className="fa fa-hdd-o fa-4x partition-name-icon partition-icon" aria-hidden="true"></i>
+        <h1 className="partition-name-icon"><Link to={ "/partitions/" + partition.id }>{ partition.name }</Link></h1>
       </div>
     )
   }

@@ -42,29 +42,36 @@ var DocumentsSubmittedListContainer = React.createClass({
   },
   render: function () {
     return (
-      <div className="document-list">
-        <Header
-          title={ "Submitted Documents" } />
-
-        <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
-          <div className="form-group form-group-lg">
-            <label className="col-lg-4 control-label form-center">document path</label>
-            <label className="col-lg-4 control-label form-center">interval to check</label>
-            <label className="col-lg-4 control-label form-center">save a backup?</label>
+      <div>
+        <div className="document-list panel panel-default">
+          <div className="panel-heading">
+            <Header
+              title={ "Submitted Documents" } />
           </div>
-          {
-            this.props.documentList.map( function( obj ) {
-              return <DocumentSubmitted
-                        key={ obj.doc.id }
-                        data={ obj } />
-            }.bind(this))
-          }
-          <input className="btn btn-default" type="submit" value="submit list" />
-        </form>
+
+          <div className="panel-body">
+            <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
+              <div className="form-group form-group-lg">
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
+              </div>
+              {
+                this.props.documentList.map( function( obj ) {
+                  return <DocumentSubmitted
+                            key={ obj.doc.id }
+                            data={ obj } />
+                }.bind(this))
+              }
+              <input className="btn btn-primary" type="submit" value="submit list" />
+            </form>
+          </div>
+
+
+        </div>
 
         <CancelButton
             onCancelDocumentList={ this.props.onCancelDocumentList } />
-
       </div>
     )
   }
