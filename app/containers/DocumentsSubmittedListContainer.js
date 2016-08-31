@@ -10,13 +10,16 @@ var DocumentsSubmittedListContainer = React.createClass({
       values[field.name] = field.value;
     });
 
-    var data_arr = [["document name", "interval to check", "pristine copy"]];
+    var data_arr = [[this.props.documentList.length]];
 
-    this.props.documentList.forEach(function(doc) {
+    var that = this
+
+    this.props.documentList.forEach(function(obj) {
        temp_arr = [];
-       temp_arr.push(doc.name);
-       temp_arr.push(parseInt(values[doc.name + "-interval"]));
-       if ( values[doc.name + "-copy-checked"] ) {
+       temp_arr.push(parseInt(that.props.partition));
+       temp_arr.push(obj.relativePath);
+       temp_arr.push(values[obj.doc.name + "-interval"]);
+       if ( values[obj.doc.name + "-copy-checked"] ) {
          temp_arr.push(1)
        } else {
          temp_arr.push(0)
@@ -45,15 +48,15 @@ var DocumentsSubmittedListContainer = React.createClass({
 
         <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
           <div className="form-group form-group-lg">
-            <label className="col-lg-4 control-label form-center">document name</label>
+            <label className="col-lg-4 control-label form-center">document path</label>
             <label className="col-lg-4 control-label form-center">interval to check</label>
             <label className="col-lg-4 control-label form-center">save a backup?</label>
           </div>
           {
-            this.props.documentList.map( function( doc ) {
+            this.props.documentList.map( function( obj ) {
               return <DocumentSubmitted
-                        key={ doc.id }
-                        data={ doc } />
+                        key={ obj.doc.id }
+                        data={ obj } />
             }.bind(this))
           }
           <input className="btn btn-default" type="submit" value="submit list" />

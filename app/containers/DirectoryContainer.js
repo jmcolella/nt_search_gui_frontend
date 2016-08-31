@@ -51,7 +51,7 @@ var DirectoryContainer = React.createClass({
                       data={doc}
                       onShowAddButton={this.props.onShowAddButton}
                       documentToAdd={ this.props.documentToAdd }
-                      clickedDocuments={ this.props.clickedDocuments }
+                      clickedDocumentNames={ this.props.clickedDocumentNames }
                       onMouseOver={ this.handleMouseOver }
                       onMouseDepart={ this.handleMouseDepart } />
               }.bind(this))

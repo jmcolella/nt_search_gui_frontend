@@ -1,7 +1,7 @@
 var React = require('react');
 
 function Document ( props ) {
- if( props.clickedDocuments.includes( props.data.name ) || props.documentToAdd && props.documentToAdd.id === props.data.id ) {
+ if( props.clickedDocumentNames.includes( props.data.name ) || props.documentToAdd && props.documentToAdd.id === props.data.id ) {
     var render =
       <h4 id={ "document-" + props.data.id } className="clicked-document dfolder-document-icon-name">{ props.data.name }</h4>
   } else {
