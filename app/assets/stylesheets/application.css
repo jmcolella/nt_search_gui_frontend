@@ -13,6 +13,25 @@
   color: white !important;
 }
 
+.app-header {
+  color: #175373;
+}
+
+/* Partitions styling */
+
+.individual-partition-container {
+  margin-top: 2em;
+}
+
+.partition-name-icon {
+  display: inline-block;
+}
+
+.partition-icon {
+  margin-right: 20px;
+  color: #175373;
+}
+
 /* Root styling */
 
 #root-container {
@@ -23,6 +42,12 @@
 
 .directory-list {
   height: 50vh;
+}
+
+@media ( max-width: 1440px ) {
+  .directory-list {
+    height: 70vh;
+  }
 }
 
 .folder-document-icon-name {
@@ -62,6 +87,12 @@
   color: #777;
 }
 
+@media ( max-width: 1440px ) {
+  .document-list {
+    height: 70vh;
+  }
+}
+
 .submit-document-list {
   margin-top: 3vh;
 }
@@ -84,6 +115,12 @@
 
 .add-button {
   margin-top: 15em;
+}
+
+@media ( max-width: 1440px ) {
+  .add-button {
+    margin-top: 12em;
+  }
 }
 
 .cancel-add-button {
