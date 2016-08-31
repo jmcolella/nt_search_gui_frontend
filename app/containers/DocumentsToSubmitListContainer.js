@@ -19,10 +19,10 @@ var DocumentsToSubmitListContainer = React.createClass({
 
         <div className="panel-body submit-document-list">
           {
-            this.props.documentList.map( function( doc ) {
+            this.props.documentList.map( function( obj ) {
               return <DocumentToSubmit
-                        key={ doc.id }
-                        data={ doc }
+                        key={ obj.doc.id }
+                        data={ obj.doc }
                         onRemoveDocument={ this.props.onRemoveDocument }
                         submit={ this.props.submit } />
             }.bind(this))
