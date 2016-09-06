@@ -81,23 +81,6 @@ var RootContainer = React.createClass({
       });
     }.bind(this));
   },
-  handleGoBack: function() {
-    $.ajax({
-      url: "http://localhost:3000" + this.state.pathList[this.state.pathList.length - 2],
-      type: "GET"
-    }).done( function( response ) {
-      this.setState({
-        partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
-        documents: response.documents || [],
-        pathList: this.state.pathList.slice( 0, this.state.pathList.length - 1 ),
-        addButton: false,
-        documentPath: this.state.documentPath.slice( 0, this.state.documentPath.length - 1 ),
-        documentPath: this.state.documentPath.slice( 0, this.state.documentPath.length - 1 ),
-        submit: false
-      });
-    }.bind(this));
-  },
   handleShowAddButton: function( data ) {
     this.setState({
       addButton: true,
@@ -183,7 +166,6 @@ var RootContainer = React.createClass({
                 onUpdateRender={ this.handleUpdateRender }
                 pathList={ this.state.pathList }
                 breadcrumbList={ this.state.breadcrumbList }
-                onGoBack={ this.handleGoBack }
                 onShowAddButton={ this.handleShowAddButton }
                 documentToAdd={ this.state.documentToAdd }
                 clickedDocumentNames={ this.state.clickedDocumentNames }

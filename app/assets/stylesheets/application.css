@@ -50,6 +50,10 @@
   }
 }
 
+.list-of-folders {
+  margin-top: 3vh;
+}
+
 .folder-document-icon-name {
   display: inline-block;
 }

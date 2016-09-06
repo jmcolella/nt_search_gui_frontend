@@ -2,7 +2,6 @@ var React = require('react');
 var Folder = require('../components/Folder');
 var Document = require('../components/Document');
 var BreadCrumbsContainer = require('../containers/BreadCrumbsContainer');
-var GoBackButton = require('../components/GoBackButton');
 
 var DirectoryContainer = React.createClass({
   handleMouseOver: function(e) {
@@ -12,11 +11,6 @@ var DirectoryContainer = React.createClass({
     $(e.target).closest("div").find("i").addClass("hidden");
   },
   render: function() {
-    if ( this.props.pathList.length > 1 && this.props.cancelPath.length === 0 ) {
-        var goBackButton =
-          <GoBackButton
-              onGoBack={ this.props.onGoBack } />
-    }
     return (
       <div className="directory-list panel panel-default">
         <div className="panel-heading">
@@ -26,11 +20,6 @@ var DirectoryContainer = React.createClass({
         </div>
 
         <div className="panel-body">
-
-          <div id="back-button-container">
-            { goBackButton }
-          </div>
-
           <div className="list-of-folders">
             {
               this.props.folders.map( function( folder ) {
