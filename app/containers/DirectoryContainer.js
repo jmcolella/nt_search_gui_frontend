@@ -1,7 +1,7 @@
 var React = require('react');
 var Folder = require('../components/Folder');
 var Document = require('../components/Document');
-var Header = require('../components/Header');
+var BreadCrumbsContainer = require('../containers/BreadCrumbsContainer');
 var GoBackButton = require('../components/GoBackButton');
 
 var DirectoryContainer = React.createClass({
@@ -20,8 +20,9 @@ var DirectoryContainer = React.createClass({
     return (
       <div className="directory-list panel panel-default">
         <div className="panel-heading">
-          <Header
-            title={ "Directory" } />
+          <BreadCrumbsContainer
+            breadcrumbList={ this.props.breadcrumbList }
+            onUpdateRender={ this.props.onUpdateRender } />
         </div>
 
         <div className="panel-body">
