@@ -17,6 +17,7 @@ var RootContainer = React.createClass({
       folders: [],
       documents: [],
       pathList: [],
+      breadcrumbList: [],
       addButton: false,
       documentToAdd: {},
       clickedDocumentObjects: [],
@@ -28,6 +29,12 @@ var RootContainer = React.createClass({
   },
   componentWillMount: function() {
     var path = this.props.location.pathname;
+
+    this.state.breadcrumbList.push( {
+      path: this.props.location.pathname,
+      name: "partition-" + this.props.params.id
+    } );
+
     $.ajax({
       url: "http://localhost:3000" + path,
       type: "GET"
@@ -38,12 +45,25 @@ var RootContainer = React.createClass({
         partition: this.props.params.id,
         folders: response.folders || [],
         documents: response.documents || [],
-        pathList: this.state.pathList
+        pathList: this.state.pathList,
+        breadcrumbList: this.state.breadcrumbList
       });
     }.bind(this));
   },
-  handleUpdateRender: function( path, currentName ) {
-    this.state.documentPath.push( currentName );
+  handleUpdateRender: function( path, current ) {
+    if ( typeof(current) === "string" ) {
+      this.state.documentPath.push( current );
+      this.state.breadcrumbList.push( {
+        path: path,
+        name: current
+      } );
+    } else {
+      var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( current ) + 1;
+      this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
+
+      var sliceDocumentPathIdx = this.state.documentPath.indexOf( current.name ) + 1;
+      this.state.documentPath.splice( sliceDocumentPathIdx, this.state.documentPath.length - sliceDocumentPathIdx );
+    }
 
     $.ajax({
       url: "http://localhost:3000" + path,
@@ -56,6 +76,7 @@ var RootContainer = React.createClass({
         folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList,
+        breadcrumbList: this.state.breadcrumbList,
         documentPath: this.state.documentPath
       });
     }.bind(this));
@@ -161,6 +182,7 @@ var RootContainer = React.createClass({
                 documents={ this.state.documents }
                 onUpdateRender={ this.handleUpdateRender }
                 pathList={ this.state.pathList }
+                breadcrumbList={ this.state.breadcrumbList }
                 onGoBack={ this.handleGoBack }
                 onShowAddButton={ this.handleShowAddButton }
                 documentToAdd={ this.state.documentToAdd }
