@@ -80,6 +80,10 @@
   display: none !important;
 }
 
+.bread-crumb {
+  display: inline-block;
+}
+
 /* Documents to Submit styling */
 
 .document-list {
