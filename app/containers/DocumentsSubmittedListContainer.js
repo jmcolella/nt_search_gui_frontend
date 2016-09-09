@@ -63,7 +63,7 @@ var DocumentsSubmittedListContainer = React.createClass({
                             data={ obj } />
                 }.bind(this))
               }
-              <input className="btn btn-primary" type="submit" value="submit list" />
+              <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
             </form>
           </div>
 
