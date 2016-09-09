@@ -13,7 +13,7 @@ var DirectoryContainer = React.createClass({
   },
   render: function() {
     return (
-      <div className="directory-list panel panel-default">
+      <div id="directory-list" className="default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
               title={ this.props.partition } />
@@ -24,7 +24,7 @@ var DirectoryContainer = React.createClass({
             breadcrumbList={ this.props.breadcrumbList }
             onUpdateRender={ this.props.onUpdateRender } />
 
-          <div className="list-of-folders">
+          <div id="list-of-folders">
             {
               this.props.folders.map( function( folder ) {
                 return <Folder
@@ -37,7 +37,7 @@ var DirectoryContainer = React.createClass({
             }
           </div>
 
-          <div className="list-of-documents">
+          <div id="list-of-documents">
             {
               this.props.documents.map( function( doc ) {
                 return <Document
