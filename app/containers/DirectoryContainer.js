@@ -1,7 +1,8 @@
 var React = require('react');
+var Header = require('../components/Header');
+var BreadCrumbsContainer = require('../containers/BreadCrumbsContainer');
 var Folder = require('../components/Folder');
 var Document = require('../components/Document');
-var BreadCrumbsContainer = require('../containers/BreadCrumbsContainer');
 
 var DirectoryContainer = React.createClass({
   handleMouseOver: function(e) {
@@ -14,12 +15,15 @@ var DirectoryContainer = React.createClass({
     return (
       <div className="directory-list panel panel-default">
         <div className="panel-heading">
-          <BreadCrumbsContainer
-            breadcrumbList={ this.props.breadcrumbList }
-            onUpdateRender={ this.props.onUpdateRender } />
+          <Header
+              title={ this.props.partition } />
         </div>
 
         <div className="panel-body">
+          <BreadCrumbsContainer
+            breadcrumbList={ this.props.breadcrumbList }
+            onUpdateRender={ this.props.onUpdateRender } />
+
           <div className="list-of-folders">
             {
               this.props.folders.map( function( folder ) {

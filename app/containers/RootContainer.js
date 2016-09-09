@@ -32,7 +32,7 @@ var RootContainer = React.createClass({
 
     this.state.breadcrumbList.push( {
       path: this.props.location.pathname,
-      name: "partition-" + this.props.params.id
+      name: "home"
     } );
 
     $.ajax({
@@ -42,7 +42,7 @@ var RootContainer = React.createClass({
       this.state.pathList.push( path );
 
       this.setState({
-        partition: this.props.params.id,
+        partition: "partition-" + this.props.params.id,
         folders: response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList,
@@ -161,6 +161,7 @@ var RootContainer = React.createClass({
         <div className="row text-center">
           <div className="col-lg-4 col-md-4 col-sm-4">
             <DirectoryContainer
+                partition={ this.state.partition }
                 folders={ this.state.folders }
                 documents={ this.state.documents }
                 onUpdateRender={ this.handleUpdateRender }
