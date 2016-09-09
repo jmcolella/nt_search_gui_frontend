@@ -1,6 +1,7 @@
 var React = require('react');
-var DocumentToSubmit = require('../components/DocumentToSubmit');
 var Header = require('../components/Header');
+var SubmitDocumentListCount = require('../components/SubmitDocumentListCount');
+var DocumentToSubmit = require('../components/DocumentToSubmit');
 var SubmitDocumentListButton = require('../components/SubmitDocumentListButton');
 
 var DocumentsToSubmitListContainer = React.createClass({
@@ -18,6 +19,8 @@ var DocumentsToSubmitListContainer = React.createClass({
         </div>
 
         <div className="panel-body submit-document-list">
+          <SubmitDocumentListCount
+              documentList={ this.props.documentList } />
           {
             this.props.documentList.map( function( obj ) {
               return <DocumentToSubmit
