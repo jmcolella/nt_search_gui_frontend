@@ -10,12 +10,12 @@ var BreadCrumb = React.createClass({
   },
   render: function () {
     if ( this.props.collapseData ) {
-      var breadCrumbName = "../"
+      var breadCrumbName = ".."
     } else {
-      var breadCrumbName = this.props.data.name + "/"
+      var breadCrumbName = this.props.data.name
     }
     return (
-      <h1 className="bread-crumb pointer" onClick={ this.updateRender }>{ breadCrumbName }</h1>
+      <li className="bread-crumb pointer" onClick={ this.updateRender }><a className="dark-link">{ breadCrumbName }</a></li>
     )
   }
 

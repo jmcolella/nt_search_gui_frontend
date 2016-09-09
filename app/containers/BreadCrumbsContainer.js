@@ -35,7 +35,8 @@ var BreadCrumbsContainer = React.createClass({
   },
   render: function () {
     return (
-      <div>
+      <div className="default-sub-header-height">
+        <ol className="bread-crumb-list breadcrumb">
         {
           this.state.collapse && <BreadCrumb
                                     onUpdateRender={ this.props.onUpdateRender }
@@ -46,9 +47,11 @@ var BreadCrumbsContainer = React.createClass({
             return <BreadCrumb
                       key={ index }
                       data={ pathObj }
+                      index={ index }
                       onUpdateRender={ this.props.onUpdateRender } />
           }.bind(this))
         }
+        </ol>
       </div>
     )
   }

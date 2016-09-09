@@ -13,8 +13,16 @@
   color: white !important;
 }
 
+.dark-link {
+  color: #175373 !important;
+}
+
 .app-header {
   color: #175373;
+}
+
+.default-sub-header-height {
+  height: 3vh;
 }
 
 /* Partitions styling */
@@ -50,16 +58,8 @@
   }
 }
 
-.list-of-folders {
-  margin-top: 3vh;
-}
-
 .folder-document-icon-name {
   display: inline-block;
-}
-
-.folder-link {
-  color: #175373 !important;
 }
 
 .folder-icon {
@@ -69,6 +69,7 @@
 
 .individual-document-container {
   color: #5688A2;
+  padding: 3px;
 }
 
 .document-icon {
@@ -84,8 +85,8 @@
   display: none !important;
 }
 
-.bread-crumb {
-  display: inline-block;
+li.bread-crumb.pointer::before {
+  color: #5688A2 !important;
 }
 
 /* Documents to Submit styling */
@@ -101,8 +102,13 @@
   }
 }
 
-.submit-document-list {
-  margin-top: 3vh;
+#submit-document-count-sub-header {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  color: #175373;;
 }
 
 /* Button styling */
