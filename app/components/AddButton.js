@@ -13,7 +13,7 @@ function AddButton ( props ) {
       <button id="add-button" className="btn btn-primary btn-lg disabled-button-color" disabled="disabled" onClick={ function() { props.onUpdateDocumentList( props.documentToAdd ) } }>add document</button>
   }
   return (
-    <div>
+    <div id="add-button-container">
       { add }
     </div>
   )
