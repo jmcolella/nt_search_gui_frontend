@@ -1,6 +1,6 @@
 var React = require('react');
 var DirectoryContainer = require('../containers/DirectoryContainer');
-var AddButton = require('../components/AddButton');
+var AddButtonContainer = require('../containers/AddButtonContainer');
 var DocumentsToSubmitListContainer = require('../containers/DocumentsToSubmitListContainer');
 
 var RenderDirectoryContainer = React.createClass({
@@ -22,7 +22,7 @@ var RenderDirectoryContainer = React.createClass({
         </div>
 
         <div className="col-lg-4 col-md-4 col-sm-4">
-          <AddButton
+          <AddButtonContainer
               addButton={ this.props.addButton }
               onUpdateDocumentList={ this.props.onUpdateDocumentList }
               onCancelAddDocument={ this.props.onCancelAddDocument }

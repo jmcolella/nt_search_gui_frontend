@@ -2,7 +2,7 @@ var React = require('react');
 var Header = require('../components/Header');
 var BreadCrumbsListContainer = require('../containers/BreadCrumbsListContainer');
 var FolderContainer = require('../containers/FolderContainer');
-var Document = require('../components/Document');
+var DocumentContainer = require('../containers/DocumentContainer');
 
 var DirectoryContainer = React.createClass({
   handleMouseOver: function(e) {
@@ -40,7 +40,7 @@ var DirectoryContainer = React.createClass({
           <div id="list-of-documents">
             {
               this.props.documents.map( function( doc ) {
-                return <Document
+                return <DocumentContainer
                           key={doc.id}
                           data={doc}
                           onShowAddButton={this.props.onShowAddButton}
