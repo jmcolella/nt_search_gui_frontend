@@ -1,7 +1,7 @@
 var React = require('react');
 var Header = require('../components/Header');
 var SubmitDocumentListCount = require('../components/SubmitDocumentListCount');
-var DocumentToSubmit = require('../components/DocumentToSubmit');
+var DocumentToSubmitContainer = require('../containers/DocumentToSubmitContainer');
 var SubmitDocumentListButton = require('../components/SubmitDocumentListButton');
 
 var DocumentsToSubmitListContainer = React.createClass({
@@ -24,7 +24,7 @@ var DocumentsToSubmitListContainer = React.createClass({
                 documentList={ this.props.documentList } />
             {
               this.props.documentList.map( function( obj ) {
-                return <DocumentToSubmit
+                return <DocumentToSubmitContainer
                           key={ obj.doc.id }
                           data={ obj.doc }
                           onRemoveDocument={ this.props.onRemoveDocument }

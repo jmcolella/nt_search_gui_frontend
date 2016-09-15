@@ -1,8 +1,8 @@
 var React = require('react');
-var BreadCrumb = require('../components/BreadCrumb');
+var BreadCrumbContainer = require('../containers/BreadCrumbContainer');
 
 
-var BreadCrumbsContainer = React.createClass({
+var BreadCrumbsListContainer = React.createClass({
   getInitialState: function () {
     return {
       collapse: false,
@@ -38,13 +38,13 @@ var BreadCrumbsContainer = React.createClass({
       <div className="default-sub-header-height">
         <ol className="bread-crumb-list breadcrumb">
         {
-          this.state.collapse && <BreadCrumb
+          this.state.collapse && <BreadCrumbContainer
                                     onUpdateRender={ this.props.onUpdateRender }
                                     collapseData={ this.state.collapseData } />
         }
         {
           this.state.breadcrumbList.map( function( pathObj, index ) {
-            return <BreadCrumb
+            return <BreadCrumbContainer
                       key={ index }
                       data={ pathObj }
                       index={ index }
@@ -57,4 +57,4 @@ var BreadCrumbsContainer = React.createClass({
   }
 });
 
-module.exports = BreadCrumbsContainer;
+module.exports = BreadCrumbsListContainer;

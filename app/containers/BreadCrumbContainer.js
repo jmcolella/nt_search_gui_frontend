@@ -1,7 +1,7 @@
 var React = require('react');
 
-var BreadCrumb = React.createClass({
-  updateRender: function() {
+var BreadCrumbContainer = React.createClass({
+  updateRenderBreadCrumb: function() {
     if ( this.props.collapseData ) {
       this.props.onUpdateRender( this.props.collapseData.path, this.props.collapseData );
     } else {
@@ -15,10 +15,10 @@ var BreadCrumb = React.createClass({
       var breadCrumbName = this.props.data.name
     }
     return (
-      <li className="bread-crumb pointer" onClick={ this.updateRender }><a className="dark-link">{ breadCrumbName }</a></li>
+      <li className="bread-crumb pointer" onClick={ this.updateRenderBreadCrumb }><a className="dark-link">{ breadCrumbName }</a></li>
     )
   }
 
 });
 
-module.exports = BreadCrumb;
+module.exports = BreadCrumbContainer;

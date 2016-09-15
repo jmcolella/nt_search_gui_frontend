@@ -1,14 +1,12 @@
 var React = require('react');
-var Header = require('../components/Header');
+var AppHeader = require('../components/AppHeader');
 
 var AppContainer = React.createClass({
   render: function() {
     return (
       <div className="container-fluid font">
-        <div className="row text-center app-header">
-          <Header
-              title={ 'NT Search GUI' } />
-        </div>
+        < AppHeader />
+
         {this.props.children}
       </div>
     )

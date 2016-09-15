@@ -1,10 +1,8 @@
 var React = require('react');
 var ReactDOM = require("react-dom");
 var findDOMNode = ReactDOM.findDOMNode;
-var DirectoryContainer = require('../containers/DirectoryContainer');
-var DocumentsToSubmitListContainer = require('../containers/DocumentsToSubmitListContainer');
-var DocumentsSubmittedListContainer = require('../containers/DocumentsSubmittedListContainer');
-var AddButton = require('../components/AddButton');
+var RenderDirectoryContainer = require('../containers/RenderDirectoryContainer');
+var RenderDocumentsSubmittedListContainer = require('../containers/RenderDocumentsSubmittedListContainer');
 
 
 var RootContainer = React.createClass({
@@ -147,48 +145,32 @@ var RootContainer = React.createClass({
   render: function() {
     if ( this.state.submit === true ) {
       var rootRender =
-        <div className="row text-center">
-          <div className="col-lg-12">
-            <DocumentsSubmittedListContainer
-                partition={ this.state.partition }
-                documentList={ this.state.clickedDocumentObjects }
-                submit={ this.state.submit }
-                onCancelDocumentList={ this.handleCancelDocumentList } />
-          </div>
-        </div>
+        <RenderDocumentsSubmittedListContainer
+            partition={ this.state.partition }
+            documentList={ this.state.clickedDocumentObjects }
+            submit={ this.state.submit }
+            onCancelDocumentList={ this.handleCancelDocumentList } />
     } else {
       var rootRender =
-        <div className="row text-center">
-          <div className="col-lg-4 col-md-4 col-sm-4">
-            <DirectoryContainer
-                partition={ this.state.partition }
-                folders={ this.state.folders }
-                documents={ this.state.documents }
-                onUpdateRender={ this.handleUpdateRender }
-                pathList={ this.state.pathList }
-                breadcrumbList={ this.state.breadcrumbList }
-                onShowAddButton={ this.handleShowAddButton }
-                documentToAdd={ this.state.documentToAdd }
-                clickedDocumentNames={ this.state.clickedDocumentNames }
-                cancelPath={ this.state.cancelPath } />
-          </div>
-
-          <div className="col-lg-4 col-md-4 col-sm-4">
-            <AddButton
-                addButton={ this.state.addButton }
-                onUpdateDocumentList={ this.handleUpdateDocumentList }
-                onCancelAddDocument={ this.handleCancelAddDocument }
-                documentToAdd={ this.state.documentToAdd } />
-          </div>
-
-          <div className="col-lg-4 col-md-4 col-sm-4">
-            <DocumentsToSubmitListContainer
-                documentList={ this.state.clickedDocumentObjects }
-                onSubmitDocumentList={ this.handleSubmitDocumentList }
-                submit={ this.state.submit }
-                onRemoveDocument={ this.handleRemoveDocument } />
-          </div>
-        </div>
+        <RenderDirectoryContainer
+            partition={ this.state.partition }
+            folders={ this.state.folders }
+            documents={ this.state.documents }
+            pathList={ this.state.pathList }
+            breadcrumbList={ this.state.breadcrumbList }
+            documentToAdd={ this.state.documentToAdd }
+            clickedDocumentNames={ this.state.clickedDocumentNames }
+            cancelPath={ this.state.cancelPath }
+            addButton={ this.state.addButton }
+            documentToAdd={ this.state.documentToAdd }
+            documentList={ this.state.clickedDocumentObjects }
+            submit={ this.state.submit }
+            onUpdateRender={ this.handleUpdateRender }
+            onShowAddButton={ this.handleShowAddButton }
+            onUpdateDocumentList={ this.handleUpdateDocumentList }
+            onCancelAddDocument={ this.handleCancelAddDocument }
+            onSubmitDocumentList={ this.handleSubmitDocumentList }
+            onRemoveDocument={ this.handleRemoveDocument } />
     }
     return (
       <div id="root-container" className="container-fluid">
