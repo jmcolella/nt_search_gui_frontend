@@ -1,22 +1,24 @@
 var React = require('react');
 
-function AddButton ( props ) {
-  if ( props.addButton ) {
-    var add =
-      <div>
-        <button id="add-button" className="btn btn-primary btn-lg primary-button-color" onClick={ function() { props.onUpdateDocumentList( props.documentToAdd ) } }>add document</button>
-        <br/>
-        <button id="cancel-add-button" className="btn btn-danger btn-sm cancel-button-color" onClick={ props.onCancelAddDocument }>cancel</button>
+var AddButton = React.createClass({
+  render: function () {
+    if ( this.props.addButton ) {
+      var add =
+        <div>
+          <button id="add-button" className="btn btn-primary btn-lg primary-button-color" onClick={ this.props.onClickAddButton }>add document</button>
+          <br/>
+          <button id="cancel-add-button" className="btn btn-danger btn-sm cancel-button-color" onClick={ this.props.onCancelAddDocument }>cancel</button>
+        </div>
+    } else {
+      var add =
+        <button id="add-button" className="btn btn-primary btn-lg disabled-button-color" disabled="disabled" onClick={ this.props.onClickAddButton }>add document</button>
+    }
+    return (
+      <div id="add-button-container">
+        { add }
       </div>
-  } else {
-    var add =
-      <button id="add-button" className="btn btn-primary btn-lg disabled-button-color" disabled="disabled" onClick={ function() { props.onUpdateDocumentList( props.documentToAdd ) } }>add document</button>
+    )
   }
-  return (
-    <div id="add-button-container">
-      { add }
-    </div>
-  )
-};
+});
 
 module.exports = AddButton;
