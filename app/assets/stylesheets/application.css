@@ -13,28 +13,48 @@
   color: white !important;
 }
 
-.dark-link {
-  color: #175373 !important;
-}
-
-.app-header {
-  color: #175373;
+.inline-block-style {
+  display: inline-block;
 }
 
 .default-sub-header-height {
   height: 3vh;
 }
 
-.inline-block-style {
-  display: inline-block;
-}
+/* Default List styling */
 
 .default-list-height {
   height: 30vh;
 }
 
+.default-document-list {
+  margin-top: 50px;
+  height: 45vh;
+  overflow: scroll;
+  border: 1px solid black;
+  border-radius: 1%;
+}
+
+/* Color */
+
+.app-header {
+  color: #175373;
+}
+
 .grey-text-color {
   color: #777;
+}
+
+.dark-link {
+  color: #175373 !important;
+}
+
+/* General styling media queries */
+
+@media ( max-width: 1440px ) {
+  .default-list-height {
+    height: 80vh;
+  }
 }
 
 @media ( min-width: 831px ) and ( max-width: 1270px ) {
@@ -69,17 +89,7 @@
 /* Directory List styling */
 
 #list-of-files {
-  margin-top: 20px;
-  height: 45vh;
-  overflow: scroll;
-  border: 1px solid black;
   text-align: left;
-}
-
-@media ( max-width: 1440px ) {
-  .default-list-height {
-    height: 70vh;
-  }
 }
 
 .folder-icon {
@@ -107,58 +117,20 @@ li.bread-crumb.pointer::before {
 
 /* Documents to Submit styling */
 
-#submit-document-count-sub-header p {
+#submit-document-count-sub-header li {
   color: #175373;
   margin: 0 auto;
 }
 
-#submit-document-list {
-  height: 33vh;
-  overflow: scroll;
+.individual-submit-document-container {
+  text-align: right;
 }
 
-@media ( max-width: 1440px ) {
- .default-list-height {
-    height: 70vh;
-  }
-
-  #submit-document-list {
-    height: 45vh;
-    overflow: scroll;
-  }
-}
-
-/* Button styling */
-
-/*#add-button {
-  margin-top: 15em;
-}*/
-
-#add-button-container {
+.individual-submit-document-container > h4 {
   display: inline-block;
-  position: relative;
-  float: right;
 }
 
-#cancel-add-button {
-  margin-top: 2em;
-}
-
-/*@media ( max-width: 1440px ) {
-  #add-button {
-    margin-top: 12em;
-  }
-}
-
-@media ( max-width: 767px ) {
-  #add-button {
-    margin-top: 5em;
-  }
-
-  #add-button-container {
-    margin-bottom: 8em;
-  }
-}*/
+/* General Button styling */
 
 .primary-button-color {
   background-image: linear-gradient(to bottom,#0E6BA8 0,#0E6BA8 100%) !important;
@@ -213,29 +185,32 @@ li.bread-crumb.pointer::before {
   color: #B92C28;
 }
 
+/* Specific Button styling */
+
+#add-button-container {
+  display: inline-block;
+  position: relative;
+  float: right;
+}
+
+#cancel-add-button {
+  margin-top: 2em;
+}
+
 .remove-button {
   background-color: transparent;
   border: none;
   color: #b92c28;
+  display: inline-block;
 }
 
 .remove-button:focus {
   outline: 0;
 }
 
-/*#back-button-container {
-  height: 3vh;
+#submit-document-list-button-container {
+  margin-top: 15px;
 }
-
-#back-button {
-  background-color: transparent;
-  border: none;
-}
-
-#back-button:focus {
-  outline: 0;
-}
-*/
 
 /* Form styling */
 

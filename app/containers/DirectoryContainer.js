@@ -18,7 +18,7 @@ var DirectoryContainer = React.createClass({
             breadcrumbList={ this.props.breadcrumbList }
             onUpdateRender={ this.props.onUpdateRender } />
 
-          <div id="list-of-files">
+          <div id="list-of-files" className="default-document-list">
             <ul className="list-group">
               {
                 this.props.folders.map( function( folder ) {
