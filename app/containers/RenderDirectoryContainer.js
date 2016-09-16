@@ -7,7 +7,7 @@ var RenderDirectoryContainer = React.createClass({
   render: function () {
     return (
       <div className="row text-center">
-        <div className="col-lg-4 col-md-4 col-sm-4">
+        <div className="col-sm-6">
           <DirectoryContainer
               partition={ this.props.partition }
               folders={ this.props.folders }
@@ -16,20 +16,14 @@ var RenderDirectoryContainer = React.createClass({
               pathList={ this.props.pathList }
               breadcrumbList={ this.props.breadcrumbList }
               onShowAddButton={ this.props.onShowAddButton }
+              addButton={ this.props.addButton }
+              onUpdateDocumentList={ this.props.onUpdateDocumentList }
               documentToAdd={ this.props.documentToAdd }
               clickedDocumentNames={ this.props.clickedDocumentNames }
               cancelPath={ this.props.cancelPath } />
         </div>
 
-        <div className="col-lg-4 col-md-4 col-sm-4">
-          <AddButtonContainer
-              addButton={ this.props.addButton }
-              onUpdateDocumentList={ this.props.onUpdateDocumentList }
-              onCancelAddDocument={ this.props.onCancelAddDocument }
-              documentToAdd={ this.props.documentToAdd } />
-        </div>
-
-        <div className="col-lg-4 col-md-4 col-sm-4">
+        <div className="col-sm-6">
           <DocumentsToSubmitListContainer
               documentList={ this.props.documentList }
               onSubmitDocumentList={ this.props.onSubmitDocumentList }

@@ -16,8 +16,6 @@ var RootContainer = React.createClass({
       documents: [],
       pathList: [],
       breadcrumbList: [],
-      addButton: false,
-      documentToAdd: {},
       clickedDocumentObjects: [],
       clickedDocumentNames: [],
       documentPath: [],
@@ -79,18 +77,6 @@ var RootContainer = React.createClass({
       });
     }.bind(this));
   },
-  handleShowAddButton: function( data ) {
-    this.setState({
-      addButton: true,
-      documentToAdd: data
-    });
-  },
-  handleCancelAddDocument: function() {
-    this.setState({
-      addButton: false,
-      documentToAdd: {}
-    });
-  },
   handleUpdateDocumentList: function( data ) {
     this.state.documentPath.push( data.name );
     this.state.clickedDocumentNames.push( data.name );
@@ -101,7 +87,6 @@ var RootContainer = React.createClass({
     );
 
     this.setState({
-      addButton: false,
       documentToAdd: {},
       clickedDocumentObjects: this.state.clickedDocumentObjects,
       clickedDocumentNames: this.state.clickedDocumentNames,

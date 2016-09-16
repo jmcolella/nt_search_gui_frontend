@@ -1,16 +1,12 @@
 var React = require('react');
-var AddButton = require('../components/AddButton');
+var AddButtonNew = require('../components/AddButtonNew');
 
 var AddButtonContainer = React.createClass({
-  handleClickAddButton: function () {
-    this.props.onUpdateDocumentList( this.props.documentToAdd )
-  },
   render: function () {
     return (
-      <AddButton
+      <AddButtonNew
           addButton={ this.props.addButton }
-          onClickAddButton={ this.handleClickAddButton }
-          onCancelAddDocument={ this.props.onCancelAddDocument } />
+          onClickAddButton={ this.handleClickAddButton } />
     )
   }
 });
