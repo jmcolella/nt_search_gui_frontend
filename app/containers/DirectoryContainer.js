@@ -6,6 +6,7 @@ var DocumentContainer = require('../containers/DocumentContainer');
 
 var DirectoryContainer = React.createClass({
   render: function() {
+    debugger;
     return (
       <div id="directory-list" className="default-list-height panel panel-default">
         <div className="panel-heading">
@@ -21,18 +22,18 @@ var DirectoryContainer = React.createClass({
           <div id="list-of-files" className="default-document-list">
             <ul className="list-group">
               {
-                this.props.folders.map( function( folder ) {
+                this.props.folders.map( function( folder, index ) {
                   return <FolderContainer
-                            key={folder.id}
+                            key={index}
                             data={folder}
                             onUpdateRender={this.props.onUpdateRender} />
                 }.bind(this))
               }
 
               {
-                this.props.documents.map( function( doc ) {
+                this.props.documents.map( function( doc, index ) {
                   return <DocumentContainer
-                            key={doc.id}
+                            key={index}
                             data={doc}
                             onShowAddButton={this.props.onShowAddButton}
                             addButton={ this.props.addButton }

@@ -32,11 +32,13 @@ var RootContainer = React.createClass({
     } );
 
     $.ajax({
-      url: "http://localhost:3000" + path,
+      url: "http://localhost:3001",
       type: "GET"
     }).done( function( response ) {
+      response = JSON.parse( response )
       this.state.pathList.push( path );
 
+      debugger;
       this.setState({
         partition: "partition-" + this.props.params.id,
         folders: response.folders || [],
