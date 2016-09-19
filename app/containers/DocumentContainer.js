@@ -2,8 +2,8 @@ var React = require('react');
 var Document = require('../components/Document');
 
 var DocumentContainer = React.createClass({
-  handleClickDocument: function () {
-    this.props.onShowAddButton( this.props.data )
+  handleClickAddButton: function () {
+    this.props.onUpdateDocumentList( this.props.data )
   },
   render: function () {
     return (
@@ -11,9 +11,8 @@ var DocumentContainer = React.createClass({
           documentData={ this.props.data }
           clickedDocumentNames={ this.props.clickedDocumentNames }
           documentToAdd={ this.props.documentToAdd }
-          onMouseOver={ this.props.onMouseOver }
-          onMouseDepart={ this.props.onMouseDepart }
-          onClickDocument={ this.handleClickDocument } />
+          addButton={ this.props.addButton }
+          onClickAddButton={ this.handleClickAddButton } />
     )
   }
 });

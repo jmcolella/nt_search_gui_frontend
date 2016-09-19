@@ -16,8 +16,6 @@ var RootContainer = React.createClass({
       documents: [],
       pathList: [],
       breadcrumbList: [],
-      addButton: false,
-      documentToAdd: {},
       clickedDocumentObjects: [],
       clickedDocumentNames: [],
       documentPath: [],
@@ -79,18 +77,6 @@ var RootContainer = React.createClass({
       });
     }.bind(this));
   },
-  handleShowAddButton: function( data ) {
-    this.setState({
-      addButton: true,
-      documentToAdd: data
-    });
-  },
-  handleCancelAddDocument: function() {
-    this.setState({
-      addButton: false,
-      documentToAdd: {}
-    });
-  },
   handleUpdateDocumentList: function( data ) {
     this.state.documentPath.push( data.name );
     this.state.clickedDocumentNames.push( data.name );
@@ -101,7 +87,6 @@ var RootContainer = React.createClass({
     );
 
     this.setState({
-      addButton: false,
       documentToAdd: {},
       clickedDocumentObjects: this.state.clickedDocumentObjects,
       clickedDocumentNames: this.state.clickedDocumentNames,
@@ -136,7 +121,6 @@ var RootContainer = React.createClass({
         partitions: response.partitions || [],
         folders: response.sub_folders || response.folders || [],
         documents: response.documents || [],
-        addButton: false,
         cancelPath: "",
         submit: false
       });
@@ -158,17 +142,12 @@ var RootContainer = React.createClass({
             documents={ this.state.documents }
             pathList={ this.state.pathList }
             breadcrumbList={ this.state.breadcrumbList }
-            documentToAdd={ this.state.documentToAdd }
             clickedDocumentNames={ this.state.clickedDocumentNames }
             cancelPath={ this.state.cancelPath }
-            addButton={ this.state.addButton }
-            documentToAdd={ this.state.documentToAdd }
             documentList={ this.state.clickedDocumentObjects }
             submit={ this.state.submit }
             onUpdateRender={ this.handleUpdateRender }
-            onShowAddButton={ this.handleShowAddButton }
             onUpdateDocumentList={ this.handleUpdateDocumentList }
-            onCancelAddDocument={ this.handleCancelAddDocument }
             onSubmitDocumentList={ this.handleSubmitDocumentList }
             onRemoveDocument={ this.handleRemoveDocument } />
     }
