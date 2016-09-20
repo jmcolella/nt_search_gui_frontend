@@ -6,7 +6,6 @@ var DocumentContainer = require('../containers/DocumentContainer');
 
 var DirectoryContainer = React.createClass({
   render: function() {
-    debugger;
     return (
       <div id="directory-list" className="default-list-height panel panel-default">
         <div className="panel-heading">

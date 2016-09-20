@@ -5,7 +5,7 @@ var BreadCrumbContainer = React.createClass({
     if ( this.props.collapseData ) {
       this.props.onUpdateRender( this.props.collapseData.path, this.props.collapseData );
     } else {
-      this.props.onUpdateRender( this.props.data.path, this.props.data );
+      this.props.onUpdateRender( this.props.data );
     }
   },
   render: function () {

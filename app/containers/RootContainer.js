@@ -18,7 +18,6 @@ var RootContainer = React.createClass({
       breadcrumbList: [],
       clickedDocumentObjects: [],
       clickedDocumentNames: [],
-      documentPath: [],
       submit: false,
       cancelPath: ""
     };
@@ -26,7 +25,7 @@ var RootContainer = React.createClass({
   componentWillMount: function() {
     this.state.breadcrumbList.push( {
       path: ".",
-      name: "home"
+      name: "."
     } );
 
     $.ajax({
@@ -36,7 +35,6 @@ var RootContainer = React.createClass({
       response = JSON.parse( response )
       this.state.pathList.push( "." );
 
-      debugger;
       this.setState({
         folders: response.folders || [],
         documents: response.documents || [],
@@ -46,29 +44,34 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateRender: function( folderName ) {
-    if ( typeof(current) === "string" ) {
-      this.state.documentPath.push( current );
+
+    if ( typeof( folderName ) === "string" ) {
+      this.state.pathList.push( folderName );
+      breadcrumbPath = this.state.pathList.slice( 1, this.state.pathList.length );
       this.state.breadcrumbList.push( {
-        path: path,
-        name: current
+        path: breadcrumbPath.join("/"),
+        name: folderName
       } );
     } else {
-      var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( current ) + 1;
+      var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( folderName ) + 1;
       this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
 
-      var sliceDocumentPathIdx = this.state.documentPath.indexOf( current.name ) + 1;
-      this.state.documentPath.splice( sliceDocumentPathIdx, this.state.documentPath.length - sliceDocumentPathIdx );
+      var slicePathIdx = this.state.pathList.indexOf( folderName.name ) + 1;
+      this.state.pathList.splice( slicePathIdx, this.state.pathList.length - slicePathIdx );
     }
 
+    var path = this.state.breadcrumbList[this.state.breadcrumbList.length - 1].path;
+
     $.ajax({
-      url: "http://localhost:3000" + path,
-      type: "GET",
+      url: "http://localhost:3001",
+      type: "POST",
+      data: path
     }).done( function( response ) {
-      this.state.pathList.push( path );
+      debugger;
+      response = JSON.parse( response );
 
       this.setState({
-        partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
+        folders: response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList,
         breadcrumbList: this.state.breadcrumbList,
@@ -77,7 +80,6 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateDocumentList: function( data ) {
-    this.state.documentPath.push( data.name );
     this.state.clickedDocumentNames.push( data.name );
     this.state.clickedDocumentObjects.push(
       { doc: data,
@@ -86,10 +88,8 @@ var RootContainer = React.createClass({
     );
 
     this.setState({
-      documentToAdd: {},
       clickedDocumentObjects: this.state.clickedDocumentObjects,
       clickedDocumentNames: this.state.clickedDocumentNames,
-      documentPath: this.state.documentPath.slice( 0, this.state.documentPath.length - 1 )
     });
   },
   handleRemoveDocument: function( data ) {
@@ -129,35 +129,35 @@ var RootContainer = React.createClass({
     if ( this.state.submit === true ) {
       var rootRender =
         <RenderDocumentsSubmittedListContainer
-            partition={ this.state.partition }
-            documentList={ this.state.clickedDocumentObjects }
-            submit={ this.state.submit }
-            onCancelDocumentList={ this.handleCancelDocumentList } />
-    } else {
-      var rootRender =
-        <RenderDirectoryContainer
-            partition={ this.state.partition }
-            folders={ this.state.folders }
-            documents={ this.state.documents }
-            pathList={ this.state.pathList }
-            breadcrumbList={ this.state.breadcrumbList }
-            clickedDocumentNames={ this.state.clickedDocumentNames }
-            cancelPath={ this.state.cancelPath }
-            documentList={ this.state.clickedDocumentObjects }
-            submit={ this.state.submit }
-            onUpdateRender={ this.handleUpdateRender }
-            onUpdateDocumentList={ this.handleUpdateDocumentList }
-            onSubmitDocumentList={ this.handleSubmitDocumentList }
-            onRemoveDocument={ this.handleRemoveDocument } />
-    }
-    return (
-      <div id="root-container" className="container-fluid">
+          partition={ this.state.partition }
+          documentList={ this.state.clickedDocumentObjects }
+          submit={ this.state.submit }
+          onCancelDocumentList={ this.handleCancelDocumentList } />
+        } else {
+          var rootRender =
+            <RenderDirectoryContainer
+              partition={ this.state.partition }
+              folders={ this.state.folders }
+              documents={ this.state.documents }
+              pathList={ this.state.pathList }
+              breadcrumbList={ this.state.breadcrumbList }
+              clickedDocumentNames={ this.state.clickedDocumentNames }
+              cancelPath={ this.state.cancelPath }
+              documentList={ this.state.clickedDocumentObjects }
+              submit={ this.state.submit }
+              onUpdateRender={ this.handleUpdateRender }
+              onUpdateDocumentList={ this.handleUpdateDocumentList }
+              onSubmitDocumentList={ this.handleSubmitDocumentList }
+              onRemoveDocument={ this.handleRemoveDocument } />
+            }
+  return (
+    <div id="root-container" className="container-fluid">
 
-        { rootRender }
+      { rootRender }
 
-      </div>
+    </div>
     )
-  }
+}
 });
 
 module.exports = RootContainer;
