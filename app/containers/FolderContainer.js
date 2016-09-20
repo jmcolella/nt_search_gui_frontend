@@ -3,7 +3,7 @@ var Folder = require('../components/Folder');
 
 var FolderContainer = React.createClass({
   handleClickFolder: function() {
-    this.props.onUpdateRender( "/folders/" + this.props.data.id, this.props.data.name )
+    this.props.onUpdateRender( this.props.data )
   },
   render: function() {
     return (
