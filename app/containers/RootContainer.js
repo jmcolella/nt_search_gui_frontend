@@ -11,7 +11,7 @@ var RootContainer = React.createClass({
   },
   getInitialState: function() {
     return {
-      partition: "",
+      partition: "partition-1",
       folders: [],
       documents: [],
       pathList: [],
@@ -24,10 +24,8 @@ var RootContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    var path = this.props.location.pathname;
-
     this.state.breadcrumbList.push( {
-      path: this.props.location.pathname,
+      path: ".",
       name: "home"
     } );
 
@@ -36,11 +34,10 @@ var RootContainer = React.createClass({
       type: "GET"
     }).done( function( response ) {
       response = JSON.parse( response )
-      this.state.pathList.push( path );
+      this.state.pathList.push( "." );
 
       debugger;
       this.setState({
-        partition: "partition-" + this.props.params.id,
         folders: response.folders || [],
         documents: response.documents || [],
         pathList: this.state.pathList,
@@ -48,7 +45,7 @@ var RootContainer = React.createClass({
       });
     }.bind(this));
   },
-  handleUpdateRender: function( path, current ) {
+  handleUpdateRender: function( folderName ) {
     if ( typeof(current) === "string" ) {
       this.state.documentPath.push( current );
       this.state.breadcrumbList.push( {

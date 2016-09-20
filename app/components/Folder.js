@@ -2,7 +2,6 @@ var React = require('react');
 
 var Folder = React.createClass({
   render: function () {
-    debugger;
     return (
       <li className="individual-folder-container list-group-item">
         <i className="fa fa-folder-o fa-lg folder-document-icon-name folder-icon" aria-hidden="true"></i>
