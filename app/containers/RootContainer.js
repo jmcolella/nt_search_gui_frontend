@@ -11,7 +11,7 @@ var RootContainer = React.createClass({
   },
   getInitialState: function() {
     return {
-      partition: "partition-1",
+      partition: "partition-" + this.props.location.pathname.split("/")[2],
       folders: [],
       documents: [],
       pathList: [],

@@ -1,4 +1,7 @@
 /* App wide styling */
+body {
+  background-color: #F5F5F5;
+}
 
 .font {
   font-family: 'Droid Sans', sans-serif;
@@ -24,14 +27,14 @@
 /* Default List styling */
 
 .default-list-height {
-  height: 30vh;
+  height: 67vh;
 }
 
 .default-document-list {
   margin-top: 50px;
   height: 45vh;
   overflow: scroll;
-  border: 1px solid black;
+  border: 1px solid #175373;
   border-radius: 1%;
 }
 

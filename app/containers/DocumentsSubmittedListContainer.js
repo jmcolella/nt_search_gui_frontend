@@ -14,12 +14,12 @@ var DocumentsSubmittedListContainer = React.createClass({
 
     var that = this
 
-    this.props.documentList.forEach(function(obj) {
+    this.props.documentList.forEach( function ( obj ) {
        temp_arr = [];
-       temp_arr.push(parseInt(that.props.partition));
+       temp_arr.push(parseInt(that.props.partition.split("-")[1]));
        temp_arr.push(obj.relativePath);
-       temp_arr.push(values[obj.doc.name + "-interval"]);
-       if ( values[obj.doc.name + "-copy-checked"] ) {
+       temp_arr.push(values[obj.doc + "-interval"]);
+       if ( values[obj.doc + "-copy-checked"] ) {
          temp_arr.push(1)
        } else {
          temp_arr.push(0)

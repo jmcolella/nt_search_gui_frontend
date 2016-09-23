@@ -34,9 +34,7 @@ var DirectoryContainer = React.createClass({
                   return <DocumentContainer
                             key={index}
                             data={doc}
-                            onShowAddButton={this.props.onShowAddButton}
                             addButton={ this.props.addButton }
-                            documentToAdd={ this.props.documentToAdd }
                             onUpdateDocumentList={ this.props.onUpdateDocumentList }
                             clickedDocumentNames={ this.props.clickedDocumentNames } />
                 }.bind(this))
