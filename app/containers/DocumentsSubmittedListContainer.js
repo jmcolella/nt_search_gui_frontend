@@ -57,9 +57,9 @@ var DocumentsSubmittedListContainer = React.createClass({
                 <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
               </div>
               {
-                this.props.documentList.map( function( obj ) {
+                this.props.documentList.map( function( obj, index ) {
                   return <DocumentSubmitted
-                            key={ obj.doc.id }
+                            key={ index }
                             data={ obj } />
                 }.bind(this))
               }

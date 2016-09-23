@@ -23,7 +23,6 @@ var RootContainer = React.createClass({
     };
   },
   componentWillMount: function() {
-    debugger;
     this.state.breadcrumbList.push( {
       path: ".",
       name: "."
@@ -45,9 +44,6 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateRender: function( folderName ) {
-
-    debugger;
-
     if ( typeof( folderName ) === "string" ) {
       this.state.pathList.push( folderName );
       breadcrumbPath = this.state.pathList.slice( 1, this.state.pathList.length );
@@ -69,7 +65,6 @@ var RootContainer = React.createClass({
       url: "http://localhost:3001" + this.props.location.pathname + "/files/" + path,
       type: "GET"
     }).done( function( response ) {
-      debugger;
       response = JSON.parse( response );
 
       this.setState({
@@ -82,10 +77,15 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateDocumentList: function( data ) {
-    this.state.clickedDocumentNames.push( data.name );
+    var relativePath = this.state.pathList.map( function( path ) {
+      return path
+    });
+
+    relativePath.push( data );
+    this.state.clickedDocumentNames.push( data );
     this.state.clickedDocumentObjects.push(
       { doc: data,
-        relativePath: this.state.documentPath.join("/")
+        relativePath: relativePath.join("/")
       }
     );
 
@@ -96,10 +96,10 @@ var RootContainer = React.createClass({
   },
   handleRemoveDocument: function( data ) {
     this.state.clickedDocumentObjects = this.state.clickedDocumentObjects.filter( function(obj) {
-      return obj.doc.name != data.name
+      return obj.doc != data
     });
     this.state.clickedDocumentNames = this.state.clickedDocumentNames.filter( function(doc) {
-      return doc != data.name
+      return doc != data
     });
 
     this.setState({
@@ -115,12 +115,14 @@ var RootContainer = React.createClass({
   },
   handleCancelDocumentList: function() {
     $.ajax({
-      url: "http://localhost:3000" + this.state.cancelPath,
+      url: "http://localhost:3001" + this.props.location.pathname + "/files/" + this.state.cancelPath,
       type: "GET"
     }).done( function( response ) {
+      response = JSON.parse( response );
+
       this.setState({
         partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
+        folders: response.folders || [],
         documents: response.documents || [],
         cancelPath: "",
         submit: false
