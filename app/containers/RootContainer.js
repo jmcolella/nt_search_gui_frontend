@@ -23,13 +23,14 @@ var RootContainer = React.createClass({
     };
   },
   componentWillMount: function() {
+    debugger;
     this.state.breadcrumbList.push( {
       path: ".",
       name: "."
     } );
 
     $.ajax({
-      url: "http://localhost:3001",
+      url: "http://localhost:3001" + this.props.location.pathname + "/files/.",
       type: "GET"
     }).done( function( response ) {
       response = JSON.parse( response )
@@ -44,6 +45,8 @@ var RootContainer = React.createClass({
     }.bind(this));
   },
   handleUpdateRender: function( folderName ) {
+
+    debugger;
 
     if ( typeof( folderName ) === "string" ) {
       this.state.pathList.push( folderName );
@@ -63,9 +66,8 @@ var RootContainer = React.createClass({
     var path = this.state.breadcrumbList[this.state.breadcrumbList.length - 1].path;
 
     $.ajax({
-      url: "http://localhost:3001",
-      type: "POST",
-      data: path
+      url: "http://localhost:3001" + this.props.location.pathname + "/files/" + path,
+      type: "GET"
     }).done( function( response ) {
       debugger;
       response = JSON.parse( response );

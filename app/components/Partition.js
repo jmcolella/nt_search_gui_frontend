@@ -7,11 +7,22 @@ var Partition = React.createClass({
     var partition = this.props.data;
     return (
       <div className="col-lg-12 individual-partition-container">
-        <i className="fa fa-hdd-o fa-4x partition-name-icon partition-icon" aria-hidden="true"></i>
-        <h1 className="inline-block-style"><Link to={ "/partitions/" + partition.id }>{ partition.name }</Link></h1>
+        <div className="col-lg-3">
+          <i className="fa fa-hdd-o fa-4x partition-name-icon partition-icon" aria-hidden="true"></i>
+          <h1 className="inline-block-style"><Link to={ "/partitions/" + this.props.id }>{ partition.type }</Link></h1>
+        </div>
+        <div className="col-lg-3">
+          <h1 className="inline-block-style">Size: { partition.size }</h1>
+        </div>
+        <div className="col-lg-3">
+          <h1 className="inline-block-style">Start: { partition.start }</h1>
+        </div>
+        <div className="col-lg-3">
+          <h1 className="inline-block-style">End: { partition.end }</h1>
+        </div>
       </div>
-    )
-  }
+      )
+}
 });
 
 module.exports = Partition;
