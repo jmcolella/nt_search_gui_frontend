@@ -1,5 +1,6 @@
 var React = require('react');
 var Partition = require("../components/Partition");
+var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var PartitionContainer = React.createClass({
   getInitialState: function() {
@@ -9,15 +10,11 @@ var PartitionContainer = React.createClass({
     }
   },
   componentDidMount: function() {
-    $.ajax({
-      url: "http://localhost:3001/partitions",
-      type: "GET"
-    }).done( function( response ) {
-      response = JSON.parse( response );
-
+    serverRequestHelpers.getPartitionsHelper().then( function( response ) {
+      debugger;
       this.setState({
         loading: false,
-        partitions: response.mbr,
+        partitions: response.data.mbr,
       })
     }.bind(this));
   },
