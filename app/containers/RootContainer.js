@@ -3,7 +3,7 @@ var ReactDOM = require("react-dom");
 var findDOMNode = ReactDOM.findDOMNode;
 var RenderDirectoryContainer = require('../containers/RenderDirectoryContainer');
 var RenderDocumentsSubmittedListContainer = require('../containers/RenderDocumentsSubmittedListContainer');
-
+var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var RootContainer = React.createClass({
   contextTypes: {
@@ -28,52 +28,43 @@ var RootContainer = React.createClass({
       name: "."
     } );
 
-    $.ajax({
-      url: "http://localhost:3001" + this.props.location.pathname + "/files/.",
-      type: "GET"
-    }).done( function( response ) {
-      response = JSON.parse( response )
+    serverRequestHelpers.getPartitionFilesHelper( this.props.location.pathname ).then( function( response ) {
       this.state.pathList.push( "." );
 
       this.setState({
-        folders: response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         pathList: this.state.pathList,
         breadcrumbList: this.state.breadcrumbList
       });
-    }.bind(this));
+   }.bind(this));
   },
   handleUpdateRender: function( folderName ) {
-    if ( typeof( folderName ) === "string" ) {
-      this.state.pathList.push( folderName );
-      breadcrumbPath = this.state.pathList.slice( 1, this.state.pathList.length );
-      this.state.breadcrumbList.push( {
-        path: breadcrumbPath.join("/"),
-        name: folderName
-      } );
-    } else {
-      var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( folderName ) + 1;
-      this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
+     if ( typeof( folderName ) === "string" ) {
+       this.state.pathList.push( folderName );
+       breadcrumbPath = this.state.pathList.slice( 1, this.state.pathList.length );
+       this.state.breadcrumbList.push( {
+          path: breadcrumbPath.join("/"),
+          name: folderName
+       } );
+     } else {
+       var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( folderName ) + 1;
+       this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
 
-      var slicePathIdx = this.state.pathList.indexOf( folderName.name ) + 1;
-      this.state.pathList.splice( slicePathIdx, this.state.pathList.length - slicePathIdx );
+       var slicePathIdx = this.state.pathList.indexOf( folderName.name ) + 1;
+       this.state.pathList.splice( slicePathIdx, this.state.pathList.length - slicePathIdx );
     }
 
     var path = this.state.breadcrumbList[this.state.breadcrumbList.length - 1].path;
 
-    $.ajax({
-      url: "http://localhost:3001" + this.props.location.pathname + "/files/" + path,
-      type: "GET"
-    }).done( function( response ) {
-      response = JSON.parse( response );
-
+    serverRequestHelpers.updateRenderFilesHelper( this.props.location.pathname, path ).then( function( response ) {
       this.setState({
-        folders: response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         pathList: this.state.pathList,
         breadcrumbList: this.state.breadcrumbList,
         documentPath: this.state.documentPath
-      });
+     })
     }.bind(this));
   },
   handleUpdateDocumentList: function( data ) {
@@ -114,16 +105,10 @@ var RootContainer = React.createClass({
     })
   },
   handleCancelDocumentList: function() {
-    $.ajax({
-      url: "http://localhost:3001" + this.props.location.pathname + "/files/" + this.state.cancelPath,
-      type: "GET"
-    }).done( function( response ) {
-      response = JSON.parse( response );
-
+    serverRequestHelpers.cancelDocumentListHelper( this.props.location.pathname, this.state.cancelPath ).then( function( response ) {
       this.setState({
-        partitions: response.partitions || [],
-        folders: response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         cancelPath: "",
         submit: false
       });

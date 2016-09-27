@@ -11,7 +11,6 @@ var PartitionContainer = React.createClass({
   },
   componentDidMount: function() {
     serverRequestHelpers.getPartitionsHelper().then( function( response ) {
-      debugger;
       this.setState({
         loading: false,
         partitions: response.data.mbr,
