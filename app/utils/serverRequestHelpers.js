@@ -1,19 +1,19 @@
 var axios = require('axios');
 
 function getPartitions () {
-  return axios.get("http://localhost:3001/partitions");
+  return axios.get("http://localhost:3001/partitions?" + new Date().getTime());
 }
 
 function getPartitionFiles ( path ) {
-  return axios.get("http://localhost:3001" + path + "/files/");
+  return axios.get("http://localhost:3001" + path + "/files/?" + new Date().getTime());
 }
 
 function updateRenderFiles ( pathname, directory ) {
-  return axios.get("http://localhost:3001" + pathname + "/files/" + directory);
+  return axios.get("http://localhost:3001" + pathname + "/files/" + directory + "?" + new Date().getTime());
 }
 
 function cancelDocumentList ( path, cancelPath ) {
-  return axios.get("http://localhost:3001" + path + "/files/" + cancelPath);
+  return axios.get("http://localhost:3001" + path + "/files/" + cancelPath + "?" + new Date().getTime());
 }
 
 var serverRequestHelpers = {
