@@ -5,7 +5,7 @@ function getPartitions () {
 }
 
 function getPartitionFiles ( path ) {
-  return axios.get("http://localhost:3001" + path + "/files/?" + new Date().getTime());
+  return axios.get("http://localhost:3001" + path + "/files?" + new Date().getTime());
 }
 
 function updateRenderFiles ( pathname, directory ) {
