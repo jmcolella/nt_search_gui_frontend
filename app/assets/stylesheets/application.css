@@ -75,7 +75,32 @@ body {
 /* Partitions styling */
 
 .individual-partition-container {
-  margin-top: 2em;
+  margin: 0 auto;
+  width: 50%;
+  padding-top: 2em;
+}
+
+.partition-info {
+  width: 30%;
+  margin: 0 auto;
+}
+
+.partition-info-table {
+  margin: 0 auto;
+  width: 175px;
+}
+
+.partition-info-table-row {
+  height: 30px;
+}
+
+.partition-info-label {
+  color: #175373;
+}
+
+.partition-info-specifics {
+  text-align: right;
+  color: #777;
 }
 
 .partition-icon {
