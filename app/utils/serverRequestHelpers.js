@@ -19,6 +19,15 @@ function cancelDocumentList ( path, cancelPath ) {
   return axios.get("http://localhost:3001" + path + "/files/" + cancelPath);
 }
 
+function postSubmittedDocuments ( csvData ) {
+  debugger;
+  return axios({
+    method: "POST",
+    url: "http://localhost:3001/csv",
+    data: csvData
+  });
+}
+
 var serverRequestHelpers = {
   getPartitionsHelper: function () {
     return getPartitions();
@@ -31,6 +40,9 @@ var serverRequestHelpers = {
   },
   cancelDocumentListHelper: function ( path, cancelPath ) {
     return cancelDocumentList( path, cancelPath );
+  },
+  postSubmittedDocumentsHelper: function ( csvData ) {
+    return postSubmittedDocuments( csvData );
   }
 }
 

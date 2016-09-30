@@ -2,9 +2,12 @@ var React = require('react');
 var Header = require('../components/Header');
 var DocumentSubmitted = require('../components/DocumentSubmitted');
 var CancelButton = require('../components/CancelButton');
+var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var DocumentsSubmittedListContainer = React.createClass({
-  handleSubmitForm: function() {
+  handleSubmitForm: function( e ) {
+    e.preventDefault();
+
     var values = {};
     $.each($(this.refs.form).serializeArray(), function (i, field) {
       values[field.name] = field.value;
@@ -31,13 +34,14 @@ var DocumentsSubmittedListContainer = React.createClass({
 
     data_arr.forEach(function (infoArray, index) {
       var line = infoArray.join(",");
-      lineArray.push(index == 0 ? "data:text/csv;charset=utf-8," + line : line);
+      lineArray.push( line );
     });
 
     var csvContent = lineArray.join("\n");
 
-    var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+    serverRequestHelpers.postSubmittedDocumentsHelper( csvContent ).then( function( response ) {
+      debugger;
+    });
 
   },
   render: function () {
