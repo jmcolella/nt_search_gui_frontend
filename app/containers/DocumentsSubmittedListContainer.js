@@ -5,6 +5,26 @@ var CancelButton = require('../components/CancelButton');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var DocumentsSubmittedListContainer = React.createClass({
+  getInitialState: function () {
+    return {
+      interval: 10
+    }
+  },
+  handleUpdateInterval: function ( e ) {
+    if ( e.target.value === "" ) {
+      this.setState({
+        interval: ""
+      });
+    } else if ( e.target.value < 1 ) {
+      this.setState({
+        interval: 1
+      });
+    } else {
+      this.setState({
+        interval: e.target.value
+      });
+    };
+  },
   handleSubmitForm: function( e ) {
     e.preventDefault();
 
@@ -18,16 +38,16 @@ var DocumentsSubmittedListContainer = React.createClass({
     var that = this
 
     this.props.documentList.forEach( function ( obj ) {
-       temp_arr = [];
-       temp_arr.push(parseInt(that.props.partition.split("-")[1]));
-       temp_arr.push(obj.relativePath);
-       temp_arr.push(values[obj.doc + "-interval"]);
-       if ( values[obj.doc + "-copy-checked"] ) {
-         temp_arr.push(1)
-       } else {
-         temp_arr.push(0)
-       }
-       return data_arr.push(temp_arr);
+      temp_arr = [];
+      temp_arr.push(parseInt(that.props.partition.split("-")[1]));
+      temp_arr.push(obj.relativePath);
+      temp_arr.push(values[obj.doc + "-interval"]);
+      if ( values[obj.doc + "-copy-checked"] ) {
+        temp_arr.push(1)
+      } else {
+        temp_arr.push(0)
+      }
+      return data_arr.push(temp_arr);
     }.bind(data_arr));
 
     var lineArray = [];
@@ -61,11 +81,13 @@ var DocumentsSubmittedListContainer = React.createClass({
                 <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
               </div>
               {
-                this.props.documentList.map( function( obj, index ) {
-                  return <DocumentSubmitted
-                            key={ index }
-                            data={ obj } />
-                }.bind(this))
+              this.props.documentList.map( function( obj, index ) {
+              return <DocumentSubmitted
+                key={ index }
+                data={ obj }
+                interval={ this.state.interval }
+                onUpdateInterval={ this.handleUpdateInterval } />
+              }.bind(this))
               }
               <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
             </form>
@@ -75,9 +97,9 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
 
         <CancelButton
-            onCancelDocumentList={ this.props.onCancelDocumentList } />
+          onCancelDocumentList={ this.props.onCancelDocumentList } />
       </div>
-    )
+      )
   }
 });
 
