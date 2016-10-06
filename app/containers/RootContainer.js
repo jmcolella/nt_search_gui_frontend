@@ -3,6 +3,7 @@ var ReactDOM = require("react-dom");
 var findDOMNode = ReactDOM.findDOMNode;
 var RenderDirectoryContainer = require('../containers/RenderDirectoryContainer');
 var RenderDocumentsSubmittedListContainer = require('../containers/RenderDocumentsSubmittedListContainer');
+var ReportContainer = require('../containers/ReportContainer');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var RootContainer = React.createClass({
@@ -19,7 +20,8 @@ var RootContainer = React.createClass({
       clickedDocumentObjects: [],
       clickedDocumentNames: [],
       submit: false,
-      cancelPath: ""
+      cancelPath: "",
+      report: false
     };
   },
   componentWillMount: function() {
@@ -104,6 +106,12 @@ var RootContainer = React.createClass({
       cancelPath: this.state.pathList[this.state.pathList.length - 1]
     })
   },
+  handleShowReport: function () {
+    this.setState({
+      submit: false,
+      report: true
+    });
+  },
   handleCancelDocumentList: function() {
     serverRequestHelpers.cancelDocumentListHelper( this.props.location.pathname, this.state.cancelPath ).then( function( response ) {
       this.setState({
@@ -122,7 +130,10 @@ var RootContainer = React.createClass({
           documentList={ this.state.clickedDocumentObjects }
           submit={ this.state.submit }
           onCancelDocumentList={ this.handleCancelDocumentList } />
-        } else {
+    } else if ( this.state.report == true ) {
+      var rootRender = 
+        <ReportContainer />
+    } else {
           var rootRender =
             <RenderDirectoryContainer
               partition={ this.state.partition }
