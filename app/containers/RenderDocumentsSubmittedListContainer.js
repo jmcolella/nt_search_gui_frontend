@@ -10,6 +10,7 @@ var RenderDocumentsSubmitedListContainer = React.createClass({
               partition={ this.props.partition }
               documentList={ this.props.documentList }
               submit={ this.props.submit }
+              onShowReport={ this.props.handleShowReport }
               onCancelDocumentList={ this.props.onCancelDocumentList } />
         </div>
       </div>

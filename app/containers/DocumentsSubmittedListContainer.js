@@ -60,8 +60,8 @@ var DocumentsSubmittedListContainer = React.createClass({
     var csvContent = lineArray.join("\n");
 
     serverRequestHelpers.postSubmittedDocumentsHelper( csvContent ).then( function( response ) {
-      debugger;
-    });
+      this.props.onShowReport();
+    }.bind(this));
 
   },
   render: function () {
@@ -97,7 +97,8 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
 
         <CancelButton
-          onCancelDocumentList={ this.props.onCancelDocumentList } />
+          buttonTitle={ "cancel" }
+          onCancelClick={ this.props.onCancelDocumentList } />
       </div>
       )
   }

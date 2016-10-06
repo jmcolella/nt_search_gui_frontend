@@ -1,4 +1,6 @@
 var React = require('react');
+var ReportButtonsContainer = require('../containers/ReportButtonsContainer');
+var ReportListContainer = require('../containers/ReportListContainer');
 
 var ReportContainer = React.createClass({
   getInitialState: function () {
@@ -7,13 +9,33 @@ var ReportContainer = React.createClass({
       report: false
     }
   },
-  componentDidMount: function () {
-    debugger;
+  handleGenerateReport: function () {
+    // potentially open socket here, if not, open it in the child report component
+    this.setState({
+      button: false,
+      report: true
+    });
   },
   render: function () {
+    if ( this.props.button ) {
+      var reportRender = 
+        <ReportButtonsContainer
+          handleGenerateReport={ this.handleGenerateReport }
+          handleCancelReport={ this.props.handleCancelReport } />
+    } else {
+      var reportRender = 
+        <ReportListContainer />
+    }
     return (
-      <div className="container">
-        Report Container
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <Header
+            title={ "Report" } />
+        </div>
+
+        <div className="panel-body">
+          { reportRender }
+        </div>
       </div>
     )
   }
