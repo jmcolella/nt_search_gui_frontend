@@ -9,7 +9,10 @@ var ReportButtonsContainer = React.createClass({
         <GenerateReportButton
            onGenerateReport={ this.props.handleGenerateReport } />
 
-         <CancelButton
+        <br/>
+
+        <CancelButton
+           id={ "return-button" }
            buttonTitle={ "return" }
            onCancelClick={ this.props.handleCancelReport } />
       </div>

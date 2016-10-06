@@ -6,7 +6,7 @@ var Document = React.createClass({
     return (
       <li className="list-group-item">
         <i className="fa fa-file-o inline-block-style document-icon" aria-hidden="true"></i>
-        <h4 id={ "document-" + this.props.documentData } className="inline-block-style">{ this.props.documentData }</h4>
+        <h4 id={ "document-" + this.props.documentData } className="inline-block-style document-color">{ this.props.documentData }</h4>
 
         <AddButtonNew
             documentName={ this.props.documentData }

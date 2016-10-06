@@ -1,4 +1,5 @@
 var React = require('react');
+var Header = require('../components/Header');
 var ReportButtonsContainer = require('../containers/ReportButtonsContainer');
 var ReportListContainer = require('../containers/ReportListContainer');
 
@@ -17,7 +18,7 @@ var ReportContainer = React.createClass({
     });
   },
   render: function () {
-    if ( this.props.button ) {
+    if ( this.state.button ) {
       var reportRender = 
         <ReportButtonsContainer
           handleGenerateReport={ this.handleGenerateReport }
@@ -27,7 +28,7 @@ var ReportContainer = React.createClass({
         <ReportListContainer />
     }
     return (
-      <div className="panel panel-default">
+      <div className="panel panel-default text-center">
         <div className="panel-heading">
           <Header
             title={ "Report" } />

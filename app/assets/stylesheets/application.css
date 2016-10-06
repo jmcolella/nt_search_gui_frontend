@@ -49,7 +49,11 @@ body {
 }
 
 .dark-link {
-  color: #175373 !important;
+  color: #535454 !important;
+}
+
+.document-color {
+  color: #535454;
 }
 
 /* General styling media queries */
@@ -239,6 +243,15 @@ li.bread-crumb.pointer::before {
 #submit-document-list-button-container {
   margin-top: 15px;
 }
+
+#generate-button {
+  margin: 4em;
+}
+
+#return-button {
+  margin: 2em;
+}
+
 
 /* Form styling */
 
