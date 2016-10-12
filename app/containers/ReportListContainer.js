@@ -1,10 +1,19 @@
 var React = require('react');
+var ReportMessage = require("../components/ReportMessage");
 
 var ReportListContainer = React.createClass({
   render: function () {
     return (
       <div>
-        Report List Container
+        <ul>
+          {
+             this.props.messages.map( function( message, index ) {
+               return <ReportMessage
+                        key={ index }
+                        message={ message } />
+             })
+          }
+          </ul>
       </div>
     )
   }
