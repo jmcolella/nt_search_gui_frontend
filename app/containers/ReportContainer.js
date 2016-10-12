@@ -6,9 +6,28 @@ var ReportListContainer = require('../containers/ReportListContainer');
 var ReportContainer = React.createClass({
   getInitialState: function () {
     return {
+      messages: [],
       button: true,
       report: false
     }
+  },
+  componentDidMount: function () {
+    var socket = new WebSocket("ws://localhost:3001");
+
+    socket.onopen = function ( event ) {
+      console.log("open connection");
+    }
+
+    socket.onmessage = function ( event ) {
+      var message = event.data.split("}")[0] + "}";
+      
+      debugger;
+      this.state.messages.push( JSON.parse( message ) );
+
+      this.setState({
+        messages: this.state.messages 
+      });
+    }.bind(this);
   },
   handleGenerateReport: function () {
     // potentially open socket here, if not, open it in the child report component
@@ -35,7 +54,13 @@ var ReportContainer = React.createClass({
         </div>
 
         <div className="panel-body">
-          { reportRender }
+          <ul>
+          {
+             this.state.messages.map( function( message, index ) {
+               return <li>{ message.filename } { message.status } { message.time }</li> 
+             }) 
+          } 
+          </ul>
         </div>
       </div>
     )
