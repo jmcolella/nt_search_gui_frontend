@@ -21,7 +21,6 @@ var ReportContainer = React.createClass({
     socket.onmessage = function ( event ) {
       var message = event.data.split("}")[0] + "}";
       
-      debugger;
       this.state.messages.push( JSON.parse( message ) );
 
       this.setState({
