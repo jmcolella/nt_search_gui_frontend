@@ -7,7 +7,8 @@ var ReportContainer = React.createClass({
   getInitialState: function () {
     return {
       messages: [],
-      checkArr: []
+      checkArr: [],
+      incomingMsg: {}
     }
   },
   componentDidMount: function () {
@@ -20,6 +21,8 @@ var ReportContainer = React.createClass({
     socket.onmessage = function ( event ) {
       var message = JSON.parse( event.data.split("}")[0] + "}" );
       console.log( message );
+
+      this.setIncomingMessage( message );
 
       if( this.state.checkArr.length === 0 ) { 
         this.state.checkArr.push( message.filename )
@@ -44,6 +47,11 @@ var ReportContainer = React.createClass({
 
     }.bind(this);
   },
+  setIncomingMessage: function ( message ) {
+    this.setState({
+      incomingMsg: message 
+    });
+  },
   render: function () {
     return (
       <div className="panel panel-default text-center">
@@ -54,7 +62,8 @@ var ReportContainer = React.createClass({
 
         <div className="panel-body">
           <ReportListContainer
-            messages={ this.state.messages } />
+            messages={ this.state.messages }
+            incomingMsg={ this.state.incomingMsg } />
         </div>
       </div>
       )

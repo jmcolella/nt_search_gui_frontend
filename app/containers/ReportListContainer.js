@@ -10,8 +10,9 @@ var ReportListContainer = React.createClass({
              this.props.messages.map( function( message, index ) {
                return <ReportMessage
                         key={ index }
-                        message={ message } />
-             })
+                        message={ message }
+                        incomingMessage={ this.props.incomingMsg } />
+             }.bind(this))
           }
           </ul>
       </div>

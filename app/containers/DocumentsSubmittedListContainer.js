@@ -8,24 +8,30 @@ var serverRequestHelpers = require('../utils/serverRequestHelpers');
 var DocumentsSubmittedListContainer = React.createClass({
   getInitialState: function () {
     return {
-      interval: 10,
+      intervalBase: 10,
+      intervalChange: "",
+      intervalIndex: "",
       form: true,
       generateReport: false,
       returnForm: false
     }
   },
-  handleUpdateInterval: function ( e ) {
+  handleUpdateInterval: function ( e, index ) {
+    debugger;
     if ( e.target.value === "" ) {
       this.setState({
-        interval: ""
+        intervalChange: "",
+        intervalIndex: index
       });
     } else if ( e.target.value < 1 ) {
       this.setState({
-        interval: 1
+        intervalChange: 1,
+        intervalIndex: index
       });
     } else {
       this.setState({
-        interval: e.target.value
+        intervalChange: e.target.value,
+        intervalIndex: index
       });
     };
   },
@@ -100,6 +106,9 @@ var DocumentsSubmittedListContainer = React.createClass({
                   key={ index }
                   data={ obj }
                   interval={ this.state.interval }
+                  index={ index }
+                  intervalChange={ this.state.intervalChange }
+                  intervalIndex={ this.state.intervalIndex }
                   onUpdateInterval={ this.handleUpdateInterval } />
                 }.bind(this))
               }
