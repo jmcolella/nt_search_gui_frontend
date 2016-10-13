@@ -105,7 +105,7 @@ var DocumentsSubmittedListContainer = React.createClass({
                 return <DocumentSubmitted
                   key={ index }
                   data={ obj }
-                  interval={ this.state.interval }
+                  intervalBase={ this.state.intervalBase }
                   index={ index }
                   intervalChange={ this.state.intervalChange }
                   intervalIndex={ this.state.intervalIndex }
