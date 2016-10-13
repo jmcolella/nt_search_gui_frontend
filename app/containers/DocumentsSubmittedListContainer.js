@@ -8,32 +8,10 @@ var serverRequestHelpers = require('../utils/serverRequestHelpers');
 var DocumentsSubmittedListContainer = React.createClass({
   getInitialState: function () {
     return {
-      intervalBase: 10,
-      intervalChange: "",
-      intervalIndex: "",
       form: true,
       generateReport: false,
       returnForm: false
     }
-  },
-  handleUpdateInterval: function ( e, index ) {
-    debugger;
-    if ( e.target.value === "" ) {
-      this.setState({
-        intervalChange: "",
-        intervalIndex: index
-      });
-    } else if ( e.target.value < 1 ) {
-      this.setState({
-        intervalChange: 1,
-        intervalIndex: index
-      });
-    } else {
-      this.setState({
-        intervalChange: e.target.value,
-        intervalIndex: index
-      });
-    };
   },
   handleSubmitForm: function( e ) {
     e.preventDefault();
@@ -102,15 +80,10 @@ var DocumentsSubmittedListContainer = React.createClass({
               </div>
               {
                 this.props.documentList.map( function( obj, index ) {
-                return <DocumentSubmitted
-                  key={ index }
-                  data={ obj }
-                  intervalBase={ this.state.intervalBase }
-                  index={ index }
-                  intervalChange={ this.state.intervalChange }
-                  intervalIndex={ this.state.intervalIndex }
-                  onUpdateInterval={ this.handleUpdateInterval } />
-                }.bind(this))
+                  return <DocumentSubmitted
+                   key={ index }
+                   data={ obj } />
+                })
               }
               <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
             </form>
@@ -134,8 +107,8 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
 
         <CancelButton
-          buttonTitle={ this.state.returnForm ? "return to form" : "cancel" }
-          onCancelClick={ this.state.returnForm ? this.toggleReturnForm : this.props.onCancelDocumentList } />
+          buttonTitle={ this.state.generateReport ? "return to form" : "cancel" }
+          onCancelClick={ this.state.generateReport ? this.toggleReturnForm : this.props.onCancelDocumentList } />
       </div>
       )
   }
