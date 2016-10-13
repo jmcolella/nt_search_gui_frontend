@@ -38,6 +38,16 @@ body {
   border-radius: 1%;
 }
 
+.list-left-align {
+  text-align: left;
+}
+
+.icon-right-align {
+  position: relative;
+  float: right;
+  display: inline-bloc
+}
+
 /* Color */
 
 .app-header {
@@ -120,9 +130,7 @@ body {
 
 /* Directory List styling */
 
-#list-of-files {
-  text-align: left;
-}
+
 
 .folder-icon {
   margin-right: 10px;
@@ -218,12 +226,6 @@ li.bread-crumb.pointer::before {
 }
 
 /* Specific Button styling */
-
-#add-button-container {
-  display: inline-block;
-  position: relative;
-  float: right;
-}
 
 #cancel-add-button {
   margin-top: 2em;

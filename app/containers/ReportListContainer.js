@@ -5,7 +5,7 @@ var ReportListContainer = React.createClass({
   render: function () {
     return (
       <div>
-        <ul>
+        <ul className="list-group">
           {
              this.props.messages.map( function( message, index ) {
                return <ReportMessage

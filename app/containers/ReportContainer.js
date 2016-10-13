@@ -7,6 +7,7 @@ var ReportContainer = React.createClass({
   getInitialState: function () {
     return {
       messages: [],
+      checkArr: []
     }
   },
   componentDidMount: function () {
@@ -17,13 +18,30 @@ var ReportContainer = React.createClass({
     }
 
     socket.onmessage = function ( event ) {
-      var message = event.data.split("}")[0] + "}";
+      var message = JSON.parse( event.data.split("}")[0] + "}" );
+      console.log( message );
 
-      this.state.messages.push( JSON.parse( message ) );
+      if( this.state.checkArr.length === 0 ) { 
+        this.state.checkArr.push( message.filename )
+        this.state.messages.push( message );
+      } else {
+        if ( this.state.checkArr.includes( message.filename ) ) {
+          this.state.messages.forEach( function( m ) {
+            if ( m.status !== message.status ) {
+              m.status = message.status 
+            }
+          });
+        } else {
+          this.state.checkArr.push( message.filename );
+          this.state.messages.push( message );
+        }
+      }
 
       this.setState({
-        messages: this.state.messages
+        messages: this.state.messages,
+        checkArr: this.state.checkArr 
       });
+
     }.bind(this);
   },
   render: function () {
@@ -39,8 +57,8 @@ var ReportContainer = React.createClass({
             messages={ this.state.messages } />
         </div>
       </div>
-    )
-  }
+      )
+}
 });
 
 module.exports = ReportContainer;
