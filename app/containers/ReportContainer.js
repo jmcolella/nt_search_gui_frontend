@@ -26,13 +26,6 @@ var ReportContainer = React.createClass({
       });
     }.bind(this);
   },
-  handleGenerateReport: function () {
-    // may use this in the DocumentsSubmitted List after the submit button is clicked
-    this.setState({
-      button: false,
-      report: true
-    });
-  },
   render: function () {
     return (
       <div className="panel panel-default text-center">

@@ -112,12 +112,6 @@ var RootContainer = React.createClass({
       report: true
     });
   },
-  handleCancelReport: function () {
-    this.setState({
-      submit: true,
-      report: false
-    });
-  },
   handleCancelDocumentList: function() {
     serverRequestHelpers.cancelDocumentListHelper( this.props.location.pathname, this.state.cancelPath ).then( function( response ) {
       this.setState({
@@ -138,9 +132,8 @@ var RootContainer = React.createClass({
           handleShowReport={ this.handleShowReport }
           onCancelDocumentList={ this.handleCancelDocumentList } />
     } else if ( this.state.report == true ) {
-      var rootRender = 
-        <ReportContainer
-           handleCancelReport={ this.handleCancelReport } />
+      var rootRender =
+        <ReportContainer />
     } else {
           var rootRender =
             <RenderDirectoryContainer

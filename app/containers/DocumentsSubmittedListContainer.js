@@ -1,13 +1,17 @@
 var React = require('react');
 var Header = require('../components/Header');
 var DocumentSubmitted = require('../components/DocumentSubmitted');
+var GenerateReportButton = require('../components/GenerateReportButton');
 var CancelButton = require('../components/CancelButton');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var DocumentsSubmittedListContainer = React.createClass({
   getInitialState: function () {
     return {
-      interval: 10
+      interval: 10,
+      form: true,
+      generateReport: false,
+      returnForm: false
     }
   },
   handleUpdateInterval: function ( e ) {
@@ -60,11 +64,52 @@ var DocumentsSubmittedListContainer = React.createClass({
     var csvContent = lineArray.join("\n");
 
     serverRequestHelpers.postSubmittedDocumentsHelper( csvContent ).then( function( response ) {
-      this.props.onShowReport();
+      this.toggleGenerateReport();
     }.bind(this));
 
   },
+  toggleGenerateReport: function () {
+    this.setState({
+      form: false,
+      generateReport: true,
+      returnFrom: true
+    });
+  },
+  handleGenerateReport: function () {
+    this.props.onShowReport();
+  },
+  toggleReturnForm: function () {
+    this.setState({
+      form: true,
+      generateReport: false
+    });
+  },
   render: function () {
+    if ( this.state.form === true ) {
+      var formReport =
+        <div>
+          <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
+              <div className="form-group form-group-lg">
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
+                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
+              </div>
+              {
+                this.props.documentList.map( function( obj, index ) {
+                return <DocumentSubmitted
+                  key={ index }
+                  data={ obj }
+                  interval={ this.state.interval }
+                  onUpdateInterval={ this.handleUpdateInterval } />
+                }.bind(this))
+              }
+              <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
+            </form>
+        </div>
+    } else {
+      var formReport = <GenerateReportButton
+                          onGenerateReport={ this.handleGenerateReport } />
+    }
     return (
       <div>
         <div className="document-list panel panel-default">
@@ -74,31 +119,14 @@ var DocumentsSubmittedListContainer = React.createClass({
           </div>
 
           <div className="panel-body">
-            <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
-              <div className="form-group form-group-lg">
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
-              </div>
-              {
-              this.props.documentList.map( function( obj, index ) {
-              return <DocumentSubmitted
-                key={ index }
-                data={ obj }
-                interval={ this.state.interval }
-                onUpdateInterval={ this.handleUpdateInterval } />
-              }.bind(this))
-              }
-              <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
-            </form>
+            { formReport }
           </div>
-
 
         </div>
 
         <CancelButton
-          buttonTitle={ "cancel" }
-          onCancelClick={ this.props.onCancelDocumentList } />
+          buttonTitle={ this.state.returnForm ? "return to form" : "cancel" }
+          onCancelClick={ this.state.returnForm ? this.toggleReturnForm : this.props.onCancelDocumentList } />
       </div>
       )
   }
