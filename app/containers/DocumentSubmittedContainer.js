@@ -26,6 +26,7 @@ var DocumentSubmittedContainer = React.createClass ({
     return (
       <DocumentSubmitted
           data={ this.props.data }
+          interval={ this.state.interval }
           onUpdateInterval={ this.handleUpdateInterval } />
       )
   }

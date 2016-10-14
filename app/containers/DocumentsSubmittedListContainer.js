@@ -55,8 +55,8 @@ var DocumentsSubmittedListContainer = React.createClass({
   toggleGenerateMediation: function () {
     this.setState({
       form: false,
-      generateReport: true,
-      returnFrom: true
+      generateMediation: true,
+      returnForm: true
     });
   },
   handleGenerateMediation: function () {
