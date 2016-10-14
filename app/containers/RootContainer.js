@@ -3,7 +3,7 @@ var ReactDOM = require("react-dom");
 var findDOMNode = ReactDOM.findDOMNode;
 var RenderDirectoryContainer = require('../containers/RenderDirectoryContainer');
 var RenderDocumentsSubmittedListContainer = require('../containers/RenderDocumentsSubmittedListContainer');
-var ReportContainer = require('../containers/ReportContainer');
+var MediationContainer = require('../containers/MediationContainer');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var RootContainer = React.createClass({
@@ -21,7 +21,7 @@ var RootContainer = React.createClass({
       clickedDocumentNames: [],
       submit: false,
       cancelPath: "",
-      report: false
+      mediation: false
     };
   },
   componentWillMount: function() {
@@ -106,10 +106,10 @@ var RootContainer = React.createClass({
       cancelPath: this.state.pathList[this.state.pathList.length - 1]
     })
   },
-  handleShowReport: function () {
+  handleShowMediation: function () {
     this.setState({
       submit: false,
-      report: true
+      mediation: true
     });
   },
   handleCancelDocumentList: function() {
@@ -129,11 +129,11 @@ var RootContainer = React.createClass({
           partition={ this.state.partition }
           documentList={ this.state.clickedDocumentObjects }
           submit={ this.state.submit }
-          handleShowReport={ this.handleShowReport }
+          handleShowMediation={ this.handleShowMediation }
           onCancelDocumentList={ this.handleCancelDocumentList } />
-    } else if ( this.state.report == true ) {
+    } else if ( this.state.mediation == true ) {
       var rootRender =
-        <ReportContainer />
+        <MediationContainer />
     } else {
           var rootRender =
             <RenderDirectoryContainer

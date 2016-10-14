@@ -1,7 +1,7 @@
 var React = require('react');
 var Header = require('../components/Header');
-var DocumentSubmitted = require('../components/DocumentSubmitted');
-var GenerateReportButton = require('../components/GenerateReportButton');
+var DocumentSubmittedContainer = require('../containers/DocumentSubmittedContainer');
+var GenerateMediationButton = require('../components/GenerateMediationButton');
 var CancelButton = require('../components/CancelButton');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
@@ -9,7 +9,7 @@ var DocumentsSubmittedListContainer = React.createClass({
   getInitialState: function () {
     return {
       form: true,
-      generateReport: false,
+      generateMediation: false,
       returnForm: false
     }
   },
@@ -48,19 +48,19 @@ var DocumentsSubmittedListContainer = React.createClass({
     var csvContent = lineArray.join("\n");
 
     serverRequestHelpers.postSubmittedDocumentsHelper( csvContent ).then( function( response ) {
-      this.toggleGenerateReport();
+      this.toggleGenerateMediation();
     }.bind(this));
 
   },
-  toggleGenerateReport: function () {
+  toggleGenerateMediation: function () {
     this.setState({
       form: false,
       generateReport: true,
       returnFrom: true
     });
   },
-  handleGenerateReport: function () {
-    this.props.onShowReport();
+  handleGenerateMediation: function () {
+    this.props.onShowMediation();
   },
   toggleReturnForm: function () {
     this.setState({
@@ -73,24 +73,24 @@ var DocumentsSubmittedListContainer = React.createClass({
       var formReport =
         <div>
           <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
-              <div className="form-group form-group-lg">
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
-                <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
-              </div>
-              {
-                this.props.documentList.map( function( obj, index ) {
-                  return <DocumentSubmitted
-                   key={ index }
-                   data={ obj } />
-                })
-              }
-              <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
-            </form>
+            <div className="form-group form-group-lg">
+              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
+            </div>
+            {
+              this.props.documentList.map( function( obj, index ) {
+                return <DocumentSubmittedContainer
+                          key={ index }
+                          data={ obj } />
+              })
+            }
+            <input className="btn btn-primary primary-button-color" type="submit" value="submit list" />
+          </form>
         </div>
     } else {
-      var formReport = <GenerateReportButton
-                          onGenerateReport={ this.handleGenerateReport } />
+      var formReport = <GenerateMediationButton
+                          onGenerateMediation={ this.handleGenerateMediation } />
     }
     return (
       <div>
@@ -107,8 +107,8 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
 
         <CancelButton
-          buttonTitle={ this.state.generateReport ? "return to form" : "cancel" }
-          onCancelClick={ this.state.generateReport ? this.toggleReturnForm : this.props.onCancelDocumentList } />
+          buttonTitle={ this.state.generateMediation ? "return to form" : "cancel" }
+          onCancelClick={ this.state.generateMediation ? this.toggleReturnForm : this.props.onCancelDocumentList } />
       </div>
       )
   }

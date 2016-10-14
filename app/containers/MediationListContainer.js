@@ -1,14 +1,14 @@
 var React = require('react');
-var ReportMessage = require("../components/ReportMessage");
+var MediationMessage = require("../components/MediationMessage");
 
-var ReportListContainer = React.createClass({
+var MediationListContainer = React.createClass({
   render: function () {
     return (
       <div>
         <ul className="list-group">
           {
              this.props.messages.map( function( message, index ) {
-               return <ReportMessage
+               return <MediationMessage
                         key={ index }
                         message={ message }
                         incomingMessage={ this.props.incomingMsg } />
@@ -20,4 +20,4 @@ var ReportListContainer = React.createClass({
   }
 });
 
-module.exports = ReportListContainer;
+module.exports = MediationListContainer;

@@ -1,9 +1,8 @@
 var React = require('react');
 var Header = require('../components/Header');
-var ReportButtonsContainer = require('../containers/ReportButtonsContainer');
-var ReportListContainer = require('../containers/ReportListContainer');
+var MediationListContainer = require('../containers/MediationListContainer');
 
-var ReportContainer = React.createClass({
+var MediationContainer = React.createClass({
   getInitialState: function () {
     return {
       messages: [],
@@ -24,14 +23,14 @@ var ReportContainer = React.createClass({
 
       this.setIncomingMessage( message );
 
-      if( this.state.checkArr.length === 0 ) { 
+      if( this.state.checkArr.length === 0 ) {
         this.state.checkArr.push( message.filename )
         this.state.messages.push( message );
       } else {
         if ( this.state.checkArr.includes( message.filename ) ) {
           this.state.messages.forEach( function( m ) {
             if ( m.status !== message.status ) {
-              m.status = message.status 
+              m.status = message.status
             }
           });
         } else {
@@ -42,14 +41,14 @@ var ReportContainer = React.createClass({
 
       this.setState({
         messages: this.state.messages,
-        checkArr: this.state.checkArr 
+        checkArr: this.state.checkArr
       });
 
     }.bind(this);
   },
   setIncomingMessage: function ( message ) {
     this.setState({
-      incomingMsg: message 
+      incomingMsg: message
     });
   },
   render: function () {
@@ -57,11 +56,11 @@ var ReportContainer = React.createClass({
       <div className="panel panel-default text-center">
         <div className="panel-heading">
           <Header
-            title={ "Report" } />
+            title={ "Mediation" } />
         </div>
 
         <div className="panel-body">
-          <ReportListContainer
+          <MediationListContainer
             messages={ this.state.messages }
             incomingMsg={ this.state.incomingMsg } />
         </div>
@@ -70,4 +69,4 @@ var ReportContainer = React.createClass({
 }
 });
 
-module.exports = ReportContainer;
+module.exports = MediationContainer;

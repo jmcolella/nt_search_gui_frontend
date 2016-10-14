@@ -1,6 +1,6 @@
 var React = require('react');
 
-var ReportMessage = React.createClass({
+var MediationMessage = React.createClass({
   render: function () {
     if ( this.props.incomingMessage.filename === this.props.message.filename && this.props.message.status === "0" ) {
       var status = <i className="fa fa-check icon-right-align" aria-hidden="true"></i>
@@ -11,10 +11,10 @@ var ReportMessage = React.createClass({
     }
     return (
       <li className="list-group-item list-left-align">{ this.props.message.filename }
-        { status } 
+        { status }
       </li>
       )
   }
 });
 
-module.exports = ReportMessage;
+module.exports = MediationMessage;
