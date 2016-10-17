@@ -42,7 +42,7 @@ var serverRequestHelpers = {
   },
   postSubmittedDocumentsHelper: function ( csvData ) {
     return postSubmittedDocuments( csvData );
-  }
+  },
 }
 
 module.exports = serverRequestHelpers;

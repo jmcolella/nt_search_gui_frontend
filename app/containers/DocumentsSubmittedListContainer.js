@@ -1,7 +1,7 @@
 var React = require('react');
 var Header = require('../components/Header');
 var DocumentSubmittedContainer = require('../containers/DocumentSubmittedContainer');
-var GenerateMediationButton = require('../components/GenerateMediationButton');
+var MediationContainer = require('../containers/MediationContainer');
 var CancelButton = require('../components/CancelButton');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
@@ -48,7 +48,7 @@ var DocumentsSubmittedListContainer = React.createClass({
     var csvContent = lineArray.join("\n");
 
     serverRequestHelpers.postSubmittedDocumentsHelper( csvContent ).then( function( response ) {
-      this.toggleGenerateMediation();
+      this.props.onShowMediation();
     }.bind(this));
 
   },
@@ -57,15 +57,6 @@ var DocumentsSubmittedListContainer = React.createClass({
       form: false,
       generateMediation: true,
       returnForm: true
-    });
-  },
-  handleGenerateMediation: function () {
-    this.props.onShowMediation();
-  },
-  toggleReturnForm: function () {
-    this.setState({
-      form: true,
-      generateReport: false
     });
   },
   render: function () {
@@ -89,7 +80,7 @@ var DocumentsSubmittedListContainer = React.createClass({
           </form>
         </div>
     } else {
-      var formReport = <GenerateMediationButton
+      var formReport = <MediationContainer
                           onGenerateMediation={ this.handleGenerateMediation } />
     }
     return (
