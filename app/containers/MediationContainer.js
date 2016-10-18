@@ -1,12 +1,13 @@
 var React = require('react');
 var Header = require('../components/Header');
 var MediationListContainer = require('../containers/MediationListContainer');
-var GenerateMediationButton = require('../components/GenerateMediationButton');
+var MediationButton = require('../components/MediationButton');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var MediationContainer = React.createClass({
   getInitialState: function () {
     return {
+      socket: "",
       mediation: false,
       messages: [],
       checkArr: [],
@@ -14,24 +15,25 @@ var MediationContainer = React.createClass({
     }
   },
   handleGenerateMediation: function ( close_socket ) {
-    this.setState({
-      mediation: true 
-    }); 
-
     if ( close_socket ) {
-      socket.close();
-      socket.onclose = function ( event ) {
-        debugger; 
-      }
+      this.state.socket.close();
+      this.state.socket.onclose = function ( event ) {
+        this.setState({
+          mediation: false 
+        }); 
+      }.bind(this);
     }
-    var socket = new WebSocket("ws://localhost:3001");
 
-    socket.onopen = function ( event ) {
-      console.log("open connection");
-    }
+    var localSocket;
 
     if ( ! close_socket ) {
-      socket.onmessage = function ( event ) {
+      localSocket = new WebSocket("ws://localhost:3001");
+
+      localSocket.onopen = function ( event ) {
+        console.log("open connection");
+      }
+
+      localSocket.onmessage = function ( event ) {
         var message = JSON.parse( event.data.split("}")[0] + "}" );
         console.log( message );
 
@@ -59,6 +61,10 @@ var MediationContainer = React.createClass({
         });
 
       }.bind(this);
+      this.setState({
+        mediation: true,
+        socket: localSocket 
+      });
     }
   },
   setIncomingMessage: function ( message ) {
@@ -70,27 +76,26 @@ var MediationContainer = React.createClass({
     this.handleGenerateMediation( true );
   },
   render: function () {
-    if ( this.state.mediation ) {
-      var mediation = <MediationListContainer
-        messages={ this.state.messages }
-        incomingMsg={ this.state.incomingMsg } />
-
-      } else {
-        var mediation = <GenerateMediationButton
-          onGenerateMediation={ this.handleGenerateMediation } />
-        }
-  return (
-    <div className="panel panel-default text-center">
+    return (
+     <div className="panel panel-default text-center">
       <div className="panel-heading">
         <Header
           title={ "Mediation" } />
       </div>
 
       <div className="panel-body">
-        { mediation }
+        <MediationListContainer
+           mediation={ this.state.mediation }
+           messages={ this.state.messages }
+           incomingMsg={ this.state.incomingMsg } />
+
       </div>
-      <button className="btn btn-default" onClick={ this.handleStopMediation }>stop mediation</button>
-    </div>
+      <MediationButton
+          mediation={ this.state.mediation }
+          onGenerateMediation={ this.handleGenerateMediation }
+          onStopMediation={ this.handleStopMediation } />
+ 
+     </div>
     )
 }
 });

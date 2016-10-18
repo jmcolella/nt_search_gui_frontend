@@ -45,10 +45,14 @@ body {
 .icon-right-align {
   position: relative;
   float: right;
-  display: inline-bloc
+  display: inline-block;
 }
 
 /* Color */
+
+.dark-blue-color {
+  color: #175373;
+}
 
 .app-header {
   color: #175373;
@@ -64,6 +68,14 @@ body {
 
 .document-color {
   color: #535454;
+}
+
+.success-icon {
+  color: #5cb85c;
+}
+
+.warning-icon {
+  color: #d9534f; 
 }
 
 /* General styling media queries */
@@ -253,6 +265,9 @@ li.bread-crumb.pointer::before {
   margin: 2em;
 }
 
+#mediation-button-container {
+  margin-bottom: 30px;
+}
 
 /* Form styling */
 
