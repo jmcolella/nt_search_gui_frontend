@@ -10,6 +10,7 @@ var DirectoryContainer = React.createClass({
       <div id="directory-list" className="default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
+              className={ "responsive-header" }
               title={ this.props.partition } />
         </div>
 

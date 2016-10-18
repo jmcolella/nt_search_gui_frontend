@@ -5,7 +5,7 @@ var MediationListContainer = React.createClass({
   render: function () {
     return (
       <div>
-        <ul className="list-group">
+        <ul className="list-group half-width-list">
           <li className="list-group-item list-left-align">
             <h4 className="dark-blue-color inline-block-style">Document</h4>
             <span className="dark-blue-color icon-right-align inline-block-style"><h4>Status</h4></span> 

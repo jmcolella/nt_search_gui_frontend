@@ -15,6 +15,7 @@ var DocumentsToSubmitListContainer = React.createClass({
       <div id="document-list " className="grey-text-color default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
+            className={ "responsive-header" }
             title={ "Documents to Submit" } />
         </div>
 

@@ -27,7 +27,7 @@ body {
 /* Default List styling */
 
 .default-list-height {
-  height: 67vh;
+  height: 70vh;
 }
 
 .default-document-list {
@@ -46,6 +46,16 @@ body {
   position: relative;
   float: right;
   display: inline-block;
+}
+
+.three-quarter-width {
+  width: 75%;
+  margin: 0 auto;
+}
+
+.half-width-list {
+  width: 50%;
+  margin: 0 auto;
 }
 
 /* Color */
@@ -80,9 +90,66 @@ body {
 
 /* General styling media queries */
 
-@media ( max-width: 1440px ) {
+@media ( max-height: 1000px ) {
+  .default-list-height {
+    height: 75vh;
+  }
+}
+
+@media ( max-height: 800px ) {
   .default-list-height {
     height: 80vh;
+  }
+}
+
+@media ( max-height: 680px ) {
+  .default-list-height {
+    height: 85vh;
+  }
+}
+
+@media ( max-height: 590px ) {
+  .default-list-height {
+    height: 90vh;
+  }
+}
+
+@media ( max-height: 520px ) {
+  .default-list-height {
+    height: 100vh;
+  }
+}
+
+@media ( max-width: 1000px ) {
+  .full-width {
+    width: 100%; 
+    margin-bottom: 20px;
+  }
+
+
+}
+
+@media ( max-width: 1440px ) and ( max-height: 940px ) {
+  .default-list-height {
+    height: 80vh;
+  }
+}
+
+@media ( max-width: 1440px ) and ( max-height: 680px ) {
+  .default-list-height {
+    height: 85vh;
+  }
+}
+
+@media ( max-width: 1440px ) and ( max-height: 590px ) {
+  .default-list-height {
+    height: 90vh;
+  }
+}
+
+@media ( max-width: 1440px ) and ( max-height: 520px ) {
+  .default-list-height {
+    height: 100vh;
   }
 }
 
@@ -183,6 +250,7 @@ li.bread-crumb.pointer::before {
 
 /* General Button styling */
 
+
 .primary-button-color {
   background-image: linear-gradient(to bottom,#0E6BA8 0,#0E6BA8 100%) !important;
   background-color: #0E6BA8;
@@ -240,6 +308,16 @@ li.bread-crumb.pointer::before {
 
 #cancel-add-button {
   margin-top: 2em;
+}
+
+#cancel-submit-form {
+  margin-top: 20px;
+}
+
+@media ( max-width: 1000px ) {
+  #cancel-submit-form {
+    margin-top: 0px; 
+  }
 }
 
 .remove-button {

@@ -15,7 +15,6 @@ var DocumentsSubmittedListContainer = React.createClass({
   },
   handleSubmitForm: function( e ) {
     e.preventDefault();
-
     var values = {};
     $.each($(this.refs.form).serializeArray(), function (i, field) {
       values[field.name] = field.value;
@@ -65,9 +64,9 @@ var DocumentsSubmittedListContainer = React.createClass({
         <div>
           <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
             <div className="form-group form-group-lg">
-              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">document path</label>
-              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">interval to check</label>
-              <label className="col-lg-4 col-md-4 col-sm-4 control-label form-center">save a backup?</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">document path</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">interval to check</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">save a backup?</label>
             </div>
             {
               this.props.documentList.map( function( obj, index ) {
@@ -85,9 +84,10 @@ var DocumentsSubmittedListContainer = React.createClass({
     }
     return (
       <div>
-        <div className="document-list panel panel-default">
+        <div className="document-list panel panel-default full-width three-quarter-width">
           <div className="panel-heading">
             <Header
+              className={ "responsive-header" }
               title={ "Submitted Documents" } />
           </div>
 
@@ -98,6 +98,7 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
 
         <CancelButton
+          id={ "cancel-submit-form" }
           buttonTitle={ this.state.generateMediation ? "return to form" : "cancel" }
           onCancelClick={ this.state.generateMediation ? this.toggleReturnForm : this.props.onCancelDocumentList } />
       </div>

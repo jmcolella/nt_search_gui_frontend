@@ -77,9 +77,10 @@ var MediationContainer = React.createClass({
   },
   render: function () {
     return (
-     <div className="panel panel-default text-center">
+     <div className="panel panel-default text-center full-width three-quarter-width">
       <div className="panel-heading">
         <Header
+          className={ "" }
           title={ "Mediation" } />
       </div>
 

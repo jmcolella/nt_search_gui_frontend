@@ -6,6 +6,7 @@ var AppHeader = React.createClass({
     return (
       <div className="row text-center app-header">
         <Header
+            className={ "" }
             title={ 'NT Search GUI' } />
       </div>
     )
