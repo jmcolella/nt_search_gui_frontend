@@ -37,8 +37,6 @@ var MediationContainer = React.createClass({
         var message = JSON.parse( event.data.split("}")[0] + "}" );
         console.log( message );
 
-        this.setIncomingMessage( message );
-
         if( this.state.checkArr.length === 0 ) {
           this.state.checkArr.push( message.filename )
           this.state.messages.push( message );
@@ -57,7 +55,8 @@ var MediationContainer = React.createClass({
 
         this.setState({
           messages: this.state.messages,
-          checkArr: this.state.checkArr
+          checkArr: this.state.checkArr,
+          incomingMsg: message
         });
 
       }.bind(this);
@@ -66,11 +65,6 @@ var MediationContainer = React.createClass({
         socket: localSocket 
       });
     }
-  },
-  setIncomingMessage: function ( message ) {
-    this.setState({
-      incomingMsg: message
-    });
   },
   handleStopMediation: function () {
     this.handleGenerateMediation( true );
