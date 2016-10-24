@@ -80,7 +80,7 @@ var DocumentsSubmittedListContainer = React.createClass({
         </div>
     } else {
       var formReport = <MediationContainer
-                          onGenerateMediation={ this.handleGenerateMediation } />
+                          mediation={ false } />
     }
     return (
       <div>

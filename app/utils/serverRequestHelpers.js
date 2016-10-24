@@ -28,6 +28,9 @@ function postSubmittedDocuments ( csvData ) {
 }
 
 var serverRequestHelpers = {
+  indexHelper: function () {
+    return axios.get( "http://localhost:3001/index" );
+  },
   getPartitionsHelper: function () {
     return getPartitions();
   },

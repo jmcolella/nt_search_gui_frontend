@@ -1,12 +1,13 @@
 var React = require('react');
 var Partition = require("../components/Partition");
+var MediationContainer = require('../containers/MediationContainer');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var PartitionContainer = React.createClass({
   getInitialState: function() {
     return {
       loading: true,
-      partitions: [],
+      partitions: []
     }
   },
   componentDidMount: function() {
@@ -20,7 +21,11 @@ var PartitionContainer = React.createClass({
   render: function () {
     if ( this.state.loading ) {
       var partitionRender = <p>Loading</p>
-    } else {
+    } else if ( this.state.mediation === true ) {
+        var partitionRender = 
+            <MediationContainer
+              mediation={ true } />
+    }  else {
         var partitionRender = 
           this.state.partitions.map( function( partition, index ) {
             return <Partition
