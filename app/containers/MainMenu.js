@@ -13,6 +13,7 @@ var MainMenu = React.createClass({
   },
   componentDidMount: function () {
     serverRequestHelpers.indexHelper().then( function( response ) {
+      debugger;
       this.setState({
         mediationButton: response.data.mediation 
       });
@@ -42,7 +43,7 @@ var MainMenu = React.createClass({
       var indexRender = 
         <div>
          <button onClick={ this.togglePartitionContainer }>New Mediation</button>
-         <button onClick={ this.handleGoToMediation }>Go to Mediation</button>
+         { this.state.mediationButton ? <button onClick={ this.handleGoToMediation }>Go to Mediation</button> : <p>no</p> }
         </div> 
     }
     return (
