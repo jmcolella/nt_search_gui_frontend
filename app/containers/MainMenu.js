@@ -1,6 +1,7 @@
 var React = require('react');
 var PartitionContainer = require('../containers/PartitionContainer');
 var MediationContainer = require('../containers/MediationContainer');
+var Menu = require('../components/Menu');
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var MainMenu = React.createClass({
@@ -13,7 +14,6 @@ var MainMenu = React.createClass({
   },
   componentDidMount: function () {
     serverRequestHelpers.indexHelper().then( function( response ) {
-      debugger;
       this.setState({
         mediationButton: response.data.mediation 
       });
@@ -41,10 +41,10 @@ var MainMenu = React.createClass({
          mediation={ true } />
     } else {
       var indexRender = 
-        <div>
-         <button onClick={ this.togglePartitionContainer }>New Mediation</button>
-         { this.state.mediationButton ? <button onClick={ this.handleGoToMediation }>Go to Mediation</button> : <p>no</p> }
-        </div> 
+        <Menu
+          mediationButton={ this.state.mediationButton }
+          togglePartitionContainer={ this.togglePartitionContainer }
+          onGoToMediation={ this.handleGoToMediation } />
     }
     return (
       <div>

@@ -165,6 +165,12 @@ body {
   }
 }
 
+/* Menu styling */
+
+#menu-container {
+  padding-top: 2em;
+}
+
 /* Partitions styling */
 
 .individual-partition-container {
