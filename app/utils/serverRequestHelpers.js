@@ -20,10 +20,18 @@ function cancelDocumentList ( path, cancelPath ) {
 }
 
 function postSubmittedDocuments ( csvData ) {
+  debugger;
   return axios({
     method: "POST",
     url: "http://localhost:3001/csv",
     data: csvData
+  });
+}
+
+function closeSocket () {
+  return axios({
+    method: "POST",
+    url: "http://localhost:3001/close_mediation"
   });
 }
 
@@ -46,6 +54,9 @@ var serverRequestHelpers = {
   postSubmittedDocumentsHelper: function ( csvData ) {
     return postSubmittedDocuments( csvData );
   },
+  closeSocketHelper: function () {
+    return closeSocket();
+  }
 }
 
 module.exports = serverRequestHelpers;

@@ -3,7 +3,7 @@ var CancelButton = require('../components/CancelButton');
 
 var MediationButton = React.createClass({
   handleClick: function () {
-    this.props.mediation ? this.props.onStopMediation() :  this.props.onGenerateMediation( false );
+    this.props.mediation ? this.props.onStopMediation() :  this.props.onGenerateMediation();
   },
   render: function () {
     if ( this.props.mediation ) {
