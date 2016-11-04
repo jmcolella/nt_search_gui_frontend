@@ -1,2 +1,3 @@
-var context = require.context('./app', true, /-test\.js?$/);
+//var require = require('webpack');
+var context = require.context('./app/test', true, /-test\.js?$/);
 context.keys().forEach(context);

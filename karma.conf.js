@@ -9,7 +9,7 @@ module.exports = function ( config ) {
       'test.webpack.js' 
     ],
     preprocessors: {
-      'tests.webpack.js' : ['webpack'] 
+      'test.webpack.js' : ['webpack'] 
     },
     reporters: ['dots'],
     webpack: {
