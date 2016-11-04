@@ -15,6 +15,7 @@ var DocumentsToSubmitListContainer = React.createClass({
       <div id="document-list " className="grey-text-color default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
+            className={ "responsive-header" }
             title={ "Documents to Submit" } />
         </div>
 
@@ -25,9 +26,9 @@ var DocumentsToSubmitListContainer = React.createClass({
             <div id="submit-document-list" className="default-document-list">
               <ul className="list-group">
                 {
-                  this.props.documentList.map( function( obj ) {
+                  this.props.documentList.map( function( obj, index ) {
                     return <DocumentToSubmitContainer
-                              key={ obj.doc.id }
+                              key={ index }
                               data={ obj.doc }
                               onRemoveDocument={ this.props.onRemoveDocument }
                               submit={ this.props.submit } />

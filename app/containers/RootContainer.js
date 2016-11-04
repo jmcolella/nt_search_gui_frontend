@@ -3,7 +3,8 @@ var ReactDOM = require("react-dom");
 var findDOMNode = ReactDOM.findDOMNode;
 var RenderDirectoryContainer = require('../containers/RenderDirectoryContainer');
 var RenderDocumentsSubmittedListContainer = require('../containers/RenderDocumentsSubmittedListContainer');
-
+var MediationContainer = require('../containers/MediationContainer');
+var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var RootContainer = React.createClass({
   contextTypes: {
@@ -11,94 +12,87 @@ var RootContainer = React.createClass({
   },
   getInitialState: function() {
     return {
-      partition: "",
+      partition: "partition-" + this.props.location.pathname.split("/")[2],
       folders: [],
       documents: [],
       pathList: [],
       breadcrumbList: [],
       clickedDocumentObjects: [],
       clickedDocumentNames: [],
-      documentPath: [],
       submit: false,
-      cancelPath: ""
+      cancelPath: "",
+      mediation: false
     };
   },
   componentWillMount: function() {
-    var path = this.props.location.pathname;
-
     this.state.breadcrumbList.push( {
-      path: this.props.location.pathname,
-      name: "home"
+      path: ".",
+      name: "."
     } );
 
-    $.ajax({
-      url: "http://localhost:3000" + path,
-      type: "GET"
-    }).done( function( response ) {
-      this.state.pathList.push( path );
+    serverRequestHelpers.getPartitionFilesHelper( this.props.location.pathname ).then( function( response ) {
+      this.state.pathList.push( "." );
 
       this.setState({
-        partition: "partition-" + this.props.params.id,
-        folders: response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         pathList: this.state.pathList,
         breadcrumbList: this.state.breadcrumbList
       });
-    }.bind(this));
+   }.bind(this));
   },
-  handleUpdateRender: function( path, current ) {
-    if ( typeof(current) === "string" ) {
-      this.state.documentPath.push( current );
-      this.state.breadcrumbList.push( {
-        path: path,
-        name: current
-      } );
-    } else {
-      var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( current ) + 1;
-      this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
+  handleUpdateRender: function( folderName ) {
+     if ( typeof( folderName ) === "string" ) {
+       this.state.pathList.push( folderName );
+       breadcrumbPath = this.state.pathList.slice( 1, this.state.pathList.length );
+       this.state.breadcrumbList.push( {
+          path: breadcrumbPath.join("/"),
+          name: folderName
+       } );
+     } else {
+       var sliceBreadCrumbIdx = this.state.breadcrumbList.indexOf( folderName ) + 1;
+       this.state.breadcrumbList.splice( sliceBreadCrumbIdx , this.state.breadcrumbList.length - sliceBreadCrumbIdx );
 
-      var sliceDocumentPathIdx = this.state.documentPath.indexOf( current.name ) + 1;
-      this.state.documentPath.splice( sliceDocumentPathIdx, this.state.documentPath.length - sliceDocumentPathIdx );
+       var slicePathIdx = this.state.pathList.indexOf( folderName.name ) + 1;
+       this.state.pathList.splice( slicePathIdx, this.state.pathList.length - slicePathIdx );
     }
 
-    $.ajax({
-      url: "http://localhost:3000" + path,
-      type: "GET",
-    }).done( function( response ) {
-      this.state.pathList.push( path );
+    var path = this.state.breadcrumbList[this.state.breadcrumbList.length - 1].path;
 
+    serverRequestHelpers.updateRenderFilesHelper( this.props.location.pathname, path ).then( function( response ) {
       this.setState({
-        partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         pathList: this.state.pathList,
         breadcrumbList: this.state.breadcrumbList,
         documentPath: this.state.documentPath
-      });
+     })
     }.bind(this));
   },
   handleUpdateDocumentList: function( data ) {
-    this.state.documentPath.push( data.name );
-    this.state.clickedDocumentNames.push( data.name );
+    var relativePath = this.state.pathList.map( function( path ) {
+      return path
+    });
+
+    relativePath.push( data );
+    this.state.clickedDocumentNames.push( data );
     this.state.clickedDocumentObjects.push(
       { doc: data,
-        relativePath: this.state.documentPath.join("/")
+        relativePath: relativePath.join("/")
       }
     );
 
     this.setState({
-      documentToAdd: {},
       clickedDocumentObjects: this.state.clickedDocumentObjects,
       clickedDocumentNames: this.state.clickedDocumentNames,
-      documentPath: this.state.documentPath.slice( 0, this.state.documentPath.length - 1 )
     });
   },
   handleRemoveDocument: function( data ) {
     this.state.clickedDocumentObjects = this.state.clickedDocumentObjects.filter( function(obj) {
-      return obj.doc.name != data.name
+      return obj.doc != data
     });
     this.state.clickedDocumentNames = this.state.clickedDocumentNames.filter( function(doc) {
-      return doc != data.name
+      return doc != data
     });
 
     this.setState({
@@ -112,15 +106,17 @@ var RootContainer = React.createClass({
       cancelPath: this.state.pathList[this.state.pathList.length - 1]
     })
   },
+  handleShowMediation: function () {
+    this.setState({
+      submit: false,
+      mediation: true
+    });
+  },
   handleCancelDocumentList: function() {
-    $.ajax({
-      url: "http://localhost:3000" + this.state.cancelPath,
-      type: "GET"
-    }).done( function( response ) {
+    serverRequestHelpers.cancelDocumentListHelper( this.props.location.pathname, this.state.cancelPath ).then( function( response ) {
       this.setState({
-        partitions: response.partitions || [],
-        folders: response.sub_folders || response.folders || [],
-        documents: response.documents || [],
+        folders: response.data.folders || [],
+        documents: response.data.documents || [],
         cancelPath: "",
         submit: false
       });
@@ -130,35 +126,39 @@ var RootContainer = React.createClass({
     if ( this.state.submit === true ) {
       var rootRender =
         <RenderDocumentsSubmittedListContainer
-            partition={ this.state.partition }
-            documentList={ this.state.clickedDocumentObjects }
-            submit={ this.state.submit }
-            onCancelDocumentList={ this.handleCancelDocumentList } />
-    } else {
+          partition={ this.state.partition }
+          documentList={ this.state.clickedDocumentObjects }
+          submit={ this.state.submit }
+          handleShowMediation={ this.handleShowMediation }
+          onCancelDocumentList={ this.handleCancelDocumentList } />
+    } else if ( this.state.mediation == true ) {
       var rootRender =
-        <RenderDirectoryContainer
-            partition={ this.state.partition }
-            folders={ this.state.folders }
-            documents={ this.state.documents }
-            pathList={ this.state.pathList }
-            breadcrumbList={ this.state.breadcrumbList }
-            clickedDocumentNames={ this.state.clickedDocumentNames }
-            cancelPath={ this.state.cancelPath }
-            documentList={ this.state.clickedDocumentObjects }
-            submit={ this.state.submit }
-            onUpdateRender={ this.handleUpdateRender }
-            onUpdateDocumentList={ this.handleUpdateDocumentList }
-            onSubmitDocumentList={ this.handleSubmitDocumentList }
-            onRemoveDocument={ this.handleRemoveDocument } />
-    }
-    return (
-      <div id="root-container" className="container-fluid">
+        <MediationContainer />
+    } else {
+          var rootRender =
+            <RenderDirectoryContainer
+              partition={ this.state.partition }
+              folders={ this.state.folders }
+              documents={ this.state.documents }
+              pathList={ this.state.pathList }
+              breadcrumbList={ this.state.breadcrumbList }
+              clickedDocumentNames={ this.state.clickedDocumentNames }
+              cancelPath={ this.state.cancelPath }
+              documentList={ this.state.clickedDocumentObjects }
+              submit={ this.state.submit }
+              onUpdateRender={ this.handleUpdateRender }
+              onUpdateDocumentList={ this.handleUpdateDocumentList }
+              onSubmitDocumentList={ this.handleSubmitDocumentList }
+              onRemoveDocument={ this.handleRemoveDocument } />
+            }
+  return (
+    <div id="root-container" className="container-fluid">
 
-        { rootRender }
+      { rootRender }
 
-      </div>
+    </div>
     )
-  }
+}
 });
 
 module.exports = RootContainer;

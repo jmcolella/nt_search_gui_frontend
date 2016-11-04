@@ -3,14 +3,16 @@ var React = require('react');
 var BreadCrumbContainer = React.createClass({
   updateRenderBreadCrumb: function() {
     if ( this.props.collapseData ) {
-      this.props.onUpdateRender( this.props.collapseData.path, this.props.collapseData );
+      this.props.onUpdateRender( this.props.collapseData );
     } else {
-      this.props.onUpdateRender( this.props.data.path, this.props.data );
+      this.props.onUpdateRender( this.props.data );
     }
   },
   render: function () {
     if ( this.props.collapseData ) {
       var breadCrumbName = ".."
+    } else if ( this.props.data.name == "." ) {
+      var breadCrumbName = "root"
     } else {
       var breadCrumbName = this.props.data.name
     }

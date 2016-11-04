@@ -5,13 +5,13 @@ var Route = ReactRouter.Route;
 var IndexRoute = ReactRouter.IndexRoute;
 var hashHistory = ReactRouter.hashHistory;
 var AppContainer = require("../containers/AppContainer");
-var PartitionContainer = require("../containers/PartitionContainer");
+var MainMenu = require("../containers/MainMenu");
 var RootContainer = require("../containers/RootContainer");
 
 var routes = (
   <Router history={ hashHistory }>
     <Route path="/" component={AppContainer}>
-      <IndexRoute component={PartitionContainer} />
+      <IndexRoute component={MainMenu} />
       <Route path="/partitions/:id" component={RootContainer} />
     </Route>
   </Router>

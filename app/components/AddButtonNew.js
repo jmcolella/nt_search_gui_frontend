@@ -10,7 +10,7 @@ var AddButtonNew = React.createClass({
         <button id="add-button" className="btn btn-primary btn-sm primary-button-color" onClick={ this.props.onClickAddButton }>add</button>
     }
     return (
-      <div id="add-button-container">
+      <div className="icon-right-align">
         { add }
       </div>
     )

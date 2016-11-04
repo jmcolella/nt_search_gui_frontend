@@ -10,6 +10,7 @@ var DirectoryContainer = React.createClass({
       <div id="directory-list" className="default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
+              className={ "responsive-header" }
               title={ this.props.partition } />
         </div>
 
@@ -18,25 +19,23 @@ var DirectoryContainer = React.createClass({
             breadcrumbList={ this.props.breadcrumbList }
             onUpdateRender={ this.props.onUpdateRender } />
 
-          <div id="list-of-files" className="default-document-list">
+          <div className="default-document-list list-left-align">
             <ul className="list-group">
               {
-                this.props.folders.map( function( folder ) {
+                this.props.folders.map( function( folder, index ) {
                   return <FolderContainer
-                            key={folder.id}
+                            key={index}
                             data={folder}
                             onUpdateRender={this.props.onUpdateRender} />
                 }.bind(this))
               }
 
               {
-                this.props.documents.map( function( doc ) {
+                this.props.documents.map( function( doc, index ) {
                   return <DocumentContainer
-                            key={doc.id}
+                            key={index}
                             data={doc}
-                            onShowAddButton={this.props.onShowAddButton}
                             addButton={ this.props.addButton }
-                            documentToAdd={ this.props.documentToAdd }
                             onUpdateDocumentList={ this.props.onUpdateDocumentList }
                             clickedDocumentNames={ this.props.clickedDocumentNames } />
                 }.bind(this))

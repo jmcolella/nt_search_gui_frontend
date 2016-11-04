@@ -1,36 +1,46 @@
 var React = require('react');
 var Partition = require("../components/Partition");
+var MediationContainer = require('../containers/MediationContainer');
+var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
 var PartitionContainer = React.createClass({
   getInitialState: function() {
     return {
-      partitions: [],
+      loading: true,
+      partitions: []
     }
   },
-  componentWillMount: function() {
-    $.ajax({
-      url: "http://localhost:3000/partitions",
-      type: "GET"
-    }).done( function( response ) {
-
+  componentDidMount: function() {
+    serverRequestHelpers.getPartitionsHelper().then( function( response ) {
       this.setState({
-        partitions: response.partitions,
+        loading: false,
+        partitions: response.data.mbr,
       })
     }.bind(this));
   },
   render: function () {
-    return (
-      <div className="row text-center">
-        {
-          this.state.partitions.map( function( partition ) {
+    if ( this.state.loading ) {
+      var partitionRender = <p>Loading</p>
+    } else if ( this.state.mediation === true ) {
+        var partitionRender = 
+            <MediationContainer
+              mediation={ true } />
+    }  else {
+        var partitionRender = 
+          this.state.partitions.map( function( partition, index ) {
             return <Partition
-                      key={ partition.id }
-                      data={ partition } />
-          }.bind(this))
-        }
-     </div>
-    )
+              key={ index }
+              id={ index }
+              data={ partition } />
+            }.bind(this))
+
   }
+  return (
+    <div className="row text-center">
+      { partitionRender }
+    </div>
+    )
+}
 });
 
 module.exports = PartitionContainer;

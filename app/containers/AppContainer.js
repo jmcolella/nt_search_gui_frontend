@@ -5,7 +5,7 @@ var AppContainer = React.createClass({
   render: function() {
     return (
       <div className="container-fluid font">
-        < AppHeader />
+        <AppHeader  />
 
         {this.props.children}
       </div>
