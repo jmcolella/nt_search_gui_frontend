@@ -4,6 +4,7 @@
   "description": "NT Search Front End GUI",
   "main": "index.js",
   "scripts": {
+    "test" : "karma start",
     "production": "webpack -p",
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080"
   },
