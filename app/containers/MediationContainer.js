@@ -20,7 +20,7 @@ var MediationContainer = React.createClass({
         mediation: true 
       });
 
-      var localSocket = new WebSocket("ws://localhost:3001");
+      var localSocket = new WebSocket("ws://localhost:3001/web_socket");
 
       localSocket.onopen = function( event ) {
         console.log("open connection");
@@ -58,7 +58,7 @@ var MediationContainer = React.createClass({
   handleGenerateMediation: function () {
     var localSocket;
 
-    localSocket = new WebSocket("ws://localhost:3001");
+    localSocket = new WebSocket("ws://localhost:3001/web_socket");
 
     localSocket.onopen = function ( event ) {
       console.log("open connection");
