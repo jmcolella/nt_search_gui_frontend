@@ -11,7 +11,7 @@ module.exports = function ( config ) {
     preprocessors: {
       'test.webpack.js' : ['webpack'] 
     },
-    reporters: ['dots'],
+    reporters: ['verbose', 'junit'],
     webpack: {
       module: {
         loaders: [
@@ -22,6 +22,13 @@ module.exports = function ( config ) {
     },
     webpackServer: {
       noInfo: true 
+    },
+    logLevel: config.LOG_INFO,
+    client: {
+      captureConsole: true,
+      mocha: {
+        bail: true 
+      }
     }
   });
 };
