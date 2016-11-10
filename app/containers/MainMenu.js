@@ -14,6 +14,7 @@ var MainMenu = React.createClass({
   },
   componentDidMount: function () {
     serverRequestHelpers.indexHelper().then( function( response ) {
+      debugger;
       this.setState({
         mediationButton: response.data.mediation 
       });
