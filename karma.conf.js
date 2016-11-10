@@ -13,6 +13,7 @@ module.exports = function ( config ) {
     },
     reporters: ['verbose', 'junit'],
     webpack: {
+      devtool: 'inline-source-map',
       module: {
         loaders: [
           { test: /\.js?$/, exclude: /node_modules/, loader: 'babel-loader' } 
