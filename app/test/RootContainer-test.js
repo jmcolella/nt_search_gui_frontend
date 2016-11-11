@@ -7,10 +7,11 @@ var RootContainer = require('../../app/containers/RootContainer');
 
 describe ( 'Root Container', function () {
   var root;
+  var pathnameStr = '/partitions/0';
 
   beforeEach( function () {
-    root = Mount( <RootContainer location={ {pathname: '/partitions/0'} }/> );
-})
+    root = Mount( <RootContainer location={ {pathname: pathnameStr} }/> );
+  });
 
   it ( 'renders without problems', function () {
    expect( root ).toExist();
@@ -21,9 +22,9 @@ describe ( 'Root Container', function () {
       expect( root.state().breadcrumbList.length ).toEqual( 1 );
     });
 
-it ( 'has initial cancelPath of blank string', function () {
-    expect( root.state().cancelPath ).toEqual("");
-});
+    it ( 'has initial cancelPath of blank string', function () {
+       expect( root.state().cancelPath ).toEqual("");
+    });
     it ( 'had initial clickedDocumentNames with length 0', function () {
       expect( root.state().clickedDocumentNames.length ).toEqual( 0 );
     });
@@ -48,9 +49,21 @@ it ( 'has initial cancelPath of blank string', function () {
       expect( root.state().pathList.length ).toEqual( 0 );
     });
 
+    it ( 'has initial partition string with value of partition number in pathname props', function () {
+      var partitionNum = pathnameStr.split("/")[2];
+      expect( root.state().partition ).toEqual( 'partition-'+ partitionNum );
+     
+    });
+
     it ( 'has initial submit with value false', function () {
       expect( root.state().submit ).toEqual( false );
     });
 
   });
+
+  it ( "renders with top-level container with id 'root-container'", function () {
+    expect( root.find( "#root-container" ) ).toExist();
+  });
+
+
 });
