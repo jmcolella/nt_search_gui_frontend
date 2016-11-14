@@ -20,7 +20,6 @@ function cancelDocumentList ( path, cancelPath ) {
 }
 
 function postSubmittedDocuments ( csvData ) {
-  debugger;
   return axios({
     method: "POST",
     url: "http://localhost:3001/csv",

@@ -68,6 +68,9 @@ var MediationContainer = React.createClass({
       var message = JSON.parse( event.data.split("}")[0] + "}" );
       console.log( message );
 
+      if(message.status != 0){
+        alert("FUK") ;
+      }
       if ( this.state.checkArr.includes( message.filename ) ) {
         this.state.messages.forEach( function( m ) {
           if ( m.status !== message.status ) {
@@ -99,6 +102,9 @@ var MediationContainer = React.createClass({
     }.bind(this));
   },
   render: function () {
+    if ( this.state.incomingMsg.status && this.state.incomingMsg.status != 0 ) {
+      alert( "Compromised message" + incomingMsg.filename );
+    }
     return (
       <div className="panel panel-default text-center full-width three-quarter-width">
         <div className="panel-heading">
@@ -118,7 +124,6 @@ var MediationContainer = React.createClass({
           mediation={ this.state.mediation }
           onGenerateMediation={ this.handleGenerateMediation }
           onStopMediation={ this.handleStopMediation } />
-
       </div>
       )
 }
