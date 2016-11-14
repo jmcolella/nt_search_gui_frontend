@@ -58,7 +58,7 @@ var MediationContainer = React.createClass({
   handleGenerateMediation: function () {
     var localSocket;
 
-    localSocket = new WebSocket("ws://localhost:3001/web_socket");
+    localSocket = new WebSocket( "ws://localhost:3001/web_socket" + new Date() );
 
     localSocket.onopen = function ( event ) {
       console.log("open connection");
@@ -68,20 +68,15 @@ var MediationContainer = React.createClass({
       var message = JSON.parse( event.data.split("}")[0] + "}" );
       console.log( message );
 
-      if( this.state.checkArr.length === 0 ) {
-        this.state.checkArr.push( message.filename )
-        this.state.messages.push( message );
+      if ( this.state.checkArr.includes( message.filename ) ) {
+        this.state.messages.forEach( function( m ) {
+          if ( m.status !== message.status ) {
+            m.status = message.status
+          }
+        });
       } else {
-        if ( this.state.checkArr.includes( message.filename ) ) {
-          this.state.messages.forEach( function( m ) {
-            if ( m.status !== message.status ) {
-              m.status = message.status
-            }
-          });
-        } else {
-          this.state.checkArr.push( message.filename );
-          this.state.messages.push( message );
-        }
+        this.state.checkArr.push( message.filename );
+        this.state.messages.push( message );
       }
 
       this.setState({
