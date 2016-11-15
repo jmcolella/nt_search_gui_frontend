@@ -50,3 +50,5 @@ function messages ( state, action ) {
 var socketMessagesStore = combineReducers({
   messages: messages
 });
+
+module.exports = socketMessagesStore;
