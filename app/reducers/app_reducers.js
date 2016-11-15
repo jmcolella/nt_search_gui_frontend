@@ -4,6 +4,7 @@ var constants = require( '../constants/app_constants' );
 var actions = require( '../actions/app_actions' );
 
 var initialState = {
+  mediation: false,
   messages: [],
   checkArr: [],
   incomingMsg: {}
@@ -29,6 +30,10 @@ function messages ( state, action ) {
   state = state || initialState;
 
   switch( action.type ) {
+    case constants.START_MEDIATION:
+      return assign( {}, state {
+        mediation: !state.mediation
+      });
     case constants.ADD_MESSAGE:
       return assign( {}, state, {
         messages: messages.concat( action.message ),
@@ -41,6 +46,10 @@ function messages ( state, action ) {
       return assign( {}, state, {
         messages: checkArr,
         incomingMsg: action.message
+      });
+    case constants.STOP_MEDIATION:
+      return assign( {}, state, {
+        mediation: !state.mediation
       });
     default:
       return state;
