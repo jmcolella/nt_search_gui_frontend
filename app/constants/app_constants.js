@@ -1,4 +1,4 @@
-var startMedation = 'START_MEDIATION';
+var startMediation = 'START_MEDIATION';
 var addMessage = "ADD_MESSAGE";
 var checkMessage = "CHECK_MESSAGE";
 var stopMediation = 'STOP_MEDIATION';

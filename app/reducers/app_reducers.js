@@ -31,7 +31,7 @@ function messages ( state, action ) {
 
   switch( action.type ) {
     case constants.START_MEDIATION:
-      return assign( {}, state {
+      return assign( {}, state, {
         mediation: !state.mediation
       });
     case constants.ADD_MESSAGE:
