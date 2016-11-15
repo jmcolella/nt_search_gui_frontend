@@ -1,4 +1,6 @@
 var React = require('react');
+var connect = require( 'react-redux' ).connect;
+var dispatch = require( 'redux' ).dispatch;
 var Header = require('../components/Header');
 var MediationListContainer = require('../containers/MediationListContainer');
 var MediationButton = require('../components/MediationButton');
@@ -15,6 +17,7 @@ var MediationContainer = React.createClass({
     }
   },
   componentDidMount: function () {
+    debugger;
     if ( this.props.mediation === true ) {
       this.setState({
         mediation: true 
@@ -129,4 +132,11 @@ var MediationContainer = React.createClass({
 }
 });
 
-module.exports = MediationContainer;
+function mapStateToProps ( state ) {
+  return {
+    state: state
+  }
+}
+
+
+module.exports = connect( mapStateToProps )( MediationContainer );
