@@ -1,8 +1,8 @@
 var constants = require( '../constants/app_constants' );
 
-module.exports.startMediation = function startMediation () {
+module.exports.toggleMediation = function toggleMediation () {
   return {
-    type: constants.START_MEDIATION
+    type: constants.TOGGLE_MEDIATION
   };
 };
 
@@ -20,8 +20,3 @@ module.exports.checkMessage = function checkMessage ( message ) {
   };
 };
 
-module.exports.stopMediation = function stopMediation () {
-  return {
-    type: constants.STOP_MEDIATION   
-  };
-};

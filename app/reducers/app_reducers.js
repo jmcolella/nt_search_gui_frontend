@@ -1,4 +1,5 @@
 var Redux = require( 'redux' );
+var assign = require( 'object-assign' );
 var combineReducers = Redux.combineReducers;
 var constants = require( '../constants/app_constants' );
 var actions = require( '../actions/app_actions' );
@@ -30,26 +31,22 @@ function messages ( state, action ) {
   state = state || initialState;
 
   switch( action.type ) {
-    case constants.START_MEDIATION:
+    case constants.TOGGLE_MEDIATION:
       return assign( {}, state, {
         mediation: !state.mediation
       });
     case constants.ADD_MESSAGE:
       return assign( {}, state, {
-        messages: messages.concat( action.message ),
-        checkArr: checkArr.concat( action.message.filename ),
+        messages: state.messages.concat( action.message ),
+        checkArr: state.checkArr.concat( action.message.filename ),
         incomingMsg: action.message
       });
     case constants.CHECK_MESSAGE:
-     var checkArr = check( state.messages, action.message );
+     var checkArray = check( state.messages, action.message );
   
       return assign( {}, state, {
-        messages: checkArr,
+        messages: checkArray,
         incomingMsg: action.message
-      });
-    case constants.STOP_MEDIATION:
-      return assign( {}, state, {
-        mediation: !state.mediation
       });
     default:
       return state;

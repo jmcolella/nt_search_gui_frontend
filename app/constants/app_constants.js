@@ -1,11 +1,9 @@
-var startMediation = 'START_MEDIATION';
+var toggleMediation = 'TOGGLE_MEDIATION';
 var addMessage = "ADD_MESSAGE";
 var checkMessage = "CHECK_MESSAGE";
-var stopMediation = 'STOP_MEDIATION';
 
 module.exports = {
-  START_MEDIATION: startMediation,
+  TOGGLE_MEDIATION: toggleMediation,
   ADD_MESSAGE: addMessage,
-  CHECK_MESSAGE: checkMessage,
-  STOP_MEDIATION: stopMediation
+  CHECK_MESSAGE: checkMessage
 };
