@@ -28,6 +28,7 @@
     "karma-webpack": "^1.8.0",
     "mocha": "^3.1.2",
     "node-libs-browser": "^0.5.2",
+    "react-addons-test-utils": "^15.4.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.0"
   },
