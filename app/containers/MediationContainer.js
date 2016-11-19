@@ -4,6 +4,7 @@ var dispatch = require( 'redux' ).dispatch;
 var Header = require('../components/Header');
 var MediationListContainer = require('../containers/MediationListContainer');
 var MediationButton = require('../components/MediationButton');
+var MediationAlert = require( '../components/MediationAlert' );
 var actions = require( '../actions/app_actions' );
 var serverRequestHelpers = require('../utils/serverRequestHelpers');
 
@@ -71,31 +72,32 @@ var MediationContainer = React.createClass({
   },
   render: function () {
     var state = this.context.store.getState().messages;
-    if ( state.incomingMsg.status && state.incomingMsg.status != 0 ) {
-      alert( "Compromised message" + state.incomingMsg.filename );
-    }
     return (
-      <div className="panel panel-default text-center full-width three-quarter-width">
-        <div className="panel-heading">
-          <Header
-            className={ "" }
-            title={ "Mediation" } />
-        </div>
+      <div>
+        <div className="panel panel-default text-center full-width three-quarter-width">
+          <div className="panel-heading">
+            <Header
+              className={ "" }
+              title={ "Mediation" } />
+          </div>
 
-        <div className="panel-body">
-          <MediationListContainer
+          <div className="panel-body">
+            <MediationListContainer
+              mediation={ state.mediation }
+              messages={ state.messages }
+              incomingMsg={ state.incomingMsg } />
+
+          </div>
+          <MediationButton
             mediation={ state.mediation }
-            messages={ state.messages }
-            incomingMsg={ state.incomingMsg } />
-
+            onGenerateMediation={ this.handleGenerateMediation }
+            onStopMediation={ this.handleStopMediation } />
         </div>
-        <MediationButton
-          mediation={ state.mediation }
-          onGenerateMediation={ this.handleGenerateMediation }
-          onStopMediation={ this.handleStopMediation } />
+        <MediationAlert
+          incomingMsg={ state.incomingMsg } />
       </div>
-      )
-}
+    )
+  }
 });
 
 MediationContainer.contextTypes = {
