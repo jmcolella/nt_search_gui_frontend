@@ -254,6 +254,23 @@ li.bread-crumb.pointer::before {
   display: inline-block;
 }
 
+/* Mediation styling */
+
+.mediation-alert-container {
+  width: 100%;
+  background: rgba( 185, 44, 40, .3 );
+  position: relative;
+  padding: 20px;
+  box-shadow: 0 2px 20px 0 rgba( 0, 0, 0, 0.2 );
+}
+
+.mediation-alert-exit-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
 /* General Button styling */
 
 

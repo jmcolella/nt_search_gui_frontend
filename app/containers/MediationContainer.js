@@ -93,8 +93,10 @@ var MediationContainer = React.createClass({
             onGenerateMediation={ this.handleGenerateMediation }
             onStopMediation={ this.handleStopMediation } />
         </div>
+
         <MediationAlert
           incomingMsg={ state.incomingMsg } />
+
       </div>
     )
   }
@@ -104,4 +106,10 @@ MediationContainer.contextTypes = {
   store: React.PropTypes.object
 }
 
-module.exports = connect()( MediationContainer );
+function mapStateToProps( state ) {
+  return {
+    state: state
+  }
+};
+
+module.exports = connect( mapStateToProps )( MediationContainer );
