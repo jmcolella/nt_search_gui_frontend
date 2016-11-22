@@ -20,7 +20,6 @@ function cancelDocumentList ( path, cancelPath ) {
 }
 
 function postSubmittedDocuments ( csvData ) {
-  debugger;
   return axios({
     method: "POST",
     url: "http://localhost:3001/csv",
@@ -37,7 +36,7 @@ function closeSocket () {
 
 var serverRequestHelpers = {
   indexHelper: function () {
-    return axios.get( "http://localhost:3001/index" );
+    return axios.get( "http://localhost:3001/index" + new Date() );
   },
   getPartitionsHelper: function () {
     return getPartitions();

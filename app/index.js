@@ -5,5 +5,6 @@ var AppContainer = require("./containers/AppContainer")
 
 
 ReactDOM.render(
-  routes, document.getElementById("app")
+  routes,
+  document.getElementById("app")
 );
