@@ -73,7 +73,7 @@ var MediationContainer = React.createClass({
   render: function () {
     var state = this.context.store.getState().messages;
     return (
-      <div>
+      <div className={ this.props.mediation ? "continue-mediation-container" : "" }>
         <div className="panel panel-default text-center full-width three-quarter-width">
           <div className="panel-heading">
             <Header
