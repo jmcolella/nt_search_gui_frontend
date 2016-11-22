@@ -256,6 +256,10 @@ li.bread-crumb.pointer::before {
 
 /* Mediation styling */
 
+.mediation-alert-wrapper {
+  margin-top: 50px;
+}
+
 .mediation-alert-container {
   width: 100%;
   background: rgba( 185, 44, 40, .3 );

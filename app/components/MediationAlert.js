@@ -32,12 +32,12 @@ var MediationAlert = React.createClass({
     if ( this.state.error ) {
       var error = 
         <div className="mediation-alert-container text-center grey-text-color">
-          <p>{ this.state.message.filename } has been compromised and resolved</p>
-          <i className="fa fa-times mediation-alert-exti-icon" aria-hidden="true" onClick={ this.closeErrorMessage }></i>
+          <p>{ this.state.message.filename } was compromised and has now been resolved</p>
+          <i className="fa fa-times mediation-alert-exit-icon" aria-hidden="true" onClick={ this.closeErrorMessage }></i>
         </div>
     }
     return (
-      <div className="three-quarter-width">
+      <div className="mediation-alert-wrapper three-quarter-width">
         { error }
       </div>
    );
