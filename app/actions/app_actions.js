@@ -1,8 +1,8 @@
 var constants = require( '../constants/app_constants' );
 
-module.exports.toggleMediation = function toggleMediation () {
+module.exports.toggleMediation = function toggleMediation ( type ) {
   return {
-    type: constants.TOGGLE_MEDIATION
+    type: type === "start" ? constants.START_MEDIATION : constants.STOP_MEDIATION 
   };
 };
 

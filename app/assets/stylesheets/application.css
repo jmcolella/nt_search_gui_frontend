@@ -256,6 +256,10 @@ li.bread-crumb.pointer::before {
 
 /* Mediation styling */
 
+.mediation-loading-icon {
+  margin: 30px 0px;
+}
+
 .continue-mediation-container {
   margin-top: 5vh;
 }
