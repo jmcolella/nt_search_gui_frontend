@@ -1,5 +1,5 @@
 var React = require( 'react' );
-var mount = require( 'enzyme' ).mount;
+var shallow = require( 'enzyme' ).shallow;
 var expect = require( 'chai' ).expect;
 var MainMenu = require( '../containers/MainMenu' );
 var PartitionContainer = require( '../containers/PartitionContainer' );
@@ -11,7 +11,7 @@ describe ( 'Main Menu container', function () {
   var mainMeunContainer;
 
   beforeEach( function () {
-    mainMenuContainer = mount( <MainMenu /> );
+    mainMenuContainer = shallow( <MainMenu /> );
   });
 
   it ( 'renders without problems', function () {

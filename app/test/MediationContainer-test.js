@@ -1,6 +1,8 @@
 var React = require( 'react' );
 var mount = require( 'enzyme' ).mount;
 var expect = require( 'chai' ).expect;
+var createStore = require( 'redux' ).createStore;
+var socketMessageStore = require( '../reducers/app_reducers' );
 var MediationContainer = require( '../containers/MediationContainer' );
 var Header = require( '../components/Header' );
 var MediationListContainer = require( '../containers/MediationListContainer' );
@@ -12,7 +14,11 @@ describe ( 'Mediation Container', function () {
   var mediationContainer;
 
   beforeEach( function () {
-    mediationContainer = mount( <MediationContainer /> );
+    mediationContainer = mount( <MediationContainer />, {
+      context: {
+         store: createStore( socketMessageStore ) 
+      }
+    });
   });
 
   it ( 'renders without problems', function () {
@@ -24,7 +30,7 @@ describe ( 'Mediation Container', function () {
   });
 
   it ( 'renders a h1 node with text `Mediation`', function () {
-    expet( mediationContainer.find( 'h1' ).text() ).to.equal( 'Mediation' );
+    expect( mediationContainer.find( 'h1' ).text() ).to.equal( 'Mediation' );
   });
 
   it ( 'renders child component `MediationListContaier`', function () {
@@ -32,7 +38,7 @@ describe ( 'Mediation Container', function () {
   });
 
   it ( 'renders child component `MediationButton`', function () {
-    expet( mediationContainer.find( MediationButton ) ).to.exist;
+    expect( mediationContainer.find( MediationButton ) ).to.exist;
   });
 
   it ( 'renders only 1 button', function () {
