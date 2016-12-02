@@ -12,7 +12,7 @@ var DocumentsToSubmitListContainer = React.createClass({
               onSubmitDocumentList={ this.props.onSubmitDocumentList } />
     }
     return (
-      <div id="document-list " className="grey-text-color default-list-height panel panel-default">
+      <div id="document-list" className="grey-text-color default-list-height panel panel-default">
         <div className="panel-heading">
           <Header
             className={ "responsive-header" }
