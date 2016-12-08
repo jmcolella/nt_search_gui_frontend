@@ -8,7 +8,7 @@ describe ( 'AddButton component', function() {
   let addButton;
 
   beforeEach( function() {
-    addButton = shallow( <AddButtonNew /> );
+    addButton = shallow( <AddButtonNew clickedDocumentNames={ [] } documentName={ "" }/> );
   });
 
   it ( 'renders without problems', function() {

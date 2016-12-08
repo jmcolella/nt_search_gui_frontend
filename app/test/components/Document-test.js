@@ -25,7 +25,7 @@ describe ( 'Document component', function() {
   });
 
   it ( 'renders a `h4` node with text equal to documentData props', function() {
-    expect( doc.find( 'h4' ).text() ).to.equal( doc.props().documentData );
+    expect( doc.find( 'h4' ).text() ).to.equal( doc.unrendered.props.documentData );
   });
 
   it ( 'renders child component AddButtonNew', function() {

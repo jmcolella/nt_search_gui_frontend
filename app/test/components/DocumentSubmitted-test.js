@@ -16,7 +16,7 @@ describe ( 'DocumentSubmitted component', function() {
   });
 
   it ( 'renders a div with class `form-group`', function() {
-    expect( docSubmitted.find( 'dv.form-group' ) ).to.have.length( 1 );
+    expect( docSubmitted.find( 'div.form-group' ) ).to.have.length( 1 );
   });
 
   it ( 'renders 2 label nodes', function() {
@@ -28,7 +28,7 @@ describe ( 'DocumentSubmitted component', function() {
   });
 
   it ( 'renders the first label with text props.data.relativePath', function() {
-    expect( docSubmitted.find( 'label' )[0].text() ).to.equal( docSubmitted.props().data.relativePath );
+    expect( docSubmitted.find('label').nodes[0].props.children ).to.equal( docSubmitted.unrendered.props.data.relativePath );
   });
 
 
