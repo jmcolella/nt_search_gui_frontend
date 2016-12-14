@@ -14,7 +14,7 @@ var MediationContainer = React.createClass({
     var state = store.getState().messages;
 
     if ( this.props.mediation === true ) {
-      store.dispatch( actions.toggleMediation() );
+      store.dispatch( actions.toggleMediation( 'start' ) );
 
       var localSocket = new WebSocket("ws://localhost:3001/web_socket_return");
 
@@ -61,19 +61,18 @@ var MediationContainer = React.createClass({
 
     }.bind(this);
 
-    store.dispatch( actions.toggleMediation() );
-
+    store.dispatch( actions.toggleMediation( 'start' ) );
   },
   handleStopMediation: function () {
     var store = this.context.store;
     serverRequestHelpers.closeSocketHelper().then( function( response ) {
-      store.dispatch( actions.toggleMediation() );
+      store.dispatch( actions.toggleMediation( 'stop' ) );
     }.call( actions ));
   },
   render: function () {
     var state = this.context.store.getState().messages;
     return (
-      <div>
+      <div className={ this.props.mediation ? "continue-mediation-container" : "" }>
         <div className="panel panel-default text-center full-width three-quarter-width">
           <div className="panel-heading">
             <Header
@@ -90,6 +89,7 @@ var MediationContainer = React.createClass({
           </div>
           <MediationButton
             mediation={ state.mediation }
+            messages={ state.messages }
             onGenerateMediation={ this.handleGenerateMediation }
             onStopMediation={ this.handleStopMediation } />
         </div>
