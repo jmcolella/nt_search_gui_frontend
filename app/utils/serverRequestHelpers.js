@@ -1,28 +1,29 @@
 var axios = require('axios');
+var localhost = '127.0.0.1';
 
 function getPartitions () {
-  return axios.get("http://localhost:3001/partitions");
+  return axios.get("http://" + localhost + ":3001/partitions");
 }
 
 function getPartitionFiles ( path ) {
-  console.log( "http://localhost:3001" + path + "/files/");
-  return axios.get("http://localhost:3001" + path + "/files/");
+  console.log( "http://" + localhost + ":3001" + path + "/files/");
+  return axios.get("http://" + localhost + ":3001" + path + "/files/");
 }
 
 function updateRenderFiles ( pathname, directory ) {
-  console.log("http://localhost:3001" + pathname + "/files/" + directory);
-  return axios.get("http://localhost:3001" + pathname + "/files/" + directory);
+  console.log("http://" + localhost + ":3001" + pathname + "/files/" + directory);
+  return axios.get("http://" + localhost + ":3001" + pathname + "/files/" + directory);
 }
 
 function cancelDocumentList ( path, cancelPath ) {
-  console.log( "http://localhost:3001" + path + "/files/" + cancelPath );
-  return axios.get("http://localhost:3001" + path + "/files/" + cancelPath);
+  console.log( "http://" + localhost + ":3001" + path + "/files/" + cancelPath );
+  return axios.get("http://" + localhost + ":3001" + path + "/files/" + cancelPath);
 }
 
 function postSubmittedDocuments ( csvData ) {
   return axios({
     method: "POST",
-    url: "http://localhost:3001/csv",
+    url: "http://" + localhost + ":3001/csv",
     data: csvData
   });
 }
@@ -30,13 +31,13 @@ function postSubmittedDocuments ( csvData ) {
 function closeSocket () {
   return axios({
     method: "POST",
-    url: "http://localhost:3001/close_mediation"
+    url: "http://" + localhost + ":3001/close_mediation"
   });
 }
 
 var serverRequestHelpers = {
   indexHelper: function () {
-    return axios.get( "http://localhost:3001/index" + new Date() );
+    return axios.get( "http://" + localhost + ":3001/index" + new Date() );
   },
   getPartitionsHelper: function () {
     return getPartitions();
