@@ -1,5 +1,5 @@
 var React = require( 'react' );
-var shallow = require( 'enzyme' ).mount;
+var mount = require( 'enzyme' ).mount;
 var expect = require( 'chai' ).expect;
 var MediationAlert = require( '../../components/MediationAlert' );
 
@@ -31,7 +31,7 @@ describe ( 'MediationAlert component', function() {
     });
 
     it ( 'renders 1 div with class `mediation-alert-container`', function() {
-      expect( alert.find( '.mediation-alert-container' ) ).to.have.length( 1 )''
+      expect( alert.find( '.mediation-alert-container' ) ).to.have.length( 1 );
     });
 
     it ( 'renders 1 p node inside the div', function() {
@@ -44,7 +44,9 @@ describe ( 'MediationAlert component', function() {
 
     describe ( 'error status is 1', function() {
       it ( 'renders p node with text including `compromised`', function() {
-        expect( alert.find( '.mediation-alert-container p ' ).text() ).to.include( 'compromised' );
+        alert.setProps( { incomingMsg: { filename: 'hello.txt', status: '1' } } );
+
+        expect( alert.find( '.mediation-alert-container p' ).text() ).to.include( 'compromised' );
       });
     });
 
@@ -65,7 +67,7 @@ describe ( 'MediationAlert component', function() {
     it ( 'returns error state to false onClick of `x` icon', function() {
       alert.find( '.fa-times' ).simulate( 'click' );
 
-      expect( alert.state().error ).to.equal( true );
+      expect( alert.state().error ).to.equal( false );
     });
   });
 

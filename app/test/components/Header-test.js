@@ -8,7 +8,7 @@ describe ( 'Header component', function() {
   let header;
 
   beforeEach( function() {
-    header = shallow( <Header className={} title={ 'Test' } /> );
+    header = shallow( <Header className={ '' } title={ 'Test' } /> );
   });
 
   it ( 'renders to the DOM', function() {
