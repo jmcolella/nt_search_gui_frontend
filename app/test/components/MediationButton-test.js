@@ -1,8 +1,8 @@
 var React = require( 'react' );
 var shallow = require( 'enzyme' ).shallow;
 var expect = require( 'chai' ).expect;
-var MediationButton = require( '../../app/components/MediationButton' );
-var CancelButton = require( '../../app.components/CancelButton' );
+var MediationButton = require( '../../components/MediationButton' );
+var CancelButton = require( '../../components/CancelButton' );
 
 describe ( 'Mediation Button component', function() {
 
