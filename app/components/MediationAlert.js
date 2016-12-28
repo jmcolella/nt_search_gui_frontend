@@ -32,7 +32,7 @@ var MediationAlert = React.createClass({
     if ( this.state.error ) {
       var error = 
         <div className="mediation-alert-container text-center grey-text-color">
-          <p>{ this.state.message.filename } was compromised and has now been resolved</p>
+          <p>{ this.state.message.filename } was { this.state.message.status == 2 ? "deleted" : "compromised" } and has now been reinstated</p>
           <i className="fa fa-times mediation-alert-exit-icon" aria-hidden="true" onClick={ this.closeErrorMessage }></i>
         </div>
     }

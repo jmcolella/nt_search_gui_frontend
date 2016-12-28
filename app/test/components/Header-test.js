@@ -5,17 +5,21 @@ var Header = require( '../../components/Header' );
 
 describe ( 'Header component', function() {
 
-  var header;
+  let header;
 
   beforeEach( function() {
-    header = shallow( <Header title={ "Test" } /> );
+    header = shallow( <Header className={} title={ 'Test' } /> );
   });
 
   it ( 'renders to the DOM', function() {
     expect( header ).to.exist;
   });
 
-  it ( 'renders a `h1` node with text props.title', function() {
+  it ( 'renders 1 `h1` node', function() {
+    expect( header.find( 'h1' ) ).to.have.length( 1 );
+  });
+
+  it ( 'renders `h1` node with text of props.title', function() {
     expect( header.find( 'h1' ).text() ).to.equal( header.unrendered.props.title );
   });
 
