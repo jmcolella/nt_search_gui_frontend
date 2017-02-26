@@ -31,9 +31,12 @@ function messages ( state, action ) {
   state = state || initialState;
 
   switch( action.type ) {
-    case constants.TOGGLE_MEDIATION:
+    case constants.START_MEDIATION:
       return assign( {}, state, {
-        mediation: !state.mediation
+        mediation: true,
+        messages: [],
+        checkArr: [],
+        incomingMsg: {}
       });
     case constants.ADD_MESSAGE:
       return assign( {}, state, {
@@ -47,6 +50,10 @@ function messages ( state, action ) {
       return assign( {}, state, {
         messages: checkArray,
         incomingMsg: action.message
+      });
+    case constants.STOP_MEDIATION:
+      return assign( {}, state, {
+        mediation: false
       });
     default:
       return state;

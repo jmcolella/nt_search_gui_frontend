@@ -65,7 +65,7 @@ var DocumentsSubmittedListContainer = React.createClass({
           <form id="submit-form" ref="form" onSubmit={ this.handleSubmitForm } className="form-horizontal center-block">
             <div className="form-group form-group-lg">
               <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">document path</label>
-              <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">interval to check</label>
+              <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">interval to check (seconds)</label>
               <label className="col-lg-4 col-md-4 col-sm-4 col-xs-4 control-label form-center">save a backup?</label>
             </div>
             {

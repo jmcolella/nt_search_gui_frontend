@@ -256,6 +256,13 @@ li.bread-crumb.pointer::before {
 
 /* Mediation styling */
 
+.mediation-loading-icon {
+  margin: 30px 0px;
+}
+
+.continue-mediation-container {
+  margin-top: 5vh;
+}
 .mediation-alert-wrapper {
   margin-top: 50px;
 }
@@ -266,6 +273,10 @@ li.bread-crumb.pointer::before {
   position: relative;
   padding: 20px;
   box-shadow: 0 2px 20px 0 rgba( 0, 0, 0, 0.2 );
+}
+
+.mediation-alert-container p {
+  margin: 0 !important;
 }
 
 .mediation-alert-exit-icon {
